@@ -4738,7 +4738,7 @@ function hydrateFactory($stencilWindow, $stencilHydrateOpts, $stencilHydrateResu
 
 
 const NAMESPACE = 'header-b2c';
-const BUILD = /* header-b2c */ { allRenderFn: true, appendChildSlotFix: false, asyncLoading: true, attachStyles: true, cloneNodeFix: false, cmpDidLoad: false, cmpDidRender: false, cmpDidUnload: false, cmpDidUpdate: false, cmpShouldUpdate: false, cmpWillLoad: false, cmpWillRender: false, cmpWillUpdate: false, connectedCallback: true, constructableCSS: false, cssAnnotations: true, cssVarShim: false, devTools: false, disconnectedCallback: true, dynamicImportShim: false, element: false, event: false, hasRenderFn: true, hostListener: false, hostListenerTarget: false, hostListenerTargetBody: false, hostListenerTargetDocument: false, hostListenerTargetParent: false, hostListenerTargetWindow: false, hotModuleReplacement: false, hydrateClientSide: true, hydrateServerSide: true, hydratedAttribute: false, hydratedClass: true, isDebug: false, isDev: false, isTesting: false, lazyLoad: true, lifecycle: false, lifecycleDOMEvents: false, member: true, method: false, mode: false, observeAttribute: false, profile: false, prop: false, propBoolean: false, propMutable: false, propNumber: false, propString: false, reflect: false, safari10: false, scoped: false, scriptDataOpts: false, shadowDelegatesFocus: false, shadowDom: true, shadowDomShim: true, slot: false, slotChildNodesFix: false, slotRelocation: true, state: true, style: true, svg: false, taskQueue: true, updatable: true, vdomAttribute: true, vdomClass: false, vdomFunctional: false, vdomKey: false, vdomListener: true, vdomPropOrAttr: false, vdomRef: false, vdomRender: true, vdomStyle: false, vdomText: true, vdomXlink: false, watchCallback: false };
+const BUILD = /* header-b2c */ { allRenderFn: true, appendChildSlotFix: false, asyncLoading: true, attachStyles: true, cloneNodeFix: false, cmpDidLoad: false, cmpDidRender: false, cmpDidUnload: false, cmpDidUpdate: false, cmpShouldUpdate: false, cmpWillLoad: false, cmpWillRender: false, cmpWillUpdate: false, connectedCallback: true, constructableCSS: false, cssAnnotations: true, cssVarShim: false, devTools: false, disconnectedCallback: true, dynamicImportShim: false, element: false, event: false, hasRenderFn: true, hostListener: false, hostListenerTarget: false, hostListenerTargetBody: false, hostListenerTargetDocument: false, hostListenerTargetParent: false, hostListenerTargetWindow: false, hotModuleReplacement: false, hydrateClientSide: true, hydrateServerSide: true, hydratedAttribute: false, hydratedClass: true, isDebug: false, isDev: false, isTesting: false, lazyLoad: true, lifecycle: false, lifecycleDOMEvents: false, member: true, method: false, mode: false, observeAttribute: true, profile: false, prop: true, propBoolean: false, propMutable: false, propNumber: false, propString: true, reflect: false, safari10: false, scoped: false, scriptDataOpts: false, shadowDelegatesFocus: false, shadowDom: true, shadowDomShim: true, slot: false, slotChildNodesFix: false, slotRelocation: true, state: true, style: true, svg: false, taskQueue: true, updatable: true, vdomAttribute: true, vdomClass: false, vdomFunctional: false, vdomKey: false, vdomListener: true, vdomPropOrAttr: false, vdomRef: false, vdomRender: true, vdomStyle: false, vdomText: true, vdomXlink: false, watchCallback: false };
 
 function componentOnReady() {
  return getHostRef(this).$onReadyPromise$;
@@ -4786,7 +4786,7 @@ function hydrateApp(e, t, o, n, s) {
        if (31 & l) {
         const a = s[1] || n, r = e.getAttribute(a);
         if (null != r) {
-         const e = parsePropertyValue(r);
+         const e = parsePropertyValue(r, l);
          o.$instanceValues$.set(n, e);
         }
         const i = e[n];
@@ -4795,7 +4795,7 @@ function hydrateApp(e, t, o, n, s) {
           return getValue(this, n);
          },
          set(e) {
-          setValue(this, n, e);
+          setValue(this, n, e, t);
          },
          configurable: !0,
          enumerable: !0
@@ -5204,9 +5204,9 @@ const callRender = (e, t, o) => {
   const o = e.nodeValue.split(".");
   "o" === o[0] && (t.set(o[1] + "." + o[2], e), e.nodeValue = "", e["s-en"] = o[3]);
  }
-}, parsePropertyValue = (e, t) => null == e || isComplexType(e) ? e : e, getValue = (e, t) => getHostRef(e).$instanceValues$.get(t), setValue = (e, t, o, n) => {
+}, parsePropertyValue = (e, t) => null == e || isComplexType(e) ? e : 1 & t ? String(e) : e, getValue = (e, t) => getHostRef(e).$instanceValues$.get(t), setValue = (e, t, o, n) => {
  const s = getHostRef(e), a = s.$instanceValues$.get(t), r = s.$flags$, i = s.$lazyInstance$ ;
- o = parsePropertyValue(o);
+ o = parsePropertyValue(o, n.$members$[t][0]);
  const d = Number.isNaN(a) && Number.isNaN(o), c = o !== a && !d;
  if ((!(8 & r) || void 0 === a) && c && (s.$instanceValues$.set(t, o), 
  i)) {
@@ -5223,12 +5223,24 @@ const callRender = (e, t, o) => {
      return getValue(this, e);
     },
     set(s) {
-     setValue(this, e, s);
+     setValue(this, e, s, t);
     },
     configurable: !0,
     enumerable: !0
    }) : BUILD.method   ;
-  })), BUILD.observeAttribute ) ;
+  })), (1 & o)) {
+   const o = new Map;
+   s.attributeChangedCallback = function(e, t, n) {
+    plt.jmp((() => {
+     const t = o.get(e);
+     if (this.hasOwnProperty(t)) n = this[t], delete this[t]; else if (s.hasOwnProperty(t) && "number" == typeof this[t] && this[t] == n) return;
+     this[t] = (null !== n || "boolean" != typeof this[t]) && n;
+    }));
+   }, e.observedAttributes = n.filter((([e, t]) => 15 & t[0])).map((([e, n]) => {
+    const s = n[1] || e;
+    return o.set(s, e), s;
+   }));
+  }
  }
  return e;
 }, initializeComponent = async (e, t, o, n, s) => {
@@ -5432,6 +5444,28 @@ const cmpModules = new Map, getModule = e => {
  e["s-p"] = [], e["s-rc"] = [], hostRefs.set(e, o);
 }, styles = new Map;
 
+const footerB2cCss = "/*!@footer*/footer.sc-footer-b2c{display:block;min-height:100px;background:#0070f3;color:white;width:100%}";
+
+class FooterB2c {
+  constructor(hostRef) {
+    registerInstance(this, hostRef);
+  }
+  render() {
+    return (hAsync("footer", null, hAsync("section", null, "This is the footer"), this.userName && hAsync("div", null, "You are logged in ", this.userName)));
+  }
+  static get style() { return footerB2cCss; }
+  static get cmpMeta() { return {
+    "$flags$": 9,
+    "$tagName$": "footer-b2c",
+    "$members$": {
+      "userName": [1, "user-name"]
+    },
+    "$listeners$": undefined,
+    "$lazyBundleId$": "-",
+    "$attrsToReflect$": []
+  }; }
+}
+
 const myComponentCss = "/*!@:host*/.sc-my-component-h{display:block}/*!@button*/button.sc-my-component{color:#AA00CC}";
 
 class MyComponent {
@@ -5468,6 +5502,7 @@ class MyComponent {
 }
 
 registerComponents([
+  FooterB2c,
   MyComponent,
 ]);
 

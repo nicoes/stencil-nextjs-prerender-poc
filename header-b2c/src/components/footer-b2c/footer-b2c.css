@@ -1,0 +1,7 @@
+footer {
+  display: block;
+  min-height: 100px;
+  background: #0070f3;
+  color: white;
+  width: 100%;
+}

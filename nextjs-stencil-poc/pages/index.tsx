@@ -3,11 +3,13 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import HeaderB2c from "../components/HeaderB2c";
+import FooterB2c from "../components/FooterB2c";
 import {useState} from "react";
 
 const Home: NextPage = () => {
-  const [showHeader, setShowHeader] = useState(true);
+  const [showComponents, setShowComponents] = useState(true);
   const [showHr, setShowHr] = useState(true);
+  const [userName, setUserName] = useState<string | null>(null);
   return (
     <div className={styles.container}>
       <Head>
@@ -18,7 +20,7 @@ const Home: NextPage = () => {
 
       <div className={`${showHr ? 'show-hr' : ''} `}>
         {showHr && <hr />}
-        {showHeader && <HeaderB2c />}
+        {showComponents && <HeaderB2c />}
       </div>
 
       <main className={styles.main}>
@@ -26,12 +28,17 @@ const Home: NextPage = () => {
           DEMO Stencil
         </h1>
 
+        {showComponents && <FooterB2c userName={userName} />}
+
         <ul>
           <li>
-            <button onClick={() => setShowHeader(prevState => !prevState)}>Toggle component</button>
+            <button onClick={() => setShowComponents(prevState => !prevState)}>Toggle components</button>
           </li>
           <li>
             <button onClick={() => setShowHr(prevState => !prevState)}>Toggle horizontal rule</button>
+          </li>
+          <li>
+            <button onClick={() => setUserName(prevState => prevState ? null : 'Vitalii')}>Toggle user</button>
           </li>
         </ul>
 
