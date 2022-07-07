@@ -28,7 +28,9 @@ export class MyComponent {
 
   render() {
     return (
-      <button onClick={() => this.onTimerClick()}>{ this.time }</button>
+      <div>
+        <button onClick={() => this.onTimerClick()}>{ this.time }</button>
+      </div>
     );
   }
 }

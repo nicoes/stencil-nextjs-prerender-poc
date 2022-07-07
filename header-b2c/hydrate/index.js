@@ -5466,7 +5466,7 @@ class FooterB2c {
   }; }
 }
 
-const myComponentCss = "/*!@:host*/.sc-my-component-h{display:block}/*!@button*/button.sc-my-component{color:#AA00CC}";
+const myComponentCss = "/*!@div*/div.sc-my-component{display:block}/*!@button*/button.sc-my-component{color:#AA00CC}";
 
 class MyComponent {
   constructor(hostRef) {
@@ -5486,7 +5486,7 @@ class MyComponent {
     this.time = this.time + 100;
   }
   render() {
-    return (hAsync("button", { onClick: () => this.onTimerClick() }, this.time));
+    return (hAsync("div", null, hAsync("button", { onClick: () => this.onTimerClick() }, this.time)));
   }
   static get style() { return myComponentCss; }
   static get cmpMeta() { return {
