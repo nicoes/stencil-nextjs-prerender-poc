@@ -1,9 +1,7 @@
 import React from "react";
-import { MyComponent } from 'header-b2c/dist/components/my-component';
+import { defineCustomElement } from 'header-b2c/dist/components/my-component';
 
-if(typeof window !== "undefined") {
-    customElements.define('my-component', MyComponent);
-}
+defineCustomElement()
 
 const HeaderB2c = () => {
     const component = React.createElement("my-component", {}, null)
@@ -12,8 +10,6 @@ const HeaderB2c = () => {
         ...component,
         props: {
             ...component.props,
-            className: 'sc-my-component-h hydrated',
-            ['s-id']: 1,
             dangerouslySetInnerHTML: {
                 __html: "<!--r.1--><div class=\"sc-my-component\" c-id=\"1.0.0.0\"><!--t.1.1.1.0-->Hello, World! I'm </div>"
             }

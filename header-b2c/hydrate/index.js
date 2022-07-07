@@ -5422,18 +5422,11 @@ const cmpModules = new Map, getModule = e => {
  e["s-p"] = [], e["s-rc"] = [], hostRefs.set(e, o);
 }, styles = new Map;
 
-function format(first, middle, last) {
-  return (first || '') + (middle ? ` ${middle}` : '') + (last ? ` ${last}` : '');
-}
-
 const myComponentCss = "/*!@:host*/.sc-my-component-h{display:block}";
 
 class MyComponent {
   constructor(hostRef) {
     registerInstance(this, hostRef);
-  }
-  getText() {
-    return format(this.first, this.middle, this.last);
   }
   componentDidRender() {
     console.log("I did render on the client side");
@@ -5442,7 +5435,7 @@ class MyComponent {
     }, 100);
   }
   render() {
-    return hAsync("div", null, "Hello, World! I'm ", this.getText());
+    return hAsync("div", null, "Hello, World! I'm coming from Stencil");
   }
   static get style() { return myComponentCss; }
   static get cmpMeta() { return {

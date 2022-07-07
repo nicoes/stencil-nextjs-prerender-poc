@@ -3,8 +3,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import HeaderB2c from "../components/HeaderB2c";
+import {useState} from "react";
 
 const Home: NextPage = () => {
+  const [showHeader, setShowHeader] = useState(true);
   return (
     <div className={styles.container}>
       <Head>
@@ -13,11 +15,11 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <HeaderB2c />
+      {showHeader && <HeaderB2c />}
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          <a onClick={() => setShowHeader(prevState => !prevState)}>Click me</a>
         </h1>
 
         <p className={styles.description}>
