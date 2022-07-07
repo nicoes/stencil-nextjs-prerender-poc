@@ -26,6 +26,14 @@ export class MyComponent {
     return format(this.first, this.middle, this.last);
   }
 
+  componentDidRender() {
+    console.log("I did render on the client side")
+    setTimeout(() => {
+      alert('Look at this alert from stencil')
+    }, 100)
+
+  }
+
   render() {
     return <div>Hello, World! I'm {this.getText()}</div>;
   }

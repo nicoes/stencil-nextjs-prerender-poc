@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import {MyComponent} from "../components/stencil-generated";
+import HeaderB2c from "../components/HeaderB2c";
 
 const Home: NextPage = () => {
   return (
@@ -13,7 +13,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <MyComponent />
+      <HeaderB2c />
 
       <main className={styles.main}>
         <h1 className={styles.title}>
