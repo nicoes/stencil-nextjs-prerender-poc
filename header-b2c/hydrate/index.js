@@ -4738,7 +4738,7 @@ function hydrateFactory($stencilWindow, $stencilHydrateOpts, $stencilHydrateResu
 
 
 const NAMESPACE = 'header-b2c';
-const BUILD = /* header-b2c */ { allRenderFn: true, appendChildSlotFix: false, asyncLoading: true, attachStyles: true, cloneNodeFix: false, cmpDidLoad: false, cmpDidRender: true, cmpDidUnload: false, cmpDidUpdate: false, cmpShouldUpdate: false, cmpWillLoad: false, cmpWillRender: false, cmpWillUpdate: false, connectedCallback: false, constructableCSS: false, cssAnnotations: true, cssVarShim: false, devTools: false, disconnectedCallback: false, dynamicImportShim: false, element: false, event: false, hasRenderFn: true, hostListener: false, hostListenerTarget: false, hostListenerTargetBody: false, hostListenerTargetDocument: false, hostListenerTargetParent: false, hostListenerTargetWindow: false, hotModuleReplacement: false, hydrateClientSide: true, hydrateServerSide: true, hydratedAttribute: false, hydratedClass: true, isDebug: false, isDev: false, isTesting: false, lazyLoad: true, lifecycle: true, lifecycleDOMEvents: false, member: true, method: false, mode: false, observeAttribute: true, profile: false, prop: true, propBoolean: false, propMutable: false, propNumber: false, propString: true, reflect: false, safari10: false, scoped: false, scriptDataOpts: false, shadowDelegatesFocus: false, shadowDom: true, shadowDomShim: true, slot: false, slotChildNodesFix: false, slotRelocation: true, state: false, style: true, svg: false, taskQueue: true, updatable: true, vdomAttribute: false, vdomClass: false, vdomFunctional: false, vdomKey: false, vdomListener: false, vdomPropOrAttr: false, vdomRef: false, vdomRender: true, vdomStyle: false, vdomText: true, vdomXlink: false, watchCallback: false };
+const BUILD = /* header-b2c */ { allRenderFn: true, appendChildSlotFix: false, asyncLoading: true, attachStyles: true, cloneNodeFix: false, cmpDidLoad: false, cmpDidRender: false, cmpDidUnload: false, cmpDidUpdate: false, cmpShouldUpdate: false, cmpWillLoad: false, cmpWillRender: false, cmpWillUpdate: false, connectedCallback: true, constructableCSS: false, cssAnnotations: true, cssVarShim: false, devTools: false, disconnectedCallback: true, dynamicImportShim: false, element: false, event: false, hasRenderFn: true, hostListener: false, hostListenerTarget: false, hostListenerTargetBody: false, hostListenerTargetDocument: false, hostListenerTargetParent: false, hostListenerTargetWindow: false, hotModuleReplacement: false, hydrateClientSide: true, hydrateServerSide: true, hydratedAttribute: false, hydratedClass: true, isDebug: false, isDev: false, isTesting: false, lazyLoad: true, lifecycle: false, lifecycleDOMEvents: false, member: true, method: false, mode: false, observeAttribute: false, profile: false, prop: false, propBoolean: false, propMutable: false, propNumber: false, propString: false, reflect: false, safari10: false, scoped: false, scriptDataOpts: false, shadowDelegatesFocus: false, shadowDom: true, shadowDomShim: true, slot: false, slotChildNodesFix: false, slotRelocation: true, state: true, style: true, svg: false, taskQueue: true, updatable: true, vdomAttribute: true, vdomClass: false, vdomFunctional: false, vdomKey: false, vdomListener: true, vdomPropOrAttr: false, vdomRef: false, vdomRender: true, vdomStyle: false, vdomText: true, vdomXlink: false, watchCallback: false };
 
 function componentOnReady() {
  return getHostRef(this).$onReadyPromise$;
@@ -4786,7 +4786,7 @@ function hydrateApp(e, t, o, n, s) {
        if (31 & l) {
         const a = s[1] || n, r = e.getAttribute(a);
         if (null != r) {
-         const e = parsePropertyValue(r, l);
+         const e = parsePropertyValue(r);
          o.$instanceValues$.set(n, e);
         }
         const i = e[n];
@@ -4795,7 +4795,7 @@ function hydrateApp(e, t, o, n, s) {
           return getValue(this, n);
          },
          set(e) {
-          setValue(this, n, e, t);
+          setValue(this, n, e);
          },
          configurable: !0,
          enumerable: !0
@@ -4945,7 +4945,7 @@ const createTime = (e, t = "") => {
  10 & n && (o["s-sc"] = l, 
  o.classList.add(l + "-h"), BUILD.scoped  ), 
  s();
-}, getScopeId = (e, t) => "sc-" + (e.$tagName$), isComplexType = e => "object" == (e = typeof e) || "function" === e, isPromise = e => !!e && ("object" == typeof e || "function" == typeof e) && "function" == typeof e.then, h = (e, t, ...o) => {
+}, getScopeId = (e, t) => "sc-" + (e.$tagName$), EMPTY_OBJ = {}, isComplexType = e => "object" == (e = typeof e) || "function" === e, isPromise = e => !!e && ("object" == typeof e || "function" == typeof e) && "function" == typeof e.then, h = (e, t, ...o) => {
  let n = null, l = null, a = !1, r = !1, i = [];
  const d = t => {
   for (let o = 0; o < t.length; o++) n = t[o], Array.isArray(n) ? d(n) : null != n && "boolean" != typeof n && ((a = "function" != typeof e && !isComplexType(n)) ? n = String(n) : BUILD.isDev  , 
@@ -4965,8 +4965,18 @@ const createTime = (e, t = "") => {
   $elm$: null,
   $children$: null
  };
- return (o.$name$ = null), o;
-}, Host = {}, isHost = e => e && e.$tag$ === Host;
+ return (o.$attrs$ = null), (o.$name$ = null), o;
+}, Host = {}, isHost = e => e && e.$tag$ === Host, setAccessor = (e, t, o, n, s, l) => {
+ if (o !== n) {
+  let a = isMemberInElement(e, t), r = t.toLowerCase();
+  if ((a ) || "o" !== t[0] || "n" !== t[1]) ; else t = "-" === t[2] ? t.slice(3) : isMemberInElement(win, r) ? r.slice(2) : r[2] + t.slice(3), 
+  o && plt.rel(e, t, o, !1), n && plt.ael(e, t, n, !1);
+ }
+}, updateElement = (e, t, o, n) => {
+ const s = 11 === t.$elm$.nodeType && t.$elm$.host ? t.$elm$.host : t.$elm$, l = e && e.$attrs$ || EMPTY_OBJ, a = t.$attrs$ || EMPTY_OBJ;
+ for (n in l) n in a || setAccessor(s, n, l[n], void 0);
+ for (n in a) setAccessor(s, n, l[n], a[n]);
+};
 
 let scopeId, contentRef, hostTagName, useNativeShadowDom = !1, checkSlotFallbackVisibility = !1, checkSlotRelocate = !1;
 
@@ -4975,6 +4985,7 @@ const createElm = (e, t, o, n) => {
  if (!useNativeShadowDom && (checkSlotRelocate = !0, "slot" === r.$tag$ && (scopeId && n.classList.add(scopeId + "-s"), 
  r.$flags$ |= r.$children$ ? 2 : 1)), null !== r.$text$) s = r.$elm$ = doc.createTextNode(r.$text$); else if (1 & r.$flags$) s = r.$elm$ = slotReferenceDebugNode(r) ; else {
   if (s = r.$elm$ = doc.createElement(2 & r.$flags$ ? "slot-fb" : r.$tag$), 
+  updateElement(null, r), 
   null != scopeId && s["s-si"] !== scopeId && s.classList.add(s["s-si"] = scopeId), 
   r.$children$) for (i = 0; i < r.$children$.length; ++i) l = createElm(e, r, i, s), 
   l && s.appendChild(l);
@@ -5002,7 +5013,8 @@ const createElm = (e, t, o, n) => {
 }, isSameVnode = (e, t) => e.$tag$ === t.$tag$ && ("slot" === e.$tag$ ? e.$name$ === t.$name$ : !BUILD.vdomKey ), referenceNode = e => e && e["s-ol"] || e, parentReferenceNode = e => (e["s-ol"] ? e["s-ol"] : e).parentNode, patch = (e, t) => {
  const o = t.$elm$ = e.$elm$, n = e.$children$, s = t.$children$, a = t.$text$;
  let r;
- null !== a ? (r = o["s-cr"]) ? r.parentNode.textContent = a : e.$text$ !== a && (o.data = a) : (null !== n && null !== s ? ((e, t, o, n) => {
+ null !== a ? (r = o["s-cr"]) ? r.parentNode.textContent = a : e.$text$ !== a && (o.data = a) : ((updateElement(e, t)), 
+ null !== n && null !== s ? ((e, t, o, n) => {
   let s, a = 0, r = 0, c = t.length - 1, $ = t[0], m = t[c], p = n.length - 1, h = n[0], u = n[p];
   for (;a <= c && r <= p; ) if (null == $) $ = t[++a]; else if (null == m) m = t[--c]; else if (null == h) h = n[++r]; else if (null == u) u = n[--p]; else if (isSameVnode($, h)) patch($, h), 
   $ = t[++a], h = n[++r]; else if (isSameVnode(m, u)) patch(m, u), m = t[--c], u = n[--p]; else if (isSameVnode($, u)) "slot" !== $.$tag$ && "slot" !== u.$tag$ || putBackInOriginalLocation($.$elm$.parentNode, !1), 
@@ -5116,9 +5128,8 @@ const callRender = (e, t, o) => {
  }
  return null;
 }, postUpdateComponent = e => {
- const t = e.$cmpMeta$.$tagName$, o = e.$hostElement$, n = createTime("postUpdate", t), s = e.$lazyInstance$ , l = e.$ancestorComponent$;
- (safeCall(s, "componentDidRender"), 
- BUILD.isDev ), 64 & e.$flags$ ? (n()) : (e.$flags$ |= 64, addHydratedFlag(o), 
+ const t = e.$cmpMeta$.$tagName$, o = e.$hostElement$, n = createTime("postUpdate", t), l = e.$ancestorComponent$;
+ 64 & e.$flags$ ? (n()) : (e.$flags$ |= 64, addHydratedFlag(o), 
  n(), (e.$onReadyResolve$(o), l || appDidLoad())), (e.$onRenderResolve$ && (e.$onRenderResolve$(), 
  e.$onRenderResolve$ = void 0), 512 & e.$flags$ && nextTick((() => scheduleUpdate(e, !1))), 
  e.$flags$ &= -517);
@@ -5193,9 +5204,9 @@ const callRender = (e, t, o) => {
   const o = e.nodeValue.split(".");
   "o" === o[0] && (t.set(o[1] + "." + o[2], e), e.nodeValue = "", e["s-en"] = o[3]);
  }
-}, parsePropertyValue = (e, t) => null == e || isComplexType(e) ? e : 1 & t ? String(e) : e, getValue = (e, t) => getHostRef(e).$instanceValues$.get(t), setValue = (e, t, o, n) => {
+}, parsePropertyValue = (e, t) => null == e || isComplexType(e) ? e : e, getValue = (e, t) => getHostRef(e).$instanceValues$.get(t), setValue = (e, t, o, n) => {
  const s = getHostRef(e), a = s.$instanceValues$.get(t), r = s.$flags$, i = s.$lazyInstance$ ;
- o = parsePropertyValue(o, n.$members$[t][0]);
+ o = parsePropertyValue(o);
  const d = Number.isNaN(a) && Number.isNaN(o), c = o !== a && !d;
  if ((!(8 & r) || void 0 === a) && c && (s.$instanceValues$.set(t, o), 
  i)) {
@@ -5212,24 +5223,12 @@ const callRender = (e, t, o) => {
      return getValue(this, e);
     },
     set(s) {
-     setValue(this, e, s, t);
+     setValue(this, e, s);
     },
     configurable: !0,
     enumerable: !0
    }) : BUILD.method   ;
-  })), (1 & o)) {
-   const o = new Map;
-   s.attributeChangedCallback = function(e, t, n) {
-    plt.jmp((() => {
-     const t = o.get(e);
-     if (this.hasOwnProperty(t)) n = this[t], delete this[t]; else if (s.hasOwnProperty(t) && "number" == typeof this[t] && this[t] == n) return;
-     this[t] = (null !== n || "boolean" != typeof this[t]) && n;
-    }));
-   }, e.observedAttributes = n.filter((([e, t]) => 15 & t[0])).map((([e, n]) => {
-    const s = n[1] || e;
-    return o.set(s, e), s;
-   }));
-  }
+  })), BUILD.observeAttribute ) ;
  }
  return e;
 }, initializeComponent = async (e, t, o, n, s) => {
@@ -5248,7 +5247,7 @@ const callRender = (e, t, o) => {
     consoleError(e);
    }
    (t.$flags$ &= -9), e(), 
-   fireConnectedCallback();
+   fireConnectedCallback(t.$lazyInstance$);
   }
   if (s.style) {
    let n = s.style;
@@ -5262,10 +5261,11 @@ const callRender = (e, t, o) => {
  const r = t.$ancestorComponent$, i = () => scheduleUpdate(t, !0);
  r && r["s-rc"] ? r["s-rc"].push(i) : i();
 }, fireConnectedCallback = e => {
+ safeCall(e, "connectedCallback");
 }, connectedCallback = e => {
  if (0 == (1 & plt.$flags$)) {
   const t = getHostRef(e), o = t.$cmpMeta$, n = createTime("connectedCallback", o.$tagName$);
-  if (1 & t.$flags$) ; else {
+  if (1 & t.$flags$) fireConnectedCallback(t.$lazyInstance$); else {
    let n;
    if (t.$flags$ |= 1, (n = e.getAttribute("s-id"), n)) {
     ((e, t, o, n) => {
@@ -5385,7 +5385,17 @@ const cmpModules = new Map, getModule = e => {
   if (null != t) return t[e];
  }
  return null;
-}, loadModule = (e, t, o) => getModule(e.$tagName$), registerComponents = e => {
+}, loadModule = (e, t, o) => getModule(e.$tagName$), isMemberInElement = (e, t) => {
+ if (null != e) {
+  if (t in e) return !0;
+  const o = getModule(e.nodeName);
+  if (null != o) {
+   const e = o;
+   if (null != e && null != e.cmpMeta && null != e.cmpMeta.$members$) return t in e.cmpMeta.$members$;
+  }
+ }
+ return !1;
+}, registerComponents = e => {
  for (const t of e) {
   const e = t.cmpMeta.$tagName$;
   cmpModules.set(e, {
@@ -5422,29 +5432,34 @@ const cmpModules = new Map, getModule = e => {
  e["s-p"] = [], e["s-rc"] = [], hostRefs.set(e, o);
 }, styles = new Map;
 
-const myComponentCss = "/*!@:host*/.sc-my-component-h{display:block}";
+const myComponentCss = "/*!@:host*/.sc-my-component-h{display:block}/*!@button*/button.sc-my-component{color:#AA00CC}";
 
 class MyComponent {
   constructor(hostRef) {
     registerInstance(this, hostRef);
+    this.time = 0;
   }
-  componentDidRender() {
-    console.log("I did render on the client side");
-    setTimeout(() => {
-      alert('Look at this alert from stencil');
-    }, 100);
+  connectedCallback() {
+    this.timer = window.setInterval(() => {
+      this.time = this.time + 1;
+    }, 1000);
+  }
+  disconnectedCallback() {
+    window.clearInterval(this.timer);
+  }
+  onTimerClick() {
+    console.log('Timer clicked upon');
+    this.time = this.time + 100;
   }
   render() {
-    return hAsync("div", null, "Hello, World! I'm coming from Stencil");
+    return (hAsync("button", { onClick: () => this.onTimerClick() }, this.time));
   }
   static get style() { return myComponentCss; }
   static get cmpMeta() { return {
     "$flags$": 9,
     "$tagName$": "my-component",
     "$members$": {
-      "first": [1],
-      "middle": [1],
-      "last": [1]
+      "time": [32]
     },
     "$listeners$": undefined,
     "$lazyBundleId$": "-",

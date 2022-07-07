@@ -1,8 +1,11 @@
 import { Config } from '@stencil/core';
-import { reactOutputTarget as react } from '@stencil/react-output-target';
+import { sass } from '@stencil/sass';
 
 export const config: Config = {
   namespace: 'header-b2c',
+  plugins: [
+    sass()
+  ],
   outputTargets: [
     {
       type: 'dist',

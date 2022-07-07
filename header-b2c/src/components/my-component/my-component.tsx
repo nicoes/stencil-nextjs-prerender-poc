@@ -1,35 +1,34 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component, State, h } from '@stencil/core';
 
 @Component({
   tag: 'my-component',
-  styleUrl: 'my-component.css',
+  styleUrl: 'my-component.scss',
   shadow: true,
 })
 export class MyComponent {
-  /**
-   * The first name
-   */
-  @Prop() first: string;
 
-  /**
-   * The middle name
-   */
-  @Prop() middle: string;
+  timer: number;
 
-  /**
-   * The last name
-   */
-  @Prop() last: string;
+  @State() time: number = 0
 
-  componentDidRender() {
-    console.log("I did render on the client side")
-    setTimeout(() => {
-      alert('Look at this alert from stencil')
-    }, 100)
+  connectedCallback() {
+    this.timer = window.setInterval(() => {
+      this.time = this.time + 1
+    }, 1000);
+  }
 
+  disconnectedCallback() {
+    window.clearInterval(this.timer);
+  }
+
+  onTimerClick() {
+    console.log('Timer clicked upon')
+    this.time = this.time + 100
   }
 
   render() {
-    return <div>Hello, World! I'm coming from Stencil</div>;
+    return (
+      <button onClick={() => this.onTimerClick()}>{ this.time }</button>
+    );
   }
 }

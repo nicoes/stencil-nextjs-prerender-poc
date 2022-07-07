@@ -1,0 +1,9 @@
+@use "../../sass/colors";
+
+:host {
+  display: block;
+}
+
+button {
+  color: colors.$purple;
+}

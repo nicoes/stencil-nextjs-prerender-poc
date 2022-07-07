@@ -7,6 +7,7 @@ import {useState} from "react";
 
 const Home: NextPage = () => {
   const [showHeader, setShowHeader] = useState(true);
+  const [showHr, setShowHr] = useState(true);
   return (
     <div className={styles.container}>
       <Head>
@@ -15,12 +16,24 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {showHeader && <HeaderB2c />}
+      <div className={`${showHr ? 'show-hr' : ''} `}>
+        {showHr && <hr />}
+        {showHeader && <HeaderB2c />}
+      </div>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          <a onClick={() => setShowHeader(prevState => !prevState)}>Click me</a>
+          DEMO Stencil
         </h1>
+
+        <ul>
+          <li>
+            <button onClick={() => setShowHeader(prevState => !prevState)}>Toggle component</button>
+          </li>
+          <li>
+            <button onClick={() => setShowHr(prevState => !prevState)}>Toggle horizontal rule</button>
+          </li>
+        </ul>
 
         <p className={styles.description}>
           Get started by editing{' '}

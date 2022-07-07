@@ -11,7 +11,7 @@ const HeaderB2c = () => {
         props: {
             ...component.props,
             dangerouslySetInnerHTML: {
-                __html: "<!--r.1--><div class=\"sc-my-component\" c-id=\"1.0.0.0\"><!--t.1.1.1.0-->Hello, World! I'm </div>"
+                __html: "<!--r.1--><button c-id=\"1.0.0.0\"><!--t.1.1.1.0-->0</button>"
             }
         }
     }
