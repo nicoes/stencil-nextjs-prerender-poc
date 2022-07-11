@@ -2,9 +2,7 @@ import {Component, h, State} from '@stencil/core';
 import Logo from "./nvb-header-b2c/Logo";
 import DropdownContainerJobs from "./nvb-header-b2c/DropdownContainerJobs";
 import DropdownContainerCareer from "./nvb-header-b2c/DropdownContainerCareer";
-
-type SubMenuType = 'industry' | 'city'
-type DropdownType = 'jobs' | 'career'
+import {VisibilityChangedEvent} from "../modal-window/modal-window";
 
 @Component({
   tag: 'nvb-header-b2c',
@@ -12,28 +10,31 @@ type DropdownType = 'jobs' | 'career'
   shadow: true,
 })
 export class NvbHeaderB2c {
-  @State() activeSubMenu: SubMenuType | null = null
-  @State() activeDropdown: DropdownType | null = null
+  @State() isActiveMobileMenu: boolean = false
+
+  onVisibilityChanged(evt: CustomEvent<VisibilityChangedEvent>) {
+    this.isActiveMobileMenu = evt.detail.isVisible
+  }
 
   render() {
     return (
       <header>
         <div class={'top'}><a href="#">Werkgevers / Plaats vacature</a></div>
-        <nav class={'main'} onMouseOut={() => {
-          this.activeSubMenu = null
-        }}>
+        <nav class={'main'}>
           <a href="#"><Logo /></a>
           <div class={'menu'}>
             <div class="dropdown-wrapper">
-              <button class='menu-link menu-link-dropdown' onMouseOver={() => this.activeDropdown = 'jobs'}>Vacatures</button>
-              <DropdownContainerJobs activeSubMenu={this.activeSubMenu} />
+              <button class='menu-link menu-link-dropdown'>Vacatures</button>
+              <DropdownContainerJobs />
             </div>
             <div class={'dropdown-wrapper'}>
-              <button class='menu-link menu-link-dropdown'
-                      onMouseOver={() => this.activeDropdown = 'career'}>Carrieretips
-              </button>
+              <button class='menu-link menu-link-dropdown'>Carrieretips</button>
               <DropdownContainerCareer/>
             </div>
+          </div>
+          <div class={'mobile-menu'}>
+            <button onClick={() => this.isActiveMobileMenu = !this.isActiveMobileMenu}>Mobile menu</button>
+            <modal-window onVisibilityChanged={ev => this.onVisibilityChanged(ev)} is-visible={this.isActiveMobileMenu} modalTitle={'This is the mobile menu'} modalText={'This is the content'} />
           </div>
         </nav>
       </header>

@@ -21,6 +21,19 @@
 | `visibilityChanged` |             | `CustomEvent<VisibilityChangedEvent>` |
 
 
+## Dependencies
+
+### Used by
+
+ - [nvb-header-b2c](../nvb-header-b2c)
+
+### Graph
+```mermaid
+graph TD;
+  nvb-header-b2c --> modal-window
+  style modal-window fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

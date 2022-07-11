@@ -5613,26 +5613,25 @@ const DropdownContainerCareer = () => hAsync("div", { class: "dropdown-container
     hAsync("li", null,
       hAsync("a", { href: "/carriere/personal-branding" }, "Personal branding"))));
 
-const nvbHeaderB2cCss = "/*!@header*/header.sc-nvb-header-b2c{display:flex;flex-direction:column;position:relative;z-index:1000}/*!@.main*/.main.sc-nvb-header-b2c{display:flex;flex-direction:row;justify-content:space-between;align-items:stretch;position:relative;background-color:#05baed}/*!@.dropdown-container a*/.dropdown-container.sc-nvb-header-b2c a.sc-nvb-header-b2c{color:#000}/*!@.menu*/.menu.sc-nvb-header-b2c{display:flex;align-items:stretch;flex-direction:row;width:60%}/*!@.dropdown-container*/.dropdown-container.sc-nvb-header-b2c{position:absolute;width:100%;padding-top:60px;padding-bottom:60px;top:0;left:0;z-index:-1;visibility:hidden;background:#f3f3f3}/*!@.dropdown-wrapper*/.dropdown-wrapper.sc-nvb-header-b2c{display:flex;align-items:center;padding-left:2rem;padding-right:2rem}/*!@.dropdown-wrapper:hover .dropdown-container*/.dropdown-wrapper.sc-nvb-header-b2c:hover .dropdown-container.sc-nvb-header-b2c{visibility:visible}/*!@.dropdown-list*/.dropdown-list.sc-nvb-header-b2c{list-style:none;padding:0 0 0 2rem;margin:0 0 0 40%;position:relative}/*!@.sub-menu*/.sub-menu.sc-nvb-header-b2c{position:absolute;height:100%;left:200px;top:0;visibility:hidden}/*!@.sub-menu-container:hover .sub-menu*/.sub-menu-container.sc-nvb-header-b2c:hover .sub-menu.sc-nvb-header-b2c{visibility:visible}";
+const nvbHeaderB2cCss = "/*!@header*/header.sc-nvb-header-b2c{display:flex;flex-direction:column;position:relative;z-index:1000}/*!@.main*/.main.sc-nvb-header-b2c{display:flex;flex-direction:row;justify-content:space-between;align-items:stretch;position:relative;background-color:#05baed}/*!@.dropdown-container a*/.dropdown-container.sc-nvb-header-b2c a.sc-nvb-header-b2c{color:#000}/*!@.menu*/.menu.sc-nvb-header-b2c{align-items:stretch;flex-direction:row;width:60%;display:none}@media (min-width: 992px){/*!@.menu*/.menu.sc-nvb-header-b2c{display:flex}}/*!@.mobile-menu*/.mobile-menu.sc-nvb-header-b2c{display:block}@media (min-width: 992px){/*!@.mobile-menu*/.mobile-menu.sc-nvb-header-b2c{display:none}}/*!@.dropdown-container*/.dropdown-container.sc-nvb-header-b2c{position:absolute;width:100%;padding-top:60px;padding-bottom:60px;top:0;left:0;z-index:-1;visibility:hidden;background:#F6F6F6}/*!@.dropdown-wrapper*/.dropdown-wrapper.sc-nvb-header-b2c{display:flex;align-items:center;padding-left:2rem;padding-right:2rem}/*!@.dropdown-wrapper:hover .dropdown-container*/.dropdown-wrapper.sc-nvb-header-b2c:hover .dropdown-container.sc-nvb-header-b2c{visibility:visible}/*!@.dropdown-list*/.dropdown-list.sc-nvb-header-b2c{list-style:none;padding:0 0 0 2rem;margin:0 0 0 40%;position:relative}/*!@.sub-menu*/.sub-menu.sc-nvb-header-b2c{position:absolute;height:100%;left:200px;top:0;visibility:hidden}/*!@.sub-menu-container:hover .sub-menu*/.sub-menu-container.sc-nvb-header-b2c:hover .sub-menu.sc-nvb-header-b2c{visibility:visible}";
 
 class NvbHeaderB2c {
   constructor(hostRef) {
     registerInstance(this, hostRef);
-    this.activeSubMenu = null;
-    this.activeDropdown = null;
+    this.isActiveMobileMenu = false;
+  }
+  onVisibilityChanged(evt) {
+    this.isActiveMobileMenu = evt.detail.isVisible;
   }
   render() {
-    return (hAsync("header", null, hAsync("div", { class: 'top' }, hAsync("a", { href: "#" }, "Werkgevers / Plaats vacature")), hAsync("nav", { class: 'main', onMouseOut: () => {
-        this.activeSubMenu = null;
-      } }, hAsync("a", { href: "#" }, hAsync(Logo, null)), hAsync("div", { class: 'menu' }, hAsync("div", { class: "dropdown-wrapper" }, hAsync("button", { class: 'menu-link menu-link-dropdown', onMouseOver: () => this.activeDropdown = 'jobs' }, "Vacatures"), hAsync(DropdownContainerJobs, { activeSubMenu: this.activeSubMenu })), hAsync("div", { class: 'dropdown-wrapper' }, hAsync("button", { class: 'menu-link menu-link-dropdown', onMouseOver: () => this.activeDropdown = 'career' }, "Carrieretips"), hAsync(DropdownContainerCareer, null))))));
+    return (hAsync("header", null, hAsync("div", { class: 'top' }, hAsync("a", { href: "#" }, "Werkgevers / Plaats vacature")), hAsync("nav", { class: 'main' }, hAsync("a", { href: "#" }, hAsync(Logo, null)), hAsync("div", { class: 'menu' }, hAsync("div", { class: "dropdown-wrapper" }, hAsync("button", { class: 'menu-link menu-link-dropdown' }, "Vacatures"), hAsync(DropdownContainerJobs, null)), hAsync("div", { class: 'dropdown-wrapper' }, hAsync("button", { class: 'menu-link menu-link-dropdown' }, "Carrieretips"), hAsync(DropdownContainerCareer, null))), hAsync("div", { class: 'mobile-menu' }, hAsync("button", { onClick: () => this.isActiveMobileMenu = !this.isActiveMobileMenu }, "Mobile menu"), hAsync("modal-window", { onVisibilityChanged: ev => this.onVisibilityChanged(ev), "is-visible": this.isActiveMobileMenu, modalTitle: 'This is the mobile menu', modalText: 'This is the content' })))));
   }
   static get style() { return nvbHeaderB2cCss; }
   static get cmpMeta() { return {
     "$flags$": 9,
     "$tagName$": "nvb-header-b2c",
     "$members$": {
-      "activeSubMenu": [32],
-      "activeDropdown": [32]
+      "isActiveMobileMenu": [32]
     },
     "$listeners$": undefined,
     "$lazyBundleId$": "-",

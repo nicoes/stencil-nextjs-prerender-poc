@@ -1,4 +1,6 @@
 @use "~@dpgr/design-system/nvb/tokens/colors";
+@use "~@dpgr/design-system/nvb/tokens/z-indices";
+@use "~@dpgr/design-system/nvb/tokens/breakpoints";
 
 $dropdown-list-offset: 60px;
 
@@ -6,7 +8,7 @@ header {
   display: flex;
   flex-direction: column;
   position: relative;
-  z-index: 1000;
+  z-index: z-indices.$header-menu;
 }
 
 .main {
@@ -23,10 +25,22 @@ header {
 }
 
 .menu {
-  display: flex;
   align-items: stretch;
   flex-direction: row;
-  width: 60%
+  width: 60%;
+  display: none;
+
+  @media (min-width: breakpoints.$lg) {
+    display: flex;
+  }
+}
+
+.mobile-menu {
+  display: block;
+
+  @media (min-width: breakpoints.$lg) {
+    display: none;
+  }
 }
 
 .dropdown-container {
@@ -38,7 +52,7 @@ header {
   left: 0;
   z-index: -1;
   visibility: hidden;
-  background: #f3f3f3;
+  background: colors.$gray-light;
 }
 
 .dropdown-wrapper {
