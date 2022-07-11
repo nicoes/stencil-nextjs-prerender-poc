@@ -17,7 +17,7 @@ const ModalWindow = ({ title, isVisible, setIsVisible, text }: { title: string, 
         }
     }, []);
     const component = React.createElement("modal-window", {}, null)
-    const DecoratedComponent = {
+    return {
         ...component,
         props: {
             ...component.props,
@@ -31,8 +31,6 @@ const ModalWindow = ({ title, isVisible, setIsVisible, text }: { title: string, 
         },
         ref: trackedRef
     }
-
-    return DecoratedComponent
 }
 
 export default ModalWindow

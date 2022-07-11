@@ -1,0 +1,72 @@
+@use "~@dpgr/design-system/nvb/tokens/colors";
+
+$dropdown-list-offset: 60px;
+
+header {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1000;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  position: relative;
+  background-color: colors.$blue;
+}
+
+.dropdown-container a {
+  color: colors.$black
+}
+
+.menu {
+  display: flex;
+  align-items: stretch;
+  flex-direction: row;
+  width: 60%
+}
+
+.dropdown-container {
+  position: absolute;
+  width: 100%;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  visibility: hidden;
+  background: #f3f3f3;
+}
+
+.dropdown-wrapper {
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.dropdown-wrapper:hover .dropdown-container {
+  visibility: visible;
+}
+
+.dropdown-list {
+  list-style: none;
+  padding: 0 0 0 2rem;
+  margin: 0 0 0 40%;
+  position: relative;
+}
+
+.sub-menu {
+  position: absolute;
+  height: 100%;
+  left: 200px;
+  top: 0;
+  visibility: hidden;
+}
+
+.sub-menu-container:hover .sub-menu {
+  visibility: visible;
+}

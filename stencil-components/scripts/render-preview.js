@@ -5,7 +5,8 @@ const cheerio = require('cheerio')
 const componentTags = [
   'my-component',
   'footer-b2c',
-  'modal-window'
+  'modal-window',
+  'nvb-header-b2c'
 ]
 
 async function getPrerenderedComponent(tag) {
@@ -16,7 +17,7 @@ async function getPrerenderedComponent(tag) {
     tag,
     classNames: $(tag).attr('class'),
     html: $(tag).html(),
-    style: $.html('style')
+    style: $('style').html()
   };
 }
 

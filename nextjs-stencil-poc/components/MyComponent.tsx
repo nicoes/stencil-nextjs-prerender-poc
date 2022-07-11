@@ -5,7 +5,7 @@ import {registerSsrStyle} from "../utils/StencilStyleRepository";
 registerSsrStyle('my-component', '/*!@div*/div.sc-my-component{display:block}/*!@button*/button.sc-my-component{color:#AA00CC}')
 defineCustomElement()
 
-const HeaderB2c = () => {
+const MyComponent = () => {
     const component = React.createElement("my-component", {}, null)
     const DecoratedComponent = {
         ...component,
@@ -20,4 +20,4 @@ const HeaderB2c = () => {
     return DecoratedComponent
 }
 
-export default HeaderB2c
+export default MyComponent

@@ -9,11 +9,6 @@
     <script nomodule src="/build/stencil-components.js"></script>
   </head>
   <body>
-    <modal-window modal-title="Report job apply" is-visible="true">This is some custom modal content</modal-window>
-    <footer-b2c user-name="vitalii" />
-    <script>
-      const modalWindowElement = document.querySelector('modal-window');
-      modalWindowElement.addEventListener('visibilityChanged', e => console.log('visibility changed', e))
-    </script>
+    <nvb-header-b2c />
   </body>
 </html>

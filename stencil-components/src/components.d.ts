@@ -17,6 +17,8 @@ export namespace Components {
     }
     interface MyComponent {
     }
+    interface NvbHeaderB2c {
+    }
 }
 declare global {
     interface HTMLFooterB2cElement extends Components.FooterB2c, HTMLStencilElement {
@@ -37,10 +39,17 @@ declare global {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
     };
+    interface HTMLNvbHeaderB2cElement extends Components.NvbHeaderB2c, HTMLStencilElement {
+    }
+    var HTMLNvbHeaderB2cElement: {
+        prototype: HTMLNvbHeaderB2cElement;
+        new (): HTMLNvbHeaderB2cElement;
+    };
     interface HTMLElementTagNameMap {
         "footer-b2c": HTMLFooterB2cElement;
         "modal-window": HTMLModalWindowElement;
         "my-component": HTMLMyComponentElement;
+        "nvb-header-b2c": HTMLNvbHeaderB2cElement;
     }
 }
 declare namespace LocalJSX {
@@ -55,10 +64,13 @@ declare namespace LocalJSX {
     }
     interface MyComponent {
     }
+    interface NvbHeaderB2c {
+    }
     interface IntrinsicElements {
         "footer-b2c": FooterB2c;
         "modal-window": ModalWindow;
         "my-component": MyComponent;
+        "nvb-header-b2c": NvbHeaderB2c;
     }
 }
 export { LocalJSX as JSX };
@@ -68,6 +80,7 @@ declare module "@stencil/core" {
             "footer-b2c": LocalJSX.FooterB2c & JSXBase.HTMLAttributes<HTMLFooterB2cElement>;
             "modal-window": LocalJSX.ModalWindow & JSXBase.HTMLAttributes<HTMLModalWindowElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "nvb-header-b2c": LocalJSX.NvbHeaderB2c & JSXBase.HTMLAttributes<HTMLNvbHeaderB2cElement>;
         }
     }
 }
