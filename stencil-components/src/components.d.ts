@@ -5,9 +5,15 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { VisibilityChangedEvent } from "./components/modal-window/modal-window";
 export namespace Components {
     interface FooterB2c {
         "userName": string;
+    }
+    interface ModalWindow {
+        "isVisible": boolean;
+        "modalText": string;
+        "modalTitle": string;
     }
     interface MyComponent {
     }
@@ -19,6 +25,12 @@ declare global {
         prototype: HTMLFooterB2cElement;
         new (): HTMLFooterB2cElement;
     };
+    interface HTMLModalWindowElement extends Components.ModalWindow, HTMLStencilElement {
+    }
+    var HTMLModalWindowElement: {
+        prototype: HTMLModalWindowElement;
+        new (): HTMLModalWindowElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -27,6 +39,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "footer-b2c": HTMLFooterB2cElement;
+        "modal-window": HTMLModalWindowElement;
         "my-component": HTMLMyComponentElement;
     }
 }
@@ -34,10 +47,17 @@ declare namespace LocalJSX {
     interface FooterB2c {
         "userName"?: string;
     }
+    interface ModalWindow {
+        "isVisible"?: boolean;
+        "modalText"?: string;
+        "modalTitle"?: string;
+        "onVisibilityChanged"?: (event: CustomEvent<VisibilityChangedEvent>) => void;
+    }
     interface MyComponent {
     }
     interface IntrinsicElements {
         "footer-b2c": FooterB2c;
+        "modal-window": ModalWindow;
         "my-component": MyComponent;
     }
 }
@@ -46,6 +66,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "footer-b2c": LocalJSX.FooterB2c & JSXBase.HTMLAttributes<HTMLFooterB2cElement>;
+            "modal-window": LocalJSX.ModalWindow & JSXBase.HTMLAttributes<HTMLModalWindowElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }

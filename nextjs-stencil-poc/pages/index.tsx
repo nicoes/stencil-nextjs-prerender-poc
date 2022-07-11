@@ -5,9 +5,11 @@ import styles from '../styles/Home.module.css'
 import HeaderB2c from "../components/HeaderB2c";
 import FooterB2c from "../components/FooterB2c";
 import React, {useState} from "react";
+import ModalWindow from "../components/ModalWindow";
 
 const Home: NextPage = () => {
   const [showComponents, setShowComponents] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [showHr, setShowHr] = useState(true);
   const [userName, setUserName] = useState<string | null>(null);
   return (
@@ -33,6 +35,8 @@ const Home: NextPage = () => {
 
         {showComponents && <FooterB2c userName={userName} />}
 
+        {showComponents && <ModalWindow title="This is a modal" isVisible={showModal} setIsVisible={setShowModal} text={'This is the modal content'} />}
+
         <ul>
           <li>
             <button onClick={() => setShowComponents(prevState => !prevState)}>Toggle components</button>
@@ -42,6 +46,9 @@ const Home: NextPage = () => {
           </li>
           <li>
             <button onClick={() => setUserName(prevState => prevState ? null : 'Vitalii')}>Toggle user</button>
+          </li>
+          <li>
+            <button onClick={() => setShowModal(prevState => !prevState)}>Show modal (only when components are toggled)</button>
           </li>
         </ul>
 

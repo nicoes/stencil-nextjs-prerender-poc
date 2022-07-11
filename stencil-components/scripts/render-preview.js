@@ -4,7 +4,8 @@ const cheerio = require('cheerio')
 
 const componentTags = [
   'my-component',
-  'footer-b2c'
+  'footer-b2c',
+  'modal-window'
 ]
 
 async function getPrerenderedComponent(tag) {

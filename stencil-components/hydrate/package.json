@@ -1,6 +1,6 @@
 {
   "name": "stencil-components/hydrate",
-  "description": "HeaderB2c component hydration app.",
+  "description": "StencilComponents component hydration app.",
   "main": "index.js",
   "types": "index.d.ts"
 }

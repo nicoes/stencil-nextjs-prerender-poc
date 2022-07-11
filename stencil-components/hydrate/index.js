@@ -4737,8 +4737,8 @@ function hydrateFactory($stencilWindow, $stencilHydrateOpts, $stencilHydrateResu
   /*hydrateAppClosure start*/
 
 
-const NAMESPACE = 'header-b2c';
-const BUILD = /* header-b2c */ { allRenderFn: true, appendChildSlotFix: false, asyncLoading: true, attachStyles: true, cloneNodeFix: false, cmpDidLoad: false, cmpDidRender: false, cmpDidUnload: false, cmpDidUpdate: false, cmpShouldUpdate: false, cmpWillLoad: false, cmpWillRender: false, cmpWillUpdate: false, connectedCallback: true, constructableCSS: false, cssAnnotations: true, cssVarShim: false, devTools: false, disconnectedCallback: true, dynamicImportShim: false, element: false, event: false, hasRenderFn: true, hostListener: false, hostListenerTarget: false, hostListenerTargetBody: false, hostListenerTargetDocument: false, hostListenerTargetParent: false, hostListenerTargetWindow: false, hotModuleReplacement: false, hydrateClientSide: true, hydrateServerSide: true, hydratedAttribute: false, hydratedClass: true, isDebug: false, isDev: false, isTesting: false, lazyLoad: true, lifecycle: false, lifecycleDOMEvents: false, member: true, method: false, mode: false, observeAttribute: true, profile: false, prop: true, propBoolean: false, propMutable: false, propNumber: false, propString: true, reflect: false, safari10: false, scoped: false, scriptDataOpts: false, shadowDelegatesFocus: false, shadowDom: true, shadowDomShim: true, slot: false, slotChildNodesFix: false, slotRelocation: true, state: true, style: true, svg: false, taskQueue: true, updatable: true, vdomAttribute: true, vdomClass: false, vdomFunctional: false, vdomKey: false, vdomListener: true, vdomPropOrAttr: false, vdomRef: false, vdomRender: true, vdomStyle: false, vdomText: true, vdomXlink: false, watchCallback: false };
+const NAMESPACE = 'stencil-components';
+const BUILD = /* stencil-components */ { allRenderFn: true, appendChildSlotFix: false, asyncLoading: true, attachStyles: true, cloneNodeFix: false, cmpDidLoad: false, cmpDidRender: false, cmpDidUnload: false, cmpDidUpdate: false, cmpShouldUpdate: false, cmpWillLoad: false, cmpWillRender: false, cmpWillUpdate: false, connectedCallback: true, constructableCSS: false, cssAnnotations: true, cssVarShim: false, devTools: false, disconnectedCallback: true, dynamicImportShim: false, element: false, event: true, hasRenderFn: true, hostListener: false, hostListenerTarget: false, hostListenerTargetBody: false, hostListenerTargetDocument: false, hostListenerTargetParent: false, hostListenerTargetWindow: false, hotModuleReplacement: false, hydrateClientSide: true, hydrateServerSide: true, hydratedAttribute: false, hydratedClass: true, isDebug: false, isDev: false, isTesting: false, lazyLoad: true, lifecycle: false, lifecycleDOMEvents: false, member: true, method: false, mode: false, observeAttribute: true, profile: false, prop: true, propBoolean: true, propMutable: false, propNumber: false, propString: true, reflect: false, safari10: false, scoped: false, scriptDataOpts: false, shadowDelegatesFocus: false, shadowDom: true, shadowDomShim: true, slot: false, slotChildNodesFix: false, slotRelocation: true, state: true, style: true, svg: false, taskQueue: true, updatable: true, vdomAttribute: true, vdomClass: true, vdomFunctional: false, vdomKey: false, vdomListener: true, vdomPropOrAttr: false, vdomRef: false, vdomRender: true, vdomStyle: false, vdomText: true, vdomXlink: false, watchCallback: false };
 
 function componentOnReady() {
  return getHostRef(this).$onReadyPromise$;
@@ -4969,10 +4969,13 @@ const createTime = (e, t = "") => {
 }, Host = {}, isHost = e => e && e.$tag$ === Host, setAccessor = (e, t, o, n, s, l) => {
  if (o !== n) {
   let a = isMemberInElement(e, t), r = t.toLowerCase();
-  if ((a ) || "o" !== t[0] || "n" !== t[1]) ; else t = "-" === t[2] ? t.slice(3) : isMemberInElement(win, r) ? r.slice(2) : r[2] + t.slice(3), 
+  if ("class" === t) {
+   const t = e.classList, s = parseClassList(o), l = parseClassList(n);
+   t.remove(...s.filter((e => e && !l.includes(e)))), t.add(...l.filter((e => e && !s.includes(e))));
+  } else if ((a ) || "o" !== t[0] || "n" !== t[1]) ; else t = "-" === t[2] ? t.slice(3) : isMemberInElement(win, r) ? r.slice(2) : r[2] + t.slice(3), 
   o && plt.rel(e, t, o, !1), n && plt.ael(e, t, n, !1);
  }
-}, updateElement = (e, t, o, n) => {
+}, parseClassListRegex = /\s/, parseClassList = e => e ? e.split(parseClassListRegex) : [], updateElement = (e, t, o, n) => {
  const s = 11 === t.$elm$.nodeType && t.$elm$.host ? t.$elm$.host : t.$elm$, l = e && e.$attrs$ || EMPTY_OBJ, a = t.$attrs$ || EMPTY_OBJ;
  for (n in l) n in a || setAccessor(s, n, l[n], void 0);
  for (n in a) setAccessor(s, n, l[n], a[n]);
@@ -5086,7 +5089,17 @@ const createElm = (e, t, o, n) => {
   checkSlotFallbackVisibility && updateFallbackSlotVisibility(l.$elm$), plt.$flags$ &= -2, 
   relocateNodes.length = 0;
  }
-}, slotReferenceDebugNode = e => doc.createComment(`<slot${e.$name$ ? ' name="' + e.$name$ + '"' : ""}> (host=${hostTagName.toLowerCase()})`), originalLocationDebugNode = e => doc.createComment("org-location for " + (e.localName ? `<${e.localName}> (host=${e["s-hn"]})` : `[${e.textContent}]`)), emitEvent = (e, t, o) => {
+}, slotReferenceDebugNode = e => doc.createComment(`<slot${e.$name$ ? ' name="' + e.$name$ + '"' : ""}> (host=${hostTagName.toLowerCase()})`), originalLocationDebugNode = e => doc.createComment("org-location for " + (e.localName ? `<${e.localName}> (host=${e["s-hn"]})` : `[${e.textContent}]`)), getElement = e => getHostRef(e).$hostElement$ , createEvent = (e, t, o) => {
+ const n = getElement(e);
+ return {
+  emit: e => (emitEvent(n, t, {
+   bubbles: !!(4 & o),
+   composed: !!(2 & o),
+   cancelable: !!(1 & o),
+   detail: e
+  }))
+ };
+}, emitEvent = (e, t, o) => {
  const n = plt.ce(t, o);
  return e.dispatchEvent(n), n;
 }, attachToAncestor = (e, t) => {
@@ -5204,7 +5217,7 @@ const callRender = (e, t, o) => {
   const o = e.nodeValue.split(".");
   "o" === o[0] && (t.set(o[1] + "." + o[2], e), e.nodeValue = "", e["s-en"] = o[3]);
  }
-}, parsePropertyValue = (e, t) => null == e || isComplexType(e) ? e : 1 & t ? String(e) : e, getValue = (e, t) => getHostRef(e).$instanceValues$.get(t), setValue = (e, t, o, n) => {
+}, parsePropertyValue = (e, t) => null == e || isComplexType(e) ? e : 4 & t ? "false" !== e && ("" === e || !!e) : 1 & t ? String(e) : e, getValue = (e, t) => getHostRef(e).$instanceValues$.get(t), setValue = (e, t, o, n) => {
  const s = getHostRef(e), a = s.$instanceValues$.get(t), r = s.$flags$, i = s.$lazyInstance$ ;
  o = parsePropertyValue(o, n.$members$[t][0]);
  const d = Number.isNaN(a) && Number.isNaN(o), c = o !== a && !d;
@@ -5466,6 +5479,36 @@ class FooterB2c {
   }; }
 }
 
+const modalWindowCss = "/*!@.wrapper*/.wrapper.sc-modal-window{position:fixed;left:0;top:0;width:100%;height:100%;visibility:hidden}/*!@.backdrop*/.backdrop.sc-modal-window{position:absolute;left:0;top:0;width:100%;height:100%;background-color:rgba(0, 0, 0, 0.8);opacity:0;transition:visibility 0s linear 0.1s, opacity 0.1s 0s, transform 0.1s;transform:scale(1.1);z-index:1}/*!@.visible*/.visible.sc-modal-window{visibility:visible}/*!@.visible .backdrop*/.visible.sc-modal-window .backdrop.sc-modal-window{opacity:1;transform:scale(1)}/*!@.modal*/.modal.sc-modal-window{font-size:14px;padding:10px 10px 5px 10px;background-color:#fff;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);border-radius:2px;min-width:300px;z-index:2}/*!@h1*/h1.sc-modal-window{font-size:18px}/*!@header*/header.sc-modal-window{display:flex;justify-content:space-between}/*!@button*/button.sc-modal-window{margin-left:5px;min-width:80px;background-color:#848e97;border-color:#848e97;border-style:solid;border-radius:2px;padding:3px;color:white;cursor:pointer}/*!@button:hover*/button.sc-modal-window:hover{background-color:#6c757d;border-color:#6c757d}";
+
+class ModalWindow {
+  constructor(hostRef) {
+    registerInstance(this, hostRef);
+    this.visibilityChanged = createEvent(this, "visibilityChanged", 7);
+    this.handleModalClose = () => {
+      this.visibilityChanged.emit({
+        isVisible: false
+      });
+    };
+  }
+  render() {
+    return (hAsync("div", { class: this.isVisible ? 'wrapper visible' : 'wrapper' }, hAsync("div", { class: 'backdrop', onClick: () => this.handleModalClose() }), hAsync("div", { class: "modal" }, hAsync("header", null, hAsync("h1", null, this.modalTitle), hAsync("button", { onClick: () => this.handleModalClose() }, "X")), hAsync("main", null, this.modalText))));
+  }
+  static get style() { return modalWindowCss; }
+  static get cmpMeta() { return {
+    "$flags$": 9,
+    "$tagName$": "modal-window",
+    "$members$": {
+      "isVisible": [4, "is-visible"],
+      "modalTitle": [1, "modal-title"],
+      "modalText": [1, "modal-text"]
+    },
+    "$listeners$": undefined,
+    "$lazyBundleId$": "-",
+    "$attrsToReflect$": []
+  }; }
+}
+
 const myComponentCss = "/*!@div*/div.sc-my-component{display:block}/*!@button*/button.sc-my-component{color:#AA00CC}";
 
 class MyComponent {
@@ -5503,6 +5546,7 @@ class MyComponent {
 
 registerComponents([
   FooterB2c,
+  ModalWindow,
   MyComponent,
 ]);
 
