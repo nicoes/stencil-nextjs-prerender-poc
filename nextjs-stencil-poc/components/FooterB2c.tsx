@@ -1,5 +1,5 @@
 import React from "react";
-import { defineCustomElement } from 'header-b2c/dist/components/footer-b2c';
+import { defineCustomElement } from 'stencil-components/dist/components/footer-b2c';
 
 defineCustomElement()
 
