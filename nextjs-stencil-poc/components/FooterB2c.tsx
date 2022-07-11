@@ -1,6 +1,8 @@
 import React from "react";
 import { defineCustomElement } from 'stencil-components/dist/components/footer-b2c';
+import {registerSsrStyle} from "../utils/StencilStyleRepository";
 
+registerSsrStyle('footer-b2c', '/*!@footer*/footer.sc-footer-b2c{display:block;min-height:100px;background:#0070f3;color:white;width:100%}')
 defineCustomElement()
 
 const FooterB2c = ({ userName }: { userName: string | null }) => {
@@ -16,10 +18,7 @@ const FooterB2c = ({ userName }: { userName: string | null }) => {
             }
         }
     }
-    return <React.Fragment key={'footer-b2c'}>
-        <style dangerouslySetInnerHTML={{ __html: '/*!@footer*/footer.sc-footer-b2c{display:block;min-height:100px;background:#0070f3;color:white;width:100%}'}} />
-        {DecoratedComponent}
-    </React.Fragment>
+    return DecoratedComponent
 }
 
 export default FooterB2c

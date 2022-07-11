@@ -34,6 +34,9 @@ const Home: NextPage = () => {
         </h1>
 
         {showComponents && <FooterB2c userName={userName} />}
+        {showComponents && <FooterB2c userName={userName} />}
+        {showComponents && <FooterB2c userName={userName} />}
+        {showComponents && <FooterB2c userName={userName} />}
 
         {showComponents && <ModalWindow title="This is a modal" isVisible={showModal} setIsVisible={setShowModal} text={'This is the modal content'} />}
 

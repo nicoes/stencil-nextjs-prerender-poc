@@ -1,10 +1,13 @@
-import React, {useCallback, useRef} from "react";
+import React, {useCallback} from "react";
 import { defineCustomElement } from 'stencil-components/dist/components/modal-window';
 import {VisibilityChangedEvent} from "stencil-components/dist/types/components/modal-window/modal-window";
+import {registerSsrStyle} from "../utils/StencilStyleRepository";
 
+registerSsrStyle('modal-window', '/*!@.wrapper*/.wrapper.sc-modal-window{position:fixed;left:0;top:0;width:100%;height:100%;visibility:hidden}/*!@.backdrop*/.backdrop.sc-modal-window{position:absolute;left:0;top:0;width:100%;height:100%;background-color:rgba(0, 0, 0, 0.8);opacity:0;transition:visibility 0s linear 0.1s, opacity 0.1s 0s, transform 0.1s;transform:scale(1.1);z-index:1}/*!@.visible*/.visible.sc-modal-window{visibility:visible}/*!@.visible .backdrop*/.visible.sc-modal-window .backdrop.sc-modal-window{opacity:1;transform:scale(1)}/*!@.modal*/.modal.sc-modal-window{font-size:14px;padding:10px 10px 5px 10px;background-color:#fff;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);border-radius:2px;min-width:300px;z-index:2}/*!@h1*/h1.sc-modal-window{font-size:18px}/*!@header*/header.sc-modal-window{display:flex;justify-content:space-between}/*!@button*/button.sc-modal-window{margin-left:5px;min-width:80px;background-color:#848e97;border-color:#848e97;border-style:solid;border-radius:2px;padding:3px;color:white;cursor:pointer}/*!@button:hover*/button.sc-modal-window:hover{background-color:#6c757d;border-color:#6c757d}')
 defineCustomElement()
 
 const ModalWindow = ({ title, isVisible, setIsVisible, text }: { title: string, isVisible: boolean, setIsVisible: (isVisible: boolean) => void, text: string}) => {
+
     const trackedRef = useCallback((node: Element) => {
         if (node !== null) {
             console.log('add modal ref')
@@ -13,7 +16,6 @@ const ModalWindow = ({ title, isVisible, setIsVisible, text }: { title: string, 
             console.log('remove modal ref')
         }
     }, []);
-
     const component = React.createElement("modal-window", {}, null)
     const DecoratedComponent = {
         ...component,
@@ -30,11 +32,7 @@ const ModalWindow = ({ title, isVisible, setIsVisible, text }: { title: string, 
         ref: trackedRef
     }
 
-
-    return <React.Fragment>
-        <style dangerouslySetInnerHTML={{ __html: '/*!@.wrapper*/.wrapper.sc-modal-window{position:fixed;left:0;top:0;width:100%;height:100%;visibility:hidden}/*!@.backdrop*/.backdrop.sc-modal-window{position:absolute;left:0;top:0;width:100%;height:100%;background-color:rgba(0, 0, 0, 0.8);opacity:0;transition:visibility 0s linear 0.1s, opacity 0.1s 0s, transform 0.1s;transform:scale(1.1);z-index:1}/*!@.visible*/.visible.sc-modal-window{visibility:visible}/*!@.visible .backdrop*/.visible.sc-modal-window .backdrop.sc-modal-window{opacity:1;transform:scale(1)}/*!@.modal*/.modal.sc-modal-window{font-size:14px;padding:10px 10px 5px 10px;background-color:#fff;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);border-radius:2px;min-width:300px;z-index:2}/*!@h1*/h1.sc-modal-window{font-size:18px}/*!@header*/header.sc-modal-window{display:flex;justify-content:space-between}/*!@button*/button.sc-modal-window{margin-left:5px;min-width:80px;background-color:#848e97;border-color:#848e97;border-style:solid;border-radius:2px;padding:3px;color:white;cursor:pointer}/*!@button:hover*/button.sc-modal-window:hover{background-color:#6c757d;border-color:#6c757d}'}} />
-        {DecoratedComponent}
-    </React.Fragment>
+    return DecoratedComponent
 }
 
 export default ModalWindow

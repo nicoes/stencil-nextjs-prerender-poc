@@ -1,6 +1,8 @@
 import React from "react";
 import { defineCustomElement } from 'stencil-components/dist/components/my-component';
+import {registerSsrStyle} from "../utils/StencilStyleRepository";
 
+registerSsrStyle('my-component', '/*!@div*/div.sc-my-component{display:block}/*!@button*/button.sc-my-component{color:#AA00CC}')
 defineCustomElement()
 
 const HeaderB2c = () => {
@@ -15,10 +17,7 @@ const HeaderB2c = () => {
             }
         }
     }
-    return <React.Fragment>
-            <style dangerouslySetInnerHTML={{ __html: '/*!@div*/div.sc-my-component{display:block}/*!@button*/button.sc-my-component{color:#AA00CC}'}} />
-        {DecoratedComponent}
-    </React.Fragment>
+    return DecoratedComponent
 }
 
 export default HeaderB2c
