@@ -1,9 +1,9 @@
-@use "../../sass/colors";
+@use "~@dpgr/design-system/nvb/tokens/colors";
 
 div {
   display: block;
 }
 
 button {
-  color: colors.$purple;
+  color: colors.$blue-dark;
 }

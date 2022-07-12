@@ -21,7 +21,7 @@ export class NvbHeaderB2c {
       <header>
         <div class={'top'}><a href="#">Werkgevers / Plaats vacature</a></div>
         <nav class={'main'}>
-          <a href="#"><Logo /></a>
+          <a href="#" class={'logo-link'}><Logo /></a>
           <div class={'menu'}>
             <div class="dropdown-wrapper">
               <button class='menu-link menu-link-dropdown'>Vacatures</button>

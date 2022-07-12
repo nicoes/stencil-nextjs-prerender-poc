@@ -4738,7 +4738,7 @@ function hydrateFactory($stencilWindow, $stencilHydrateOpts, $stencilHydrateResu
 
 
 const NAMESPACE = 'stencil-components';
-const BUILD = /* stencil-components */ { allRenderFn: true, appendChildSlotFix: false, asyncLoading: true, attachStyles: true, cloneNodeFix: false, cmpDidLoad: false, cmpDidRender: false, cmpDidUnload: false, cmpDidUpdate: false, cmpShouldUpdate: false, cmpWillLoad: false, cmpWillRender: false, cmpWillUpdate: false, connectedCallback: true, constructableCSS: false, cssAnnotations: true, cssVarShim: false, devTools: false, disconnectedCallback: true, dynamicImportShim: false, element: false, event: true, hasRenderFn: true, hostListener: false, hostListenerTarget: false, hostListenerTargetBody: false, hostListenerTargetDocument: false, hostListenerTargetParent: false, hostListenerTargetWindow: false, hotModuleReplacement: false, hydrateClientSide: true, hydrateServerSide: true, hydratedAttribute: false, hydratedClass: true, isDebug: false, isDev: false, isTesting: false, lazyLoad: true, lifecycle: false, lifecycleDOMEvents: false, member: true, method: false, mode: false, observeAttribute: true, profile: false, prop: true, propBoolean: true, propMutable: false, propNumber: false, propString: true, reflect: false, safari10: false, scoped: false, scriptDataOpts: false, shadowDelegatesFocus: false, shadowDom: true, shadowDomShim: true, slot: false, slotChildNodesFix: false, slotRelocation: true, state: true, style: true, svg: false, taskQueue: true, updatable: true, vdomAttribute: true, vdomClass: true, vdomFunctional: true, vdomKey: false, vdomListener: true, vdomPropOrAttr: true, vdomRef: false, vdomRender: true, vdomStyle: false, vdomText: true, vdomXlink: false, watchCallback: false };
+const BUILD = /* stencil-components */ { allRenderFn: true, appendChildSlotFix: false, asyncLoading: true, attachStyles: true, cloneNodeFix: false, cmpDidLoad: true, cmpDidRender: false, cmpDidUnload: false, cmpDidUpdate: false, cmpShouldUpdate: false, cmpWillLoad: false, cmpWillRender: false, cmpWillUpdate: false, connectedCallback: true, constructableCSS: false, cssAnnotations: true, cssVarShim: false, devTools: false, disconnectedCallback: true, dynamicImportShim: false, element: false, event: true, hasRenderFn: true, hostListener: false, hostListenerTarget: false, hostListenerTargetBody: false, hostListenerTargetDocument: false, hostListenerTargetParent: false, hostListenerTargetWindow: false, hotModuleReplacement: false, hydrateClientSide: true, hydrateServerSide: true, hydratedAttribute: false, hydratedClass: true, isDebug: false, isDev: false, isTesting: false, lazyLoad: true, lifecycle: true, lifecycleDOMEvents: false, member: true, method: false, mode: false, observeAttribute: true, profile: false, prop: true, propBoolean: true, propMutable: false, propNumber: false, propString: true, reflect: false, safari10: false, scoped: false, scriptDataOpts: false, shadowDelegatesFocus: false, shadowDom: true, shadowDomShim: true, slot: false, slotChildNodesFix: false, slotRelocation: true, state: true, style: true, svg: false, taskQueue: true, updatable: true, vdomAttribute: true, vdomClass: true, vdomFunctional: true, vdomKey: false, vdomListener: true, vdomPropOrAttr: true, vdomRef: false, vdomRender: true, vdomStyle: false, vdomText: true, vdomXlink: false, watchCallback: true };
 
 function componentOnReady() {
  return getHostRef(this).$onReadyPromise$;
@@ -5174,9 +5174,10 @@ const callRender = (e, t, o) => {
  }
  return null;
 }, postUpdateComponent = e => {
- const t = e.$cmpMeta$.$tagName$, o = e.$hostElement$, n = createTime("postUpdate", t), l = e.$ancestorComponent$;
+ const t = e.$cmpMeta$.$tagName$, o = e.$hostElement$, n = createTime("postUpdate", t), s = e.$lazyInstance$ , l = e.$ancestorComponent$;
  64 & e.$flags$ ? (n()) : (e.$flags$ |= 64, addHydratedFlag(o), 
- n(), (e.$onReadyResolve$(o), l || appDidLoad())), (e.$onRenderResolve$ && (e.$onRenderResolve$(), 
+ (safeCall(s, "componentDidLoad"), 
+ BUILD.isDev ), n(), (e.$onReadyResolve$(o), l || appDidLoad())), (e.$onRenderResolve$ && (e.$onRenderResolve$(), 
  e.$onRenderResolve$ = void 0), 512 & e.$flags$ && nextTick((() => scheduleUpdate(e, !1))), 
  e.$flags$ &= -517);
 }, appDidLoad = e => {
@@ -5251,17 +5252,28 @@ const callRender = (e, t, o) => {
   "o" === o[0] && (t.set(o[1] + "." + o[2], e), e.nodeValue = "", e["s-en"] = o[3]);
  }
 }, parsePropertyValue = (e, t) => null == e || isComplexType(e) ? e : 4 & t ? "false" !== e && ("" === e || !!e) : 1 & t ? String(e) : e, getValue = (e, t) => getHostRef(e).$instanceValues$.get(t), setValue = (e, t, o, n) => {
- const s = getHostRef(e), a = s.$instanceValues$.get(t), r = s.$flags$, i = s.$lazyInstance$ ;
+ const s = getHostRef(e), l = s.$hostElement$ , a = s.$instanceValues$.get(t), r = s.$flags$, i = s.$lazyInstance$ ;
  o = parsePropertyValue(o, n.$members$[t][0]);
  const d = Number.isNaN(a) && Number.isNaN(o), c = o !== a && !d;
  if ((!(8 & r) || void 0 === a) && c && (s.$instanceValues$.set(t, o), 
  i)) {
+  if (n.$watchers$ && 128 & r) {
+   const e = n.$watchers$[t];
+   e && e.map((e => {
+    try {
+     i[e](o, a, t);
+    } catch (e) {
+     consoleError(e, l);
+    }
+   }));
+  }
   if (2 == (18 & r)) {
    scheduleUpdate(s, !1);
   }
  }
 }, proxyComponent = (e, t, o) => {
  if (t.$members$) {
+  e.watchers && (t.$watchers$ = e.watchers);
   const n = Object.entries(t.$members$), s = e.prototype;
   if (n.map((([e, [n]]) => {
    (31 & n || (2 & o) && 32 & n) ? Object.defineProperty(s, e, {
@@ -5296,7 +5308,8 @@ const callRender = (e, t, o) => {
     const e = (() => {});
     s = await s, e();
    }
-   !s.isProxied && (proxyComponent(s, o, 2), s.isProxied = !0);
+   !s.isProxied && ((o.$watchers$ = s.watchers), 
+   proxyComponent(s, o, 2), s.isProxied = !0);
    const e = createTime("createInstance", o.$tagName$);
    (t.$flags$ |= 8);
    try {
@@ -5304,7 +5317,7 @@ const callRender = (e, t, o) => {
    } catch (e) {
     consoleError(e);
    }
-   (t.$flags$ &= -9), e(), 
+   (t.$flags$ &= -9), (t.$flags$ |= 128), e(), 
    fireConnectedCallback(t.$lazyInstance$);
   }
   if (s.style) {
@@ -5512,7 +5525,7 @@ class FooterB2c {
   }; }
 }
 
-const modalWindowCss = "/*!@.wrapper*/.wrapper.sc-modal-window{position:fixed;left:0;top:0;width:100%;height:100%;visibility:hidden}/*!@.backdrop*/.backdrop.sc-modal-window{position:absolute;left:0;top:0;width:100%;height:100%;background-color:rgba(0, 0, 0, 0.8);opacity:0;transition:visibility 0s linear 0.1s, opacity 0.1s 0s, transform 0.1s;transform:scale(1.1);z-index:1}/*!@.visible*/.visible.sc-modal-window{visibility:visible}/*!@.visible .backdrop*/.visible.sc-modal-window .backdrop.sc-modal-window{opacity:1;transform:scale(1)}/*!@.modal*/.modal.sc-modal-window{font-size:14px;padding:10px 10px 5px 10px;background-color:#fff;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);border-radius:2px;min-width:300px;z-index:2}/*!@h1*/h1.sc-modal-window{font-size:18px}/*!@header*/header.sc-modal-window{display:flex;justify-content:space-between}/*!@button*/button.sc-modal-window{margin-left:5px;min-width:80px;background-color:#848e97;border-color:#848e97;border-style:solid;border-radius:2px;padding:3px;color:white;cursor:pointer}/*!@button:hover*/button.sc-modal-window:hover{background-color:#6c757d;border-color:#6c757d}";
+const modalWindowCss = "/*!@.wrapper*/.wrapper.sc-modal-window{position:fixed;left:0;top:0;width:100%;height:100%;visibility:hidden;z-index:2000}/*!@.backdrop*/.backdrop.sc-modal-window{position:absolute;left:0;top:0;width:100%;height:100%;background-color:rgba(0, 0, 0, 0.8);opacity:0;transition:visibility 0s linear 0.1s, opacity 0.1s 0s, transform 0.1s;transform:scale(1.1);z-index:1}/*!@.visible*/.visible.sc-modal-window{visibility:visible}/*!@.visible .backdrop*/.visible.sc-modal-window .backdrop.sc-modal-window{opacity:1;transform:scale(1)}/*!@.modal*/.modal.sc-modal-window{font-size:14px;padding:10px 10px 5px 10px;background-color:#fff;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);border-radius:2px;min-width:300px;z-index:2}/*!@h1*/h1.sc-modal-window{font-size:18px}/*!@header*/header.sc-modal-window{display:flex;justify-content:space-between}/*!@button*/button.sc-modal-window{margin-left:5px;min-width:80px;background-color:#848e97;border-color:#848e97;border-style:solid;border-radius:2px;padding:3px;color:white;cursor:pointer}/*!@button:hover*/button.sc-modal-window:hover{background-color:#6c757d;border-color:#6c757d}";
 
 class ModalWindow {
   constructor(hostRef) {
@@ -5524,9 +5537,26 @@ class ModalWindow {
       });
     };
   }
+  componentDidLoad() {
+    this.adjustDocument(this.isVisible);
+  }
+  onNameChanged(isVisible) {
+    this.adjustDocument(isVisible);
+  }
+  adjustDocument(isVisible) {
+    if (isVisible) {
+      document.body.style.overflow = 'hidden';
+    }
+    else {
+      document.body.style.overflow = 'visible';
+    }
+  }
   render() {
     return (hAsync("div", { class: this.isVisible ? 'wrapper visible' : 'wrapper' }, hAsync("div", { class: 'backdrop', onClick: () => this.handleModalClose() }), hAsync("div", { class: "modal" }, hAsync("header", null, hAsync("h1", null, this.modalTitle), hAsync("button", { onClick: () => this.handleModalClose() }, "X")), hAsync("main", null, this.modalText))));
   }
+  static get watchers() { return {
+    "isVisible": ["onNameChanged"]
+  }; }
   static get style() { return modalWindowCss; }
   static get cmpMeta() { return {
     "$flags$": 9,
@@ -5542,7 +5572,7 @@ class ModalWindow {
   }; }
 }
 
-const myComponentCss = "/*!@div*/div.sc-my-component{display:block}/*!@button*/button.sc-my-component{color:#AA00CC}";
+const myComponentCss = "/*!@div*/div.sc-my-component{display:block}/*!@button*/button.sc-my-component{color:#0099c4}";
 
 class MyComponent {
   constructor(hostRef) {
@@ -5613,7 +5643,7 @@ const DropdownContainerCareer = () => hAsync("div", { class: "dropdown-container
     hAsync("li", null,
       hAsync("a", { href: "/carriere/personal-branding" }, "Personal branding"))));
 
-const nvbHeaderB2cCss = "/*!@header*/header.sc-nvb-header-b2c{display:flex;flex-direction:column;position:relative;z-index:1000}/*!@.main*/.main.sc-nvb-header-b2c{display:flex;flex-direction:row;justify-content:space-between;align-items:stretch;position:relative;background-color:#05baed}/*!@.dropdown-container a*/.dropdown-container.sc-nvb-header-b2c a.sc-nvb-header-b2c{color:#000}/*!@.menu*/.menu.sc-nvb-header-b2c{align-items:stretch;flex-direction:row;width:60%;display:none}@media (min-width: 992px){/*!@.menu*/.menu.sc-nvb-header-b2c{display:flex}}/*!@.mobile-menu*/.mobile-menu.sc-nvb-header-b2c{display:block}@media (min-width: 992px){/*!@.mobile-menu*/.mobile-menu.sc-nvb-header-b2c{display:none}}/*!@.dropdown-container*/.dropdown-container.sc-nvb-header-b2c{position:absolute;width:100%;padding-top:60px;padding-bottom:60px;top:0;left:0;z-index:-1;visibility:hidden;background:#F6F6F6}/*!@.dropdown-wrapper*/.dropdown-wrapper.sc-nvb-header-b2c{display:flex;align-items:center;padding-left:2rem;padding-right:2rem}/*!@.dropdown-wrapper:hover .dropdown-container*/.dropdown-wrapper.sc-nvb-header-b2c:hover .dropdown-container.sc-nvb-header-b2c{visibility:visible}/*!@.dropdown-list*/.dropdown-list.sc-nvb-header-b2c{list-style:none;padding:0 0 0 2rem;margin:0 0 0 40%;position:relative}/*!@.sub-menu*/.sub-menu.sc-nvb-header-b2c{position:absolute;height:100%;left:200px;top:0;visibility:hidden}/*!@.sub-menu-container:hover .sub-menu*/.sub-menu-container.sc-nvb-header-b2c:hover .sub-menu.sc-nvb-header-b2c{visibility:visible}";
+const nvbHeaderB2cCss = "/*!@header*/header.sc-nvb-header-b2c{display:flex;flex-direction:column;position:relative;z-index:1000;align-items:stretch}/*!@.top*/.top.sc-nvb-header-b2c{display:flex;justify-content:flex-end;padding:0.5rem}/*!@.main*/.main.sc-nvb-header-b2c{display:flex;flex-direction:row;justify-content:space-between;align-items:stretch;position:relative;background-color:#05baed;padding-left:1rem;padding-right:1rem}/*!@.logo-link*/.logo-link.sc-nvb-header-b2c{display:flex;align-items:center}/*!@.dropdown-container a*/.dropdown-container.sc-nvb-header-b2c a.sc-nvb-header-b2c{color:#000}/*!@.menu*/.menu.sc-nvb-header-b2c{align-items:stretch;flex-direction:row;width:60%;display:none}@media (min-width: 992px){/*!@.menu*/.menu.sc-nvb-header-b2c{display:flex}}/*!@.mobile-menu*/.mobile-menu.sc-nvb-header-b2c{display:block}@media (min-width: 992px){/*!@.mobile-menu*/.mobile-menu.sc-nvb-header-b2c{display:none}}/*!@.dropdown-container*/.dropdown-container.sc-nvb-header-b2c{position:absolute;width:100%;padding-top:115px;padding-bottom:60px;top:0;left:0;z-index:-1;visibility:hidden;background:#F6F6F6}/*!@.dropdown-wrapper*/.dropdown-wrapper.sc-nvb-header-b2c{display:flex;align-items:center;padding-left:2rem;padding-right:2rem;height:55px}/*!@.dropdown-wrapper:hover .dropdown-container*/.dropdown-wrapper.sc-nvb-header-b2c:hover .dropdown-container.sc-nvb-header-b2c{visibility:visible}/*!@.dropdown-list*/.dropdown-list.sc-nvb-header-b2c{list-style:none;padding:0 0 0 2rem;margin:0 0 0 40%;position:relative}/*!@.sub-menu*/.sub-menu.sc-nvb-header-b2c{position:absolute;height:100%;left:200px;top:0;visibility:hidden}/*!@.sub-menu-container:hover .sub-menu*/.sub-menu-container.sc-nvb-header-b2c:hover .sub-menu.sc-nvb-header-b2c{visibility:visible}";
 
 class NvbHeaderB2c {
   constructor(hostRef) {
@@ -5624,7 +5654,7 @@ class NvbHeaderB2c {
     this.isActiveMobileMenu = evt.detail.isVisible;
   }
   render() {
-    return (hAsync("header", null, hAsync("div", { class: 'top' }, hAsync("a", { href: "#" }, "Werkgevers / Plaats vacature")), hAsync("nav", { class: 'main' }, hAsync("a", { href: "#" }, hAsync(Logo, null)), hAsync("div", { class: 'menu' }, hAsync("div", { class: "dropdown-wrapper" }, hAsync("button", { class: 'menu-link menu-link-dropdown' }, "Vacatures"), hAsync(DropdownContainerJobs, null)), hAsync("div", { class: 'dropdown-wrapper' }, hAsync("button", { class: 'menu-link menu-link-dropdown' }, "Carrieretips"), hAsync(DropdownContainerCareer, null))), hAsync("div", { class: 'mobile-menu' }, hAsync("button", { onClick: () => this.isActiveMobileMenu = !this.isActiveMobileMenu }, "Mobile menu"), hAsync("modal-window", { onVisibilityChanged: ev => this.onVisibilityChanged(ev), "is-visible": this.isActiveMobileMenu, modalTitle: 'This is the mobile menu', modalText: 'This is the content' })))));
+    return (hAsync("header", null, hAsync("div", { class: 'top' }, hAsync("a", { href: "#" }, "Werkgevers / Plaats vacature")), hAsync("nav", { class: 'main' }, hAsync("a", { href: "#", class: 'logo-link' }, hAsync(Logo, null)), hAsync("div", { class: 'menu' }, hAsync("div", { class: "dropdown-wrapper" }, hAsync("button", { class: 'menu-link menu-link-dropdown' }, "Vacatures"), hAsync(DropdownContainerJobs, null)), hAsync("div", { class: 'dropdown-wrapper' }, hAsync("button", { class: 'menu-link menu-link-dropdown' }, "Carrieretips"), hAsync(DropdownContainerCareer, null))), hAsync("div", { class: 'mobile-menu' }, hAsync("button", { onClick: () => this.isActiveMobileMenu = !this.isActiveMobileMenu }, "Mobile menu"), hAsync("modal-window", { onVisibilityChanged: ev => this.onVisibilityChanged(ev), "is-visible": this.isActiveMobileMenu, modalTitle: 'This is the mobile menu', modalText: 'This is the content' })))));
   }
   static get style() { return nvbHeaderB2cCss; }
   static get cmpMeta() { return {
