@@ -24,11 +24,17 @@ export class NvbHeaderB2c {
           <a href="#" class={'logo-link'}><Logo /></a>
           <div class={'menu'}>
             <div class="dropdown-wrapper">
-              <button class='menu-link menu-link-dropdown'>Vacatures</button>
+              <button class='menu-link menu-link--dropdown'>Vacatures</button>
               <DropdownContainerJobs />
             </div>
             <div class={'dropdown-wrapper'}>
-              <button class='menu-link menu-link-dropdown'>Carrieretips</button>
+              <button class='menu-link menu-link--dropdown'>Carrieretips</button>
+              <DropdownContainerCareer/>
+            </div>
+            <a href={"/salariswijzer"} class={'menu-link'}>Salariswijzer</a>
+            <hr class={'menu-separator'} />
+            <div class={'dropdown-wrapper'}>
+              <button class='menu-link menu-link--dropdown'>Account</button>
               <DropdownContainerCareer/>
             </div>
           </div>
