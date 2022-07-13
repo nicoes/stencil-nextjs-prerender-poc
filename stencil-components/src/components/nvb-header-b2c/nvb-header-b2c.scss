@@ -5,10 +5,13 @@
 @use "~@dpgr/design-system/nvb/tools/link";
 @use "~@dpgr/design-system/nvb/tools/button";
 @use "~@dpgr/design-system/nvb/tools/font-faces";
+@use "~@dpgr/design-system/nvb/tools/grid" as grid-tools;
+@use "~@dpgr/design-system/nvb/tokens/grid";
 @use "../../sass/tools/icons" as icon-tools;
 @use "../../sass/tokens/icons";
 
-$menu-item-height: 3.75rem;
+$menu-main-height: 3.75rem;
+$menu-top-height: 2rem;
 $desktop-menu-width: 60%;
 $dropdown-link-height: 2.25rem;
 $dropdown-link-width: 13rem;
@@ -21,26 +24,43 @@ header {
   font-family: fonts.$body-font-family;
   display: flex;
   flex-direction: column;
-  position: relative;
-  z-index: z-indices.$header-menu;
   align-items: stretch;
+}
+
+a {
+  @include link.reset-style();
+}
+
+button {
+  @include button.link-style();
+}
+
+.container {
+  @include grid-tools.container-style();
 }
 
 .top {
   display: flex;
   justify-content: flex-end;
-  padding: 0.5rem;
+  align-items: center;
+  height: $menu-top-height;
+}
+
+.top a {
+  color: colors.$grey-500;
+  text-transform: lowercase;
+  font-size: 0.875rem;
 }
 
 .main {
+  background-color: colors.$blue-600;
+}
+
+.main-inner {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: stretch;
-  position: relative;
-  background-color: colors.$blue-600;
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
 .logo-link {
@@ -56,23 +76,14 @@ header {
   }
 }
 
-.dropdown-container a {
-  @include link.reset-style();
-}
-
-.dropdown-container button,
-.menu-link {
-  @include button.link-style();
-}
-
 .dropdown-container {
   position: absolute;
   width: 100%;
-  top: $menu-item-height ;
+  top: $menu-main-height + $menu-top-height;
   left: 0;
-  z-index: -1;
   visibility: hidden;
   background: colors.$grey-100;
+  z-index: z-indices.$header-menu-dropdown;
 }
 
 .dropdown-container a,
@@ -106,6 +117,20 @@ header {
   }
 }
 
+.dropdown-backdrop {
+  z-index: z-indices.$header-menu-backdrop;
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.1s ease-in;
+  position: absolute;
+  background: rgba(colors.$black, 0.5);
+  top: $menu-main-height + $menu-top-height;
+  left: 0;
+  width: 100%;
+  height: calc(100% - #{$menu-main-height} - #{$menu-top-height});
+}
+
 .menu {
   align-items: center;
   flex-direction: row;
@@ -127,7 +152,7 @@ header {
 .menu-link {
   position: relative;
   color: colors.$white;
-  line-height: $menu-item-height;
+  line-height: $menu-main-height;
   text-transform: lowercase;
   margin-left: 1rem;
   margin-right: 1rem;
@@ -168,11 +193,16 @@ header {
 .dropdown-wrapper {
   display: flex;
   align-items: center;
-  height: $menu-item-height;
+  height: $menu-main-height;
 }
 
 .dropdown-wrapper:hover .dropdown-container {
   visibility: visible;
+}
+
+.dropdown-wrapper:hover ~ .dropdown-backdrop {
+  visibility: visible;
+  opacity: 1;
 }
 
 .dropdown-wrapper:hover .menu-link:after {
@@ -186,10 +216,8 @@ header {
 
 .dropdown-list {
   list-style: none;
-  padding: 0 0 0 1rem;
-  padding-top: $dropdown-list-padding-y;
-  padding-bottom:$dropdown-list-padding-y;
-  margin: 0 0 0 (100% - $desktop-menu-width);
+  padding: $dropdown-list-padding-y 0 $dropdown-list-padding-y 1rem;
+  margin: 0 0 0 calc(100% - #{$desktop-menu-width} + #{grid.$container-gutter} - #{$dropdown-link-hover-correction});
   position: relative;
 }
 
