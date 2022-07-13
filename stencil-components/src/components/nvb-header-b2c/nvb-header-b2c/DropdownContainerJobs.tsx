@@ -7,43 +7,59 @@ const cityListItems: SubMenuItem[] =[
     value: '/vacatures/plaats/amsterdam'
   },
   {
-    label: 'Den Haag',
-    value: '/vacatures/plaats/den-haag'
-  },
-  {
-    label: 'Amsterdam',
-    value: '/vacatures/plaats/amsterdam'
+    label: 'Rotterdam',
+    value: '/vacatures/plaats/rotterdam'
   },
   {
     label: 'Den Haag',
-    value: '/vacatures/plaats/den-haag'
+    value: '/vacatures/plaats/s-gravenhage'
   },
   {
-    label: 'Amsterdam',
-    value: '/vacatures/plaats/amsterdam'
+    label: 'Utrecht',
+    value: '/vacatures/plaats/utrecht'
   },
   {
-    label: 'Den Haag',
-    value: '/vacatures/plaats/den-haag'
+    label: 'Eindhoven',
+    value: '/vacatures/plaats/eindhoven'
   },
   {
-    label: 'Amsterdam',
-    value: '/vacatures/plaats/amsterdam'
+    label: 'Groningen',
+    value: '/vacatures/plaats/groningen'
   },
   {
-    label: 'Den Haag',
-    value: '/vacatures/plaats/den-haag'
+    label: 'Tilburg',
+    value: '/vacatures/plaats/tilburg'
   }
 ]
 
 const industryListItems: SubMenuItem[] = [
   {
       label: 'Bouw',
-      value: '/vacatures/branche/bouw'
+      value: '/werken-in-de-bouw\''
   },
   {
     label: 'Onderwijs',
-    value: '/vacatures/branche/onderwijs'
+    value: '/werken-in-het-onderwijs'
+  },
+  {
+    label: 'Zorg',
+    value: '/werken-in-de-zorg'
+  },
+  {
+    label: 'Horeca',
+    value: '/werken-in-de-horeca'
+  },
+  {
+    label: 'Logistiek',
+    value: '/werken-in-de-logistiek'
+  },
+  {
+    label: 'Techniek',
+    value: '/werken-in-de-techniek'
+  },
+  {
+    label: 'Sales',
+    value: '/werken-in-de-sales'
   }
 ]
 
@@ -53,6 +69,12 @@ const DropdownContainerJobs = () =>
       <li>
         <a href="/vacature/zoeken">Zoeken</a>
       </li>
+      <li>
+        <a href="/vacature/zoeken/zoekopdrachten-beheren">Zoekopdrachten</a>
+      </li>
+      <li>
+        <a href="/vacature/zoeken/favorieten">Favorieten</a>
+      </li>
       <li class={'sub-menu-container'}>
         <button class={'sub-menu-link'}>per branche</button>
         <SubMenu listItems={industryListItems} />
@@ -61,6 +83,7 @@ const DropdownContainerJobs = () =>
         <button class={'sub-menu-link'}>per plaats</button>
         <SubMenu listItems={cityListItems} />
       </li>
+      <li class={'dropdown-list-expander dropdown-list-expander--jobs'} />
     </ul>
   </div>
 

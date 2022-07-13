@@ -161,6 +161,7 @@ header {
     top: 50%;
     margin-top: -12px;
     transition: transform 0.1s ease-out;
+    transform: rotate(180deg);
   }
 }
 
@@ -175,7 +176,7 @@ header {
 }
 
 .dropdown-wrapper:hover .menu-link:after {
-  transform: rotate(180deg);
+  transform: rotate(0deg);
 }
 
 .dropdown-wrapper:hover .menu-link:before,
@@ -193,15 +194,32 @@ header {
 }
 
 .sub-menu {
+  display: flex;
   position: absolute;
-  height: 100%;
+  min-height: 100%;
   left: $dropdown-link-width + $dropdown-link-hover-correction;
   top: 0;
+  width: calc(#{$desktop-menu-width} + 4rem);
   min-width: 300px;
   padding-left: 4rem;
   padding-top: $dropdown-list-padding-y;
+  padding-bottom: $dropdown-list-padding-y;
   visibility: hidden;
   box-sizing: border-box;
+}
+
+.sub-menu-inner {
+  position: relative;
+
+  &:before {
+    content: " ";
+    display: block;
+    position: absolute;
+    left: -2rem;
+    border-left: colors.$grey-300 1px solid;
+    height: 100%;
+    top: 0;
+  }
 }
 
 .sub-menu-placeholder-item {
@@ -213,7 +231,15 @@ header {
   visibility: visible;
 }
 
-.sub-menu-container:hover .sub-menu-placeholder-item {
+.dropdown-list-expander {
+  display: none;
+}
+
+.dropdown-list-expander--jobs {
+  height: $dropdown-link-height * 3;
+}
+
+.sub-menu-container:hover ~ .dropdown-list-expander {
   display: block;
 }
 

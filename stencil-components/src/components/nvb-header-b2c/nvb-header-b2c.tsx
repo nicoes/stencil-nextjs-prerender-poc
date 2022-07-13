@@ -3,6 +3,7 @@ import Logo from "./nvb-header-b2c/Logo";
 import DropdownContainerJobs from "./nvb-header-b2c/DropdownContainerJobs";
 import DropdownContainerCareer from "./nvb-header-b2c/DropdownContainerCareer";
 import {VisibilityChangedEvent} from "../modal-window/modal-window";
+import DropdownContainerAccount from "./nvb-header-b2c/DropdownContainerAccount";
 
 @Component({
   tag: 'nvb-header-b2c',
@@ -28,14 +29,14 @@ export class NvbHeaderB2c {
               <DropdownContainerJobs />
             </div>
             <div class={'dropdown-wrapper'}>
-              <button class='menu-link menu-link--dropdown'>Carrieretips</button>
+              <button class='menu-link menu-link--dropdown'>Carrièretips</button>
               <DropdownContainerCareer/>
             </div>
             <a href={"/salariswijzer"} class={'menu-link'}>Salariswijzer</a>
             <hr class={'menu-separator'} />
             <div class={'dropdown-wrapper'}>
               <button class='menu-link menu-link--dropdown'>Account</button>
-              <DropdownContainerCareer/>
+              <DropdownContainerAccount/>
             </div>
           </div>
           <div class={'mobile-menu'}>
