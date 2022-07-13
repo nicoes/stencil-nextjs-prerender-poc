@@ -5,10 +5,14 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { VisibilityChangedEvent } from "./components/modal-window/modal-window";
+import { VisibilityChangedEvent } from "./components/mobile-menu/mobile-menu";
+import { VisibilityChangedEvent as VisibilityChangedEvent1 } from "./components/modal-window/modal-window";
 export namespace Components {
     interface FooterB2c {
         "userName": string;
+    }
+    interface MobileMenu {
+        "isVisible": boolean;
     }
     interface ModalWindow {
         "isVisible": boolean;
@@ -26,6 +30,12 @@ declare global {
     var HTMLFooterB2cElement: {
         prototype: HTMLFooterB2cElement;
         new (): HTMLFooterB2cElement;
+    };
+    interface HTMLMobileMenuElement extends Components.MobileMenu, HTMLStencilElement {
+    }
+    var HTMLMobileMenuElement: {
+        prototype: HTMLMobileMenuElement;
+        new (): HTMLMobileMenuElement;
     };
     interface HTMLModalWindowElement extends Components.ModalWindow, HTMLStencilElement {
     }
@@ -47,6 +57,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "footer-b2c": HTMLFooterB2cElement;
+        "mobile-menu": HTMLMobileMenuElement;
         "modal-window": HTMLModalWindowElement;
         "my-component": HTMLMyComponentElement;
         "nvb-header-b2c": HTMLNvbHeaderB2cElement;
@@ -55,6 +66,10 @@ declare global {
 declare namespace LocalJSX {
     interface FooterB2c {
         "userName"?: string;
+    }
+    interface MobileMenu {
+        "isVisible"?: boolean;
+        "onVisibilityChanged"?: (event: CustomEvent<VisibilityChangedEvent>) => void;
     }
     interface ModalWindow {
         "isVisible"?: boolean;
@@ -68,6 +83,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "footer-b2c": FooterB2c;
+        "mobile-menu": MobileMenu;
         "modal-window": ModalWindow;
         "my-component": MyComponent;
         "nvb-header-b2c": NvbHeaderB2c;
@@ -78,6 +94,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "footer-b2c": LocalJSX.FooterB2c & JSXBase.HTMLAttributes<HTMLFooterB2cElement>;
+            "mobile-menu": LocalJSX.MobileMenu & JSXBase.HTMLAttributes<HTMLMobileMenuElement>;
             "modal-window": LocalJSX.ModalWindow & JSXBase.HTMLAttributes<HTMLModalWindowElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "nvb-header-b2c": LocalJSX.NvbHeaderB2c & JSXBase.HTMLAttributes<HTMLNvbHeaderB2cElement>;

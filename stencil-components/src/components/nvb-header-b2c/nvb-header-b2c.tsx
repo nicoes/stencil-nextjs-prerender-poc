@@ -20,7 +20,7 @@ export class NvbHeaderB2c {
   render() {
     return (
       <header>
-        <div class="container">
+        <div class="container container--top">
           <div class={'top'}><a href="#">Werkgevers / Plaats vacature</a></div>
         </div>
         <nav class={'main'}>
@@ -46,7 +46,7 @@ export class NvbHeaderB2c {
           </div>
           <div class={'mobile-menu'}>
             <button onClick={() => this.isActiveMobileMenu = !this.isActiveMobileMenu}>Mobile menu</button>
-            <modal-window onVisibilityChanged={ev => this.onVisibilityChanged(ev)} is-visible={this.isActiveMobileMenu} modalTitle={'This is the mobile menu'} modalText={'This is the content'} />
+            <mobile-menu onVisibilityChanged={ev => this.onVisibilityChanged(ev)} is-visible={this.isActiveMobileMenu} />
           </div>
           </div>
           </div>

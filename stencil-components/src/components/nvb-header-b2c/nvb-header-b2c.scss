@@ -39,6 +39,14 @@ button {
   @include grid-tools.container-style();
 }
 
+.container--top {
+  display: none;
+
+  @media (min-width: breakpoints.$lg) {
+    display: block;
+  }
+}
+
 .top {
   display: flex;
   justify-content: flex-end;
@@ -51,6 +59,7 @@ button {
   text-transform: lowercase;
   font-size: 0.875rem;
 }
+
 
 .main {
   background-color: colors.$blue-600;
@@ -122,13 +131,13 @@ button {
   display: block;
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.1s ease-in;
   position: absolute;
   background: rgba(colors.$black, 0.5);
   top: $menu-main-height + $menu-top-height;
   left: 0;
   width: 100%;
   height: calc(100% - #{$menu-main-height} - #{$menu-top-height});
+  transition: visibility 0.3s, opacity 0.3s 0s;
 }
 
 .menu {

@@ -9,12 +9,12 @@
 
 ### Depends on
 
-- [modal-window](../modal-window)
+- [mobile-menu](../mobile-menu)
 
 ### Graph
 ```mermaid
 graph TD;
-  nvb-header-b2c --> modal-window
+  nvb-header-b2c --> mobile-menu
   style nvb-header-b2c fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
