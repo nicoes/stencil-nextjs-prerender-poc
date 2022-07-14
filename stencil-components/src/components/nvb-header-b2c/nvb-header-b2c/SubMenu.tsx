@@ -5,10 +5,10 @@ export type SubMenuItem = {
   value: string
 }
 
-const SubMenu = ({listItems}: {listItems: SubMenuItem[]}) =>
+const SubMenu = ({listItems, subMenuTitle}: {subMenuTitle: string, listItems: SubMenuItem[]}) =>
   <div class={'sub-menu'}>
     <div class={'sub-menu-inner'}>
-      <strong class={'sub-menu-title'}>Per plaats</strong>
+      <strong class={'sub-menu-title'}>{subMenuTitle}</strong>
       <ul class={'sub-menu-list'}>
         {listItems.map(item => <li><a href={item.value}>{item.label}</a></li>)}
       </ul>

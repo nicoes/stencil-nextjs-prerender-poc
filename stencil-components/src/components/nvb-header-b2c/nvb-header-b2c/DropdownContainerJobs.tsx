@@ -35,7 +35,7 @@ const cityListItems: SubMenuItem[] =[
 const industryListItems: SubMenuItem[] = [
   {
       label: 'Bouw',
-      value: '/werken-in-de-bouw\''
+      value: '/werken-in-de-bouw'
   },
   {
     label: 'Onderwijs',
@@ -65,26 +65,28 @@ const industryListItems: SubMenuItem[] = [
 
 const DropdownContainerJobs = () =>
   <div class="dropdown-container">
-    <ul class={'dropdown-list'}>
-      <li>
-        <a href="/vacature/zoeken">Zoeken</a>
-      </li>
-      <li>
-        <a href="/vacature/zoeken/zoekopdrachten-beheren">Zoekopdrachten</a>
-      </li>
-      <li>
-        <a href="/vacature/zoeken/favorieten">Favorieten</a>
-      </li>
-      <li class={'sub-menu-container'}>
-        <button class={'sub-menu-link'}>per branche</button>
-        <SubMenu listItems={industryListItems} />
-      </li>
-      <li class={'sub-menu-container'}>
-        <button class={'sub-menu-link'}>per plaats</button>
-        <SubMenu listItems={cityListItems} />
-      </li>
-      <li class={'dropdown-list-expander dropdown-list-expander--jobs'} />
-    </ul>
+    <div class="container">
+        <ul class={'dropdown-list'}>
+          <li>
+            <a href="/vacature/zoeken">Zoeken</a>
+          </li>
+          <li>
+            <a href="/vacature/zoeken/zoekopdrachten-beheren">Zoekopdrachten</a>
+          </li>
+          <li>
+            <a href="/vacature/zoeken/favorieten">Favorieten</a>
+          </li>
+          <li class={'sub-menu-container'}>
+            <button class={'sub-menu-link'}>Per branche</button>
+            <SubMenu listItems={industryListItems} subMenuTitle={'Per branche'} />
+          </li>
+          <li class={'sub-menu-container'}>
+            <button class={'sub-menu-link'}>Per plaats</button>
+            <SubMenu listItems={cityListItems} subMenuTitle={'Per plaats'} />
+          </li>
+          <li class={'dropdown-list-expander dropdown-list-expander--jobs'} />
+        </ul>
+    </div>
   </div>
 
 export default DropdownContainerJobs
