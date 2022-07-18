@@ -5,8 +5,6 @@ import DropdownContainerCareer from "./nvb-header-b2c/DropdownContainerCareer";
 import DropdownContainerAccount from "./nvb-header-b2c/DropdownContainerAccount";
 import MobileMenu, {ActiveMobileMenuLevel} from "./nvb-header-b2c/MobileMenu";
 
-
-
 @Component({
   tag: 'nvb-header-b2c',
   styleUrl: 'nvb-header-b2c.scss',
@@ -15,6 +13,7 @@ import MobileMenu, {ActiveMobileMenuLevel} from "./nvb-header-b2c/MobileMenu";
 export class NvbHeaderB2c {
   @State() isActiveMobileMenu: boolean = false
   @State() activeMobileMenuLevel: ActiveMobileMenuLevel = 'main'
+  @State() isClientSide: boolean = false
 
   @Watch('isActiveMobileMenu')
   adjustDocument(isActiveMobileMenu: boolean) {
@@ -23,6 +22,10 @@ export class NvbHeaderB2c {
     } else {
       document.body.style.overflow  = 'visible'
     }
+  }
+
+  componentDidLoad() {
+    this.isClientSide = true
   }
 
   setActiveMobileMenuLevel(level: ActiveMobileMenuLevel) {
@@ -67,12 +70,12 @@ export class NvbHeaderB2c {
             </div>
           </div>
         </nav>
-        <MobileMenu
+        {this.isClientSide && <MobileMenu
           isVisible={this.isActiveMobileMenu}
           handleModalClose={() => this.handleClose()}
           activeMobileMenuLevel={this.activeMobileMenuLevel}
           setActiveMobileMenuLevel={level => this.setActiveMobileMenuLevel(level)}
-        />
+        />}
       </header>
     );
   }

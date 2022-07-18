@@ -17,7 +17,8 @@ async function getPrerenderedComponent(tag) {
     tag,
     classNames: $(tag).attr('class'),
     html: $(tag).html(),
-    style: $('style').html()
+    style: $('style').html(),
+    prettyPrint: true
   };
 }
 

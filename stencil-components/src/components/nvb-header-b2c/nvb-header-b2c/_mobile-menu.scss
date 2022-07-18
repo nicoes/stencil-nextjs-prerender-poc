@@ -1,6 +1,7 @@
 @use "~@dpgr/design-system/nvb/tokens/z-indices";
 @use "~@dpgr/design-system/nvb/tokens/colors";
-@use "../../../sass/tools/icons";
+@use "../../../sass/tokens/icons";
+@use "../../../sass/tools/icons" as icons-tools;
 
 $mobile-menu-max-width: 350px;
 
@@ -37,7 +38,6 @@ $mobile-menu-max-width: 350px;
 .mobile-menu {
   display: flex;
   flex-direction: column;
-  font-size: 14px;
   background-color: colors.$white;
   position: absolute;
   top: 0;
@@ -75,32 +75,41 @@ $mobile-menu-max-width: 350px;
   justify-content: center;
   align-items: center;
   position: relative;
-  width: 35px;
-  height: 35px;
+  width: icons.$icon-tap-area;
+  height: icons.$icon-tap-area;
 
   &::after {
     content: " ";
-    @include icons.background-icon("close", colors.$grey-600)
-  }
-}
-
-.mobile-menu__back-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  width: 35px;
-  height: 35px;
-
-  &::after {
-    content: " ";
-    @include icons.background-icon("arrow-back", colors.$grey-600)
+    @include icons-tools.background-icon("close", colors.$grey-600)
   }
 }
 
 .mobile-menu__header-button {
-  width: 35px;
+  width: 100px;
+  display: flex;
 }
+.mobile-menu__header-button--close {
+  justify-content: flex-end;
+}
+.mobile-menu__header-button--back{
+  justify-content: flex-start;
+}
+
+.mobile-menu__back-button {
+  text-transform: lowercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: icons.$icon-tap-area;
+  color: colors.$grey-600;
+
+  &::before {
+    content: " ";
+    @include icons-tools.background-icon("arrow-back", colors.$grey-600)
+  }
+}
+
 .mobile-menu__logo {
   flex: 1;
   text-align: center;
@@ -117,10 +126,10 @@ $mobile-menu-max-width: 350px;
   position: absolute;
   display: flex;
   width: 300%;
-  height: 100%;
+  min-height: 100%;
   top: 0;
   left: 0;
-  transition: transform 0.3s ease-out;
+  transition: transform 0.3s ease;
 }
 
 .mobile-menu__stack-inner--screen2 {
@@ -133,5 +142,88 @@ $mobile-menu-max-width: 350px;
 
 .mobile-menu__stack-screen {
   flex: 1;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
+  position: relative;
+}
+
+.mobile-menu__link-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.mobile-menu__link-list li + li {
+  border-top: 1px solid colors.$grey-300
+}
+
+.mobile-menu__link-list a, .mobile-menu__link-list button {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  line-height: 3rem;
+  display: block;
+  width: 100%;
+  text-align: left;
+  color: colors.$grey-600;
+  text-transform: lowercase;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.mobile-menu__link-list.mobile-menu__link-list--capitalize a,
+.mobile-menu__link-list.mobile-menu__link-list--capitalize button  {
+  text-transform: capitalize;
+}
+
+.mobile-menu__link-list button {
+  padding-right: icons.$icon-size-sm;
+}
+
+.mobile-menu__link-list button::after,
+.mobile-menu__bottom-link::after {
+  @include icons-tools.background-icon("keyboard-arrow-right", colors.$grey-600);
+  content: " ";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: icons.$icon-size-sm / 2 * -1;
+}
+
+.mobile-menu__link-icon {
+  @include icons-tools.inline-monochrome-icon(colors.$blue-500);
+  content: " ";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: icons.$icon-size-sm / 2 * -1;
+}
+
+.mobile-menu__stack-screen .mobile-menu__link-list:last-of-type {
+  padding-bottom: 3rem;
+}
+
+.mobile-menu__link-list .mobile-menu__link--with-icon {
+  padding-left: calc(#{icons.$icon-size-sm} + 0.5rem);
+}
+
+.mobile-menu__link-list .mobile-menu__link--no-icon {
+  padding-left: 0.5rem;
+}
+
+.mobile-menu__link-list-title {
+  font-weight: bold;
+  text-transform: lowercase;
+  margin-top: 1rem;
+}
+
+.mobile-menu__bottom-link {
+  display: block;
+  line-height: 3rem;
+  background: colors.$grey-100;
+  width: 100%;
+  color: colors.$black;
+  box-sizing: border-box;
+  padding-left: 1rem;
+  position: absolute;
+  left: 0;
+  bottom: 0;
 }

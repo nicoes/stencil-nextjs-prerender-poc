@@ -10,8 +10,6 @@
 @use "../../sass/tools/icons" as icon-tools;
 @use "../../sass/tokens/icons";
 
-@import "./nvb-header-b2c/mobile-menu";
-
 $menu-main-height: 3.75rem;
 $menu-top-height: 2rem;
 $desktop-menu-width: 34.25rem;
@@ -19,8 +17,6 @@ $dropdown-link-height: 2.25rem;
 $dropdown-link-width: 13rem;
 $dropdown-link-hover-correction: 0.5rem;
 $dropdown-list-padding-y: 2.75rem;
-
-@include font-faces.heading-font-faces();
 
 header {
   all: initial;
@@ -125,7 +121,7 @@ button {
     position: absolute;
     right: 0;
     top: 50%;
-    margin-top: -12px;
+    margin-top: icons.$icon-size-sm / 2 * -1;
   }
 }
 
@@ -298,3 +294,5 @@ button {
   padding: 0;
   margin: 0;
 }
+
+@import "./nvb-header-b2c/mobile-menu";
