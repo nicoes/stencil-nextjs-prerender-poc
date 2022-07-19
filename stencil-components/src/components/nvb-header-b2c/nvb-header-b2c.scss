@@ -13,7 +13,7 @@
 
 $menu-main-height: 3.75rem;
 $menu-top-height: 2rem;
-$desktop-menu-width: 34.25rem;
+$desktop-menu-width: 35rem;
 $dropdown-link-height: 2.25rem;
 $dropdown-link-width: 13rem;
 $dropdown-link-hover-correction: 0.5rem;
@@ -219,21 +219,27 @@ button {
   height: $menu-main-height;
 }
 
-.dropdown-wrapper:active .dropdown-container,
+.dropdown-wrapper:focus .dropdown-container,
+.dropdown-wrapper:focus-within .dropdown-container,
 .dropdown-wrapper:hover .dropdown-container {
   visibility: visible;
 }
 
-.dropdown-wrapper:active ~ .dropdown-backdrop,
+.dropdown-wrapper:focus ~ .dropdown-backdrop,
+.dropdown-wrapper:focus-within ~ .dropdown-backdrop,
 .dropdown-wrapper:hover ~ .dropdown-backdrop {
   visibility: visible;
   opacity: 1;
 }
 
+.dropdown-wrapper:focus .menu-link:after,
+.dropdown-wrapper:focus-within .menu-link:after,
 .dropdown-wrapper:hover .menu-link:after {
   transform: rotate(0deg);
 }
 
+.dropdown-wrapper:focus  .menu-link:before,
+.dropdown-wrapper:focus-within  .menu-link:before,
 .dropdown-wrapper:hover .menu-link:before,
 .menu-link:hover:before {
   opacity: 1;
@@ -252,7 +258,6 @@ button {
   min-height: 100%;
   left: $dropdown-link-width + $dropdown-link-hover-correction;
   top: 0;
-  width: calc(#{$desktop-menu-width} + 4rem);
   min-width: 300px;
   padding-left: 4rem;
   padding-top: $dropdown-list-padding-y;
@@ -280,6 +285,8 @@ button {
   display: none;
 }
 
+.sub-menu-container:focus .sub-menu,
+.sub-menu-container:focus-within .sub-menu,
 .sub-menu-container:hover .sub-menu {
   visibility: visible;
 }
@@ -292,6 +299,8 @@ button {
   height: $dropdown-link-height * 3;
 }
 
+.sub-menu-container:focus ~ .dropdown-list-expander,
+.sub-menu-container:focus-within ~ .dropdown-list-expander,
 .sub-menu-container:hover ~ .dropdown-list-expander {
   display: block;
 }
