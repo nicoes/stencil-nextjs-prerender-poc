@@ -227,3 +227,8 @@ $mobile-menu-max-width: 350px;
   left: 0;
   bottom: 0;
 }
+
+.mobile-menu__bottom-link::after {
+  right: 1rem;
+}
+

@@ -4,6 +4,7 @@ import DropdownContainerJobs from "./nvb-header-b2c/DropdownContainerJobs";
 import DropdownContainerCareer from "./nvb-header-b2c/DropdownContainerCareer";
 import DropdownContainerAccount from "./nvb-header-b2c/DropdownContainerAccount";
 import MobileMenu, {ActiveMobileMenuLevel} from "./nvb-header-b2c/MobileMenu";
+import Icons from "./nvb-header-b2c/Icons";
 
 @Component({
   tag: 'nvb-header-b2c',
@@ -46,6 +47,11 @@ export class NvbHeaderB2c {
         <nav class={'main'}>
           <div class="container">
             <div class="main-inner">
+              <div class="mobile-menu-button-container">
+                <button class={"mobile-menu-button"} onClick={() => this.isActiveMobileMenu = !this.isActiveMobileMenu}>
+                  <Icons.menu className={'mobile-menu__header-icon'} />
+                </button>
+              </div>
               <a href="#" class={'logo-link'}><Logo /></a>
               <div class={'menu'}>
                 <div class="dropdown-wrapper">
@@ -64,8 +70,8 @@ export class NvbHeaderB2c {
                 </div>
                 <div class={"dropdown-backdrop"}/>
               </div>
-              <div class={'mobile-menu-container'}>
-                <button onClick={() => this.isActiveMobileMenu = !this.isActiveMobileMenu}>Mobile menu</button>
+              <div class={'account-button-container'}>
+                <a class={"account-button"} href={"/account"}><Icons.person className={'mobile-menu__header-icon'} /></a>
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import {h} from "@stencil/core";
 import LogoInverse from "./LogoInverse";
-import Icons from "./MobileMenu/Icons";
+import Icons from "./Icons";
 
 type SecondMobileMenuLevel = 'jobs' | 'career'
 type ThirdMobileMenuLevel = 'cities' | 'industries'
@@ -49,18 +49,18 @@ const MobileMenu = ({ isVisible, handleModalClose, activeMobileMenuLevel, setAct
             <ul class={'mobile-menu__link-list'}>
               <li>
                 <a class={'mobile-menu__link--with-icon'} href={"/vacature/zoeken"}>
-                  <Icons.search/>Vacature zoeken
+                  <Icons.search className={'mobile-menu__link-icon'}/>Vacature zoeken
                 </a>
               </li>
               <li>
-                <button class={'mobile-menu__link--with-icon'} onClick={() => setActiveMobileMenuLevel('jobs')}><Icons.campaign />Vacatures</button>
+                <button class={'mobile-menu__link--with-icon'} onClick={() => setActiveMobileMenuLevel('jobs')}><Icons.campaign className={'mobile-menu__link-icon'} />Vacatures</button>
               </li>
               <li>
-                <button class={'mobile-menu__link--with-icon'} onClick={() => setActiveMobileMenuLevel('career')}><Icons.lightbulb />Carrièretips</button>
+                <button class={'mobile-menu__link--with-icon'} onClick={() => setActiveMobileMenuLevel('career')}><Icons.lightbulb className={'mobile-menu__link-icon'} />Carrièretips</button>
               </li>
               <li>
                 <a class={'mobile-menu__link--with-icon'} href={"/salariswijzer"}>
-                  <Icons.euro/>Salariswijzer
+                  <Icons.euro className={'mobile-menu__link-icon'}/>Salariswijzer
                 </a>
               </li>
             </ul>
@@ -68,22 +68,22 @@ const MobileMenu = ({ isVisible, handleModalClose, activeMobileMenuLevel, setAct
             <ul class={'mobile-menu__link-list'}>
               <li>
                 <a class={'mobile-menu__link--with-icon'} href={'/profiel/overzicht'}>
-                  <Icons.person/>Profiel
+                  <Icons.person className={'mobile-menu__link-icon'}/>Profiel
                 </a>
               </li>
               <li>
                 <a class={'mobile-menu__link--with-icon'} href={'/vacature/zoeken/favorieten'}>
-                  <Icons.favorite/>Favorieten
+                  <Icons.favorite className={'mobile-menu__link-icon'}/>Favorieten
                 </a>
               </li>
               <li>
                 <a class={'mobile-menu__link--with-icon'} href={'/vacature/zoeken/zoekopdrachten-beheren'}>
-                  <Icons.mail/>Zoekopdrachten
+                  <Icons.mail className={'mobile-menu__link-icon'}/>Zoekopdrachten
                 </a>
               </li>
               <li>
                 <a class={'mobile-menu__link--with-icon'} href={'/account'}>
-                  <Icons.settings/>Instellingen
+                  <Icons.settings className={'mobile-menu__link-icon'}/>Instellingen
                 </a>
               </li>
               <li>

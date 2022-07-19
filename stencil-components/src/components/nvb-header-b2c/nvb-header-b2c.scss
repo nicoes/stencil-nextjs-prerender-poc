@@ -7,6 +7,7 @@
 @use "~@dpgr/design-system/nvb/tools/font-faces";
 @use "~@dpgr/design-system/nvb/tools/grid" as grid-tools;
 @use "~@dpgr/design-system/nvb/tokens/grid";
+@use "~@dpgr/design-system/nvb/tools/focus";
 @use "../../sass/tools/icons" as icon-tools;
 @use "../../sass/tokens/icons";
 
@@ -28,6 +29,9 @@ header {
 
 a {
   @include link.reset-style();
+  @include focus.focus-visible-fallback() {
+    outline: 1px solid colors.$black;
+  }
 }
 
 button {
@@ -76,12 +80,23 @@ button {
   align-items: center;
 }
 
-.mobile-menu-container {
-  display: block;
+.mobile-menu-button-container, .account-button-container {
+  display: flex;
+  height: 60px;
+  align-items: center;
 
   @media (min-width: breakpoints.$lg) {
     display: none;
   }
+}
+
+.mobile-menu-button, .account-button {
+  position: relative;
+  width: icons.$icon-tap-area;
+  height: icons.$icon-tap-area;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .dropdown-container {
@@ -204,10 +219,12 @@ button {
   height: $menu-main-height;
 }
 
+.dropdown-wrapper:active .dropdown-container,
 .dropdown-wrapper:hover .dropdown-container {
   visibility: visible;
 }
 
+.dropdown-wrapper:active ~ .dropdown-backdrop,
 .dropdown-wrapper:hover ~ .dropdown-backdrop {
   visibility: visible;
   opacity: 1;
@@ -293,6 +310,10 @@ button {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.mobile-menu__header-icon {
+  @include icon-tools.inline-monochrome-icon(colors.$white)
 }
 
 @import "./nvb-header-b2c/mobile-menu";
