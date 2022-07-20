@@ -66,7 +66,7 @@ export class NvbHeaderB2c {
                 </div>
                 <a href={"/salariswijzer"} class={linkActiveClassExtender('/salariswijzer')}>Salariswijzer</a>
                 <hr class={'menu-separator'} />
-                <div class={dropdownActiveClassExtender('/account')}>
+                <div class={dropdownActiveClassExtender(['/account', '/profiel'])}>
                   <button class='menu-link menu-link--dropdown'>Account</button>
                   <DropdownContainerAccount/>
                 </div>
