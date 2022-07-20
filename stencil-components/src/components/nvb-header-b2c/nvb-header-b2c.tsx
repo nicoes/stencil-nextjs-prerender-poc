@@ -5,6 +5,7 @@ import DropdownContainerCareer from "./nvb-header-b2c/DropdownContainerCareer";
 import DropdownContainerAccount from "./nvb-header-b2c/DropdownContainerAccount";
 import MobileMenu, {ActiveMobileMenuLevel} from "./nvb-header-b2c/MobileMenu";
 import Icons from "./nvb-header-b2c/Icons";
+import createActiveClassExtender from "./nvb-header-b2c/createActiveClassExtender";
 
 @Component({
   tag: 'nvb-header-b2c',
@@ -38,6 +39,8 @@ export class NvbHeaderB2c {
   }
 
   render() {
+    const dropdownActiveClassExtender = createActiveClassExtender('dropdown-wrapper', 'dropdown-wrapper--active', document);
+    const linkActiveClassExtender = createActiveClassExtender('menu-link', 'menu-link--active', document);
     return (
       <header>
         <div class="container container--top">
@@ -53,17 +56,17 @@ export class NvbHeaderB2c {
               </div>
               <a href="/" class={'logo-link'}><Logo /></a>
               <div class={'menu'}>
-                <div class="dropdown-wrapper">
+                <div class={dropdownActiveClassExtender('/vacature')}>
                   <button class='menu-link menu-link--dropdown'>Vacatures</button>
                   <DropdownContainerJobs />
                 </div>
-                <div class={'dropdown-wrapper'}>
+                <div class={dropdownActiveClassExtender('/carriere')}>
                   <button class='menu-link menu-link--dropdown'>Carrièretips</button>
                   <DropdownContainerCareer/>
                 </div>
-                <a href={"/salariswijzer"} class={'menu-link'}>Salariswijzer</a>
+                <a href={"/salariswijzer"} class={linkActiveClassExtender('/salariswijzer')}>Salariswijzer</a>
                 <hr class={'menu-separator'} />
-                <div class={'dropdown-wrapper'}>
+                <div class={dropdownActiveClassExtender('/account')}>
                   <button class='menu-link menu-link--dropdown'>Account</button>
                   <DropdownContainerAccount/>
                 </div>

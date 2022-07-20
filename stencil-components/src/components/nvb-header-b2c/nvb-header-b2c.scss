@@ -240,6 +240,7 @@ button {
 
 .dropdown-wrapper:focus  .menu-link:before,
 .dropdown-wrapper:focus-within  .menu-link:before,
+.dropdown-wrapper--active .menu-link:before,
 .dropdown-wrapper:hover .menu-link:before,
 .menu-link:hover:before {
   opacity: 1;

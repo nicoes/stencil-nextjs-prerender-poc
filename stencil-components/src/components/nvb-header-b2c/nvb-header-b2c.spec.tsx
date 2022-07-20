@@ -1,5 +1,5 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { NvbHeaderB2c } from '../nvb-header-b2c';
+import { NvbHeaderB2c } from './nvb-header-b2c';
 
 describe('nvb-header-b2c', () => {
   it('renders on page load', async () => {
