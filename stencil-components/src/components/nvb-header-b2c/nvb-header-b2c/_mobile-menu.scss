@@ -112,7 +112,7 @@ $mobile-menu-max-width: 350px;
 
 .mobile-menu__logo {
   flex: 1;
-  text-align: center;
+  display: flex;
 }
 
 .mobile-menu__stack {

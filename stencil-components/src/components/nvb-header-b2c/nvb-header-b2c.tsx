@@ -14,19 +14,18 @@ import Icons from "./nvb-header-b2c/Icons";
 export class NvbHeaderB2c {
   @State() isActiveMobileMenu: boolean = false
   @State() activeMobileMenuLevel: ActiveMobileMenuLevel = 'main'
-  @State() isClientSide: boolean = false
 
   @Watch('isActiveMobileMenu')
   adjustDocument(isActiveMobileMenu: boolean) {
     if(isActiveMobileMenu) {
       document.body.style.overflow  = 'hidden'
     } else {
-      document.body.style.overflow  = 'visible'
+      document.body.style.overflow  = ''
     }
   }
 
-  componentDidLoad() {
-    this.isClientSide = true
+  handleOpenMenu() {
+    this.isActiveMobileMenu = true
   }
 
   setActiveMobileMenuLevel(level: ActiveMobileMenuLevel) {
@@ -34,7 +33,7 @@ export class NvbHeaderB2c {
   }
 
   handleClose() {
-    this.isActiveMobileMenu = !this.isActiveMobileMenu
+    this.isActiveMobileMenu = false
     this.activeMobileMenuLevel = "main"
   }
 
@@ -48,11 +47,11 @@ export class NvbHeaderB2c {
           <div class="container">
             <div class="main-inner">
               <div class="mobile-menu-button-container">
-                <button class={"mobile-menu-button"} onClick={() => this.isActiveMobileMenu = !this.isActiveMobileMenu}>
+                <button class={"mobile-menu-button"} onClick={() => this.handleOpenMenu()}>
                   <Icons.menu className={'mobile-menu__header-icon'} />
                 </button>
               </div>
-              <a href="#" class={'logo-link'}><Logo /></a>
+              <a href="/" class={'logo-link'}><Logo /></a>
               <div class={'menu'}>
                 <div class="dropdown-wrapper">
                   <button class='menu-link menu-link--dropdown'>Vacatures</button>
@@ -76,12 +75,12 @@ export class NvbHeaderB2c {
             </div>
           </div>
         </nav>
-        {this.isClientSide && <MobileMenu
+        <MobileMenu
           isVisible={this.isActiveMobileMenu}
           handleModalClose={() => this.handleClose()}
           activeMobileMenuLevel={this.activeMobileMenuLevel}
           setActiveMobileMenuLevel={level => this.setActiveMobileMenuLevel(level)}
-        />}
+        />
       </header>
     );
   }

@@ -30,14 +30,14 @@ const MobileMenu = ({ isVisible, handleModalClose, activeMobileMenuLevel, setAct
 
   return <div class={isVisible ? 'mobile-menu__wrapper mobile-menu__wrapper--visible' : 'mobile-menu__wrapper'}>
     <div class='mobile-menu__backdrop' onClick={() => handleModalClose()}/>
-    <div class="mobile-menu">
+    <nav class="mobile-menu">
       <div class="mobile-menu__header">
         <div class="mobile-menu__header-button mobile-menu__header-button--back">
           {previousLevel && <button onClick={() => setActiveMobileMenuLevel(previousLevel)} class={"mobile-menu__back-button"}>Terug</button>}
         </div>
-        <div class="mobile-menu__logo">
+        <a class="mobile-menu__logo" href="/">
           <LogoInverse/>
-        </div>
+        </a>
         <div class="mobile-menu__header-button mobile-menu__header-button--close">
           <button onClick={() => handleModalClose()} class={"mobile-menu__close-button"}/>
         </div>
@@ -45,7 +45,8 @@ const MobileMenu = ({ isVisible, handleModalClose, activeMobileMenuLevel, setAct
       <div class="mobile-menu__stack">
         <div class={"mobile-menu__stack-inner" + stackInnerModifier}>
           <section class="mobile-menu__stack-screen">
-            <div class={'mobile-menu__link-list-title'}>Carriere</div>
+            <div>
+            <div class={'mobile-menu__link-list-title'}>Carrière</div>
             <ul class={'mobile-menu__link-list'}>
               <li>
                 <a class={'mobile-menu__link--with-icon'} href={"/vacature/zoeken"}>
@@ -95,10 +96,11 @@ const MobileMenu = ({ isVisible, handleModalClose, activeMobileMenuLevel, setAct
             <a class={'mobile-menu__bottom-link'} href={'/werkgever'}>
               Werkgevers / plaats vacature
             </a>
+            </div>
           </section>
           <section class="mobile-menu__stack-screen">
             {activeMobileMenuLevel === 'jobs' && <div>
-              <div class={'mobile-menu__link-list-title'}>Vacactures</div>
+              <div class={'mobile-menu__link-list-title'}>Vacatures</div>
               <ul class={'mobile-menu__link-list'}>
                 <li>
                   <button class={"mobile-menu__link--no-icon"} onClick={() => setActiveMobileMenuLevel('cities')}>Per plaats</button>
@@ -146,7 +148,7 @@ const MobileMenu = ({ isVisible, handleModalClose, activeMobileMenuLevel, setAct
           </section>
         </div>
       </div>
-    </div>
+    </nav>
   </div>
 }
 

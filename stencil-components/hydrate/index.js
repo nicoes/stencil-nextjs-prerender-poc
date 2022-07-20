@@ -5767,58 +5767,59 @@ const MobileMenu = ({ isVisible, handleModalClose, activeMobileMenuLevel, setAct
   }
   return hAsync("div", { class: isVisible ? 'mobile-menu__wrapper mobile-menu__wrapper--visible' : 'mobile-menu__wrapper' },
     hAsync("div", { class: 'mobile-menu__backdrop', onClick: () => handleModalClose() }),
-    hAsync("div", { class: "mobile-menu" },
+    hAsync("nav", { class: "mobile-menu" },
       hAsync("div", { class: "mobile-menu__header" },
         hAsync("div", { class: "mobile-menu__header-button mobile-menu__header-button--back" }, previousLevel && hAsync("button", { onClick: () => setActiveMobileMenuLevel(previousLevel), class: "mobile-menu__back-button" }, "Terug")),
-        hAsync("div", { class: "mobile-menu__logo" },
+        hAsync("a", { class: "mobile-menu__logo", href: "/" },
           hAsync(LogoInverse, null)),
         hAsync("div", { class: "mobile-menu__header-button mobile-menu__header-button--close" },
           hAsync("button", { onClick: () => handleModalClose(), class: "mobile-menu__close-button" }))),
       hAsync("div", { class: "mobile-menu__stack" },
         hAsync("div", { class: "mobile-menu__stack-inner" + stackInnerModifier },
           hAsync("section", { class: "mobile-menu__stack-screen" },
-            hAsync("div", { class: 'mobile-menu__link-list-title' }, "Carriere"),
-            hAsync("ul", { class: 'mobile-menu__link-list' },
-              hAsync("li", null,
-                hAsync("a", { class: 'mobile-menu__link--with-icon', href: "/vacature/zoeken" },
-                  hAsync(Icons.search, { className: 'mobile-menu__link-icon' }),
-                  "Vacature zoeken")),
-              hAsync("li", null,
-                hAsync("button", { class: 'mobile-menu__link--with-icon', onClick: () => setActiveMobileMenuLevel('jobs') },
-                  hAsync(Icons.campaign, { className: 'mobile-menu__link-icon' }),
-                  "Vacatures")),
-              hAsync("li", null,
-                hAsync("button", { class: 'mobile-menu__link--with-icon', onClick: () => setActiveMobileMenuLevel('career') },
-                  hAsync(Icons.lightbulb, { className: 'mobile-menu__link-icon' }),
-                  "Carri\u00E8retips")),
-              hAsync("li", null,
-                hAsync("a", { class: 'mobile-menu__link--with-icon', href: "/salariswijzer" },
-                  hAsync(Icons.euro, { className: 'mobile-menu__link-icon' }),
-                  "Salariswijzer"))),
-            hAsync("div", { class: 'mobile-menu__link-list-title' }, "Account"),
-            hAsync("ul", { class: 'mobile-menu__link-list' },
-              hAsync("li", null,
-                hAsync("a", { class: 'mobile-menu__link--with-icon', href: '/profiel/overzicht' },
-                  hAsync(Icons.person, { className: 'mobile-menu__link-icon' }),
-                  "Profiel")),
-              hAsync("li", null,
-                hAsync("a", { class: 'mobile-menu__link--with-icon', href: '/vacature/zoeken/favorieten' },
-                  hAsync(Icons.favorite, { className: 'mobile-menu__link-icon' }),
-                  "Favorieten")),
-              hAsync("li", null,
-                hAsync("a", { class: 'mobile-menu__link--with-icon', href: '/vacature/zoeken/zoekopdrachten-beheren' },
-                  hAsync(Icons.mail, { className: 'mobile-menu__link-icon' }),
-                  "Zoekopdrachten")),
-              hAsync("li", null,
-                hAsync("a", { class: 'mobile-menu__link--with-icon', href: '/account' },
-                  hAsync(Icons.settings, { className: 'mobile-menu__link-icon' }),
-                  "Instellingen")),
-              hAsync("li", null,
-                hAsync("a", { class: 'mobile-menu__link--no-icon', href: '/account/uitloggen' }, "Uitloggen"))),
-            hAsync("a", { class: 'mobile-menu__bottom-link', href: '/werkgever' }, "Werkgevers / plaats vacature")),
+            hAsync("div", null,
+              hAsync("div", { class: 'mobile-menu__link-list-title' }, "Carri\u00E8re"),
+              hAsync("ul", { class: 'mobile-menu__link-list' },
+                hAsync("li", null,
+                  hAsync("a", { class: 'mobile-menu__link--with-icon', href: "/vacature/zoeken" },
+                    hAsync(Icons.search, { className: 'mobile-menu__link-icon' }),
+                    "Vacature zoeken")),
+                hAsync("li", null,
+                  hAsync("button", { class: 'mobile-menu__link--with-icon', onClick: () => setActiveMobileMenuLevel('jobs') },
+                    hAsync(Icons.campaign, { className: 'mobile-menu__link-icon' }),
+                    "Vacatures")),
+                hAsync("li", null,
+                  hAsync("button", { class: 'mobile-menu__link--with-icon', onClick: () => setActiveMobileMenuLevel('career') },
+                    hAsync(Icons.lightbulb, { className: 'mobile-menu__link-icon' }),
+                    "Carri\u00E8retips")),
+                hAsync("li", null,
+                  hAsync("a", { class: 'mobile-menu__link--with-icon', href: "/salariswijzer" },
+                    hAsync(Icons.euro, { className: 'mobile-menu__link-icon' }),
+                    "Salariswijzer"))),
+              hAsync("div", { class: 'mobile-menu__link-list-title' }, "Account"),
+              hAsync("ul", { class: 'mobile-menu__link-list' },
+                hAsync("li", null,
+                  hAsync("a", { class: 'mobile-menu__link--with-icon', href: '/profiel/overzicht' },
+                    hAsync(Icons.person, { className: 'mobile-menu__link-icon' }),
+                    "Profiel")),
+                hAsync("li", null,
+                  hAsync("a", { class: 'mobile-menu__link--with-icon', href: '/vacature/zoeken/favorieten' },
+                    hAsync(Icons.favorite, { className: 'mobile-menu__link-icon' }),
+                    "Favorieten")),
+                hAsync("li", null,
+                  hAsync("a", { class: 'mobile-menu__link--with-icon', href: '/vacature/zoeken/zoekopdrachten-beheren' },
+                    hAsync(Icons.mail, { className: 'mobile-menu__link-icon' }),
+                    "Zoekopdrachten")),
+                hAsync("li", null,
+                  hAsync("a", { class: 'mobile-menu__link--with-icon', href: '/account' },
+                    hAsync(Icons.settings, { className: 'mobile-menu__link-icon' }),
+                    "Instellingen")),
+                hAsync("li", null,
+                  hAsync("a", { class: 'mobile-menu__link--no-icon', href: '/account/uitloggen' }, "Uitloggen"))),
+              hAsync("a", { class: 'mobile-menu__bottom-link', href: '/werkgever' }, "Werkgevers / plaats vacature"))),
           hAsync("section", { class: "mobile-menu__stack-screen" },
             activeMobileMenuLevel === 'jobs' && hAsync("div", null,
-              hAsync("div", { class: 'mobile-menu__link-list-title' }, "Vacactures"),
+              hAsync("div", { class: 'mobile-menu__link-list-title' }, "Vacatures"),
               hAsync("ul", { class: 'mobile-menu__link-list' },
                 hAsync("li", null,
                   hAsync("button", { class: "mobile-menu__link--no-icon", onClick: () => setActiveMobileMenuLevel('cities') }, "Per plaats")),
@@ -5855,28 +5856,27 @@ class NvbHeaderB2c {
     registerInstance(this, hostRef);
     this.isActiveMobileMenu = false;
     this.activeMobileMenuLevel = 'main';
-    this.isClientSide = false;
   }
   adjustDocument(isActiveMobileMenu) {
     if (isActiveMobileMenu) {
       document.body.style.overflow = 'hidden';
     }
     else {
-      document.body.style.overflow = 'visible';
+      document.body.style.overflow = '';
     }
   }
-  componentDidLoad() {
-    this.isClientSide = true;
+  handleOpenMenu() {
+    this.isActiveMobileMenu = true;
   }
   setActiveMobileMenuLevel(level) {
     this.activeMobileMenuLevel = level;
   }
   handleClose() {
-    this.isActiveMobileMenu = !this.isActiveMobileMenu;
+    this.isActiveMobileMenu = false;
     this.activeMobileMenuLevel = "main";
   }
   render() {
-    return (hAsync("header", null, hAsync("div", { class: "container container--top" }, hAsync("div", { class: 'top' }, hAsync("a", { href: "#" }, "Werkgevers / Plaats vacature"))), hAsync("nav", { class: 'main' }, hAsync("div", { class: "container" }, hAsync("div", { class: "main-inner" }, hAsync("div", { class: "mobile-menu-button-container" }, hAsync("button", { class: "mobile-menu-button", onClick: () => this.isActiveMobileMenu = !this.isActiveMobileMenu }, hAsync(Icons.menu, { className: 'mobile-menu__header-icon' }))), hAsync("a", { href: "#", class: 'logo-link' }, hAsync(Logo, null)), hAsync("div", { class: 'menu' }, hAsync("div", { class: "dropdown-wrapper" }, hAsync("button", { class: 'menu-link menu-link--dropdown' }, "Vacatures"), hAsync(DropdownContainerJobs, null)), hAsync("div", { class: 'dropdown-wrapper' }, hAsync("button", { class: 'menu-link menu-link--dropdown' }, "Carri\u00E8retips"), hAsync(DropdownContainerCareer$1, null)), hAsync("a", { href: "/salariswijzer", class: 'menu-link' }, "Salariswijzer"), hAsync("hr", { class: 'menu-separator' }), hAsync("div", { class: 'dropdown-wrapper' }, hAsync("button", { class: 'menu-link menu-link--dropdown' }, "Account"), hAsync(DropdownContainerCareer, null)), hAsync("div", { class: "dropdown-backdrop" })), hAsync("div", { class: 'account-button-container' }, hAsync("a", { class: "account-button", href: "/account" }, hAsync(Icons.person, { className: 'mobile-menu__header-icon' })))))), this.isClientSide && hAsync(MobileMenu, { isVisible: this.isActiveMobileMenu, handleModalClose: () => this.handleClose(), activeMobileMenuLevel: this.activeMobileMenuLevel, setActiveMobileMenuLevel: level => this.setActiveMobileMenuLevel(level) })));
+    return (hAsync("header", null, hAsync("div", { class: "container container--top" }, hAsync("div", { class: 'top' }, hAsync("a", { href: "#" }, "Werkgevers / Plaats vacature"))), hAsync("nav", { class: 'main' }, hAsync("div", { class: "container" }, hAsync("div", { class: "main-inner" }, hAsync("div", { class: "mobile-menu-button-container" }, hAsync("button", { class: "mobile-menu-button", onClick: () => this.handleOpenMenu() }, hAsync(Icons.menu, { className: 'mobile-menu__header-icon' }))), hAsync("a", { href: "/", class: 'logo-link' }, hAsync(Logo, null)), hAsync("div", { class: 'menu' }, hAsync("div", { class: "dropdown-wrapper" }, hAsync("button", { class: 'menu-link menu-link--dropdown' }, "Vacatures"), hAsync(DropdownContainerJobs, null)), hAsync("div", { class: 'dropdown-wrapper' }, hAsync("button", { class: 'menu-link menu-link--dropdown' }, "Carri\u00E8retips"), hAsync(DropdownContainerCareer$1, null)), hAsync("a", { href: "/salariswijzer", class: 'menu-link' }, "Salariswijzer"), hAsync("hr", { class: 'menu-separator' }), hAsync("div", { class: 'dropdown-wrapper' }, hAsync("button", { class: 'menu-link menu-link--dropdown' }, "Account"), hAsync(DropdownContainerCareer, null)), hAsync("div", { class: "dropdown-backdrop" })), hAsync("div", { class: 'account-button-container' }, hAsync("a", { class: "account-button", href: "/account" }, hAsync(Icons.person, { className: 'mobile-menu__header-icon' })))))), hAsync(MobileMenu, { isVisible: this.isActiveMobileMenu, handleModalClose: () => this.handleClose(), activeMobileMenuLevel: this.activeMobileMenuLevel, setActiveMobileMenuLevel: level => this.setActiveMobileMenuLevel(level) })));
   }
   static get watchers() { return {
     "isActiveMobileMenu": ["adjustDocument"]
@@ -5887,8 +5887,7 @@ class NvbHeaderB2c {
     "$tagName$": "nvb-header-b2c",
     "$members$": {
       "isActiveMobileMenu": [32],
-      "activeMobileMenuLevel": [32],
-      "isClientSide": [32]
+      "activeMobileMenuLevel": [32]
     },
     "$listeners$": undefined,
     "$lazyBundleId$": "-",
