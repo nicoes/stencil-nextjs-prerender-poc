@@ -50,7 +50,7 @@ export class NvbHeaderB2c {
           <div class="container">
             <div class="main-inner">
               <div class="mobile-menu-button-container">
-                <button class={"mobile-menu-button"} onClick={() => this.handleOpenMenu()}>
+                <button class={"mobile-menu-button"} onClick={() => this.handleOpenMenu()} aria-label="Open menu">
                   <Icons.menu className={'mobile-menu__header-icon'} />
                 </button>
               </div>
@@ -73,7 +73,7 @@ export class NvbHeaderB2c {
                 <div class={"dropdown-backdrop"}/>
               </div>
               <div class={'account-button-container'}>
-                <a class={"account-button"} href={"/account"}><Icons.person className={'mobile-menu__header-icon'} /></a>
+                <a class={"account-button"} href={"/account"} aria-label="Naar account"><Icons.person className={'mobile-menu__header-icon'} /></a>
               </div>
             </div>
           </div>
