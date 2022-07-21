@@ -18,7 +18,7 @@ const DropdownContainerJobs = () =>
           </li>
           <li class={'sub-menu-container'}>
             <button class={'sub-menu-link'}>Per plaats</button>
-            <JobSeekerSubMenu listItems={cityListItems} subMenuTitle={'Per plaats'} />
+            <JobSeekerSubMenu listItems={cityListItems} subMenuTitle={'Per plaats'} isCapitalized={true} />
           </li>
           <li class={'dropdown-list-expander dropdown-list-expander--jobs'} />
         </ul>

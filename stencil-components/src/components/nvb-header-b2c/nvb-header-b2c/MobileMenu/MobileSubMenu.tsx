@@ -1,20 +1,18 @@
 import {h} from "@stencil/core";
-import AnalyticsDataAttributes from "../AnalyticsDataAttributes";
+import AnchorList from "../AnchorList";
 
 export type MobileSubMenuItem = {
   label: string,
   value: string
 }
 
-const MobileSubMenu = ({listItems, subMenuTitle, capitalizeLabels}: {subMenuTitle: string, listItems: MobileSubMenuItem[], capitalizeLabels?: boolean}) =>
+type MobileSubMenuProps = {subMenuTitle: string, listItems: MobileSubMenuItem[], capitalizeLabels?: boolean}
+
+const MobileSubMenu = ({listItems, subMenuTitle, capitalizeLabels}: MobileSubMenuProps) =>
   <div>
     <div class={'mobile-menu__link-list-title'}>{subMenuTitle}</div>
     <ul class={'mobile-menu__link-list' + (capitalizeLabels ? ' mobile-menu__link-list--capitalize' : '')}>
-      {listItems.map(item => <li>
-        <a
-          class={"mobile-menu__link--no-icon"}
-          { ...AnalyticsDataAttributes({ action: 'ClickOnHeaderWerkZoekendenLink', label: item.label })}
-          href={item.value}>{item.label}</a></li>)}
+      <AnchorList className={"mobile-menu__link--no-icon"} listItems={listItems} analyticsAction={'ClickOnHeaderWerkZoekendenLink'} />
     </ul>
   </div>
 

@@ -1,5 +1,4 @@
 import {h} from "@stencil/core";
-import LogoInverse from "./LogoInverse";
 import MobileCitiesMenu from "./MobileMenu/MobileCitiesMenu";
 import MobileIndustriesMenu from "./MobileMenu/MobileIndustriesMenu";
 import MobileCareerMenu from "./MobileMenu/MobileCareerMenu";
@@ -39,9 +38,7 @@ const MobileMenu = ({ isVisible, handleModalClose, activeMobileMenuLevel, setAct
         <div class="mobile-menu__header-button mobile-menu__header-button--back">
           {previousLevel && <button onClick={() => setActiveMobileMenuLevel(previousLevel)} class={"mobile-menu__back-button"}>Terug</button>}
         </div>
-        <a class="mobile-menu__logo" href="/">
-          <LogoInverse/>
-        </a>
+        <div class={'mobile-menu__header-center-placeholder '} />
         <div class="mobile-menu__header-button mobile-menu__header-button--close">
           <button onClick={() => handleModalClose()} class={"mobile-menu__close-button"}/>
         </div>

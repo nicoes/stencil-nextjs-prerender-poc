@@ -2,8 +2,9 @@ import {AnchorListItem} from "../nvb-header-b2c/SubMenu";
 
 export const careerListItems: AnchorListItem[] = [
     {
-        label: 'Carrièretips',
-        value: '/carriere'
+        label: 'Alle',
+        value: '/carriere',
+        analyticsLabel: 'Carrièretips'
     },
     {
         label: 'Actueel',

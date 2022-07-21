@@ -2,8 +2,11 @@ import AnalyticsDataAttributes, {AnalyticsAction} from "./AnalyticsDataAttribute
 import {h} from "@stencil/core";
 import {AnchorListItem} from "./SubMenu";
 
-const AnchorList = ({ listItems, analyticsAction }: { listItems: AnchorListItem[], analyticsAction: AnalyticsAction }) => listItems.map(item => <li>
+type AnchorListProps = { listItems: AnchorListItem[], analyticsAction: AnalyticsAction, className?: string }
+
+const AnchorList = ({ listItems, analyticsAction, className }: AnchorListProps) => listItems.map(item => <li>
   <a
+    class={className || ''}
     { ...AnalyticsDataAttributes({ action: analyticsAction, label: item.analyticsLabel || item.label })}
     href={item.value}>{item.label}</a></li>)
 
