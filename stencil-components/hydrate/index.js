@@ -4738,7 +4738,7 @@ function hydrateFactory($stencilWindow, $stencilHydrateOpts, $stencilHydrateResu
 
 
 const NAMESPACE = 'stencil-components';
-const BUILD = /* stencil-components */ { allRenderFn: true, appendChildSlotFix: false, asyncLoading: true, attachStyles: true, cloneNodeFix: false, cmpDidLoad: true, cmpDidRender: false, cmpDidUnload: false, cmpDidUpdate: false, cmpShouldUpdate: false, cmpWillLoad: false, cmpWillRender: false, cmpWillUpdate: false, connectedCallback: true, constructableCSS: false, cssAnnotations: true, cssVarShim: false, devTools: false, disconnectedCallback: true, dynamicImportShim: false, element: false, event: true, hasRenderFn: true, hostListener: false, hostListenerTarget: false, hostListenerTargetBody: false, hostListenerTargetDocument: false, hostListenerTargetParent: false, hostListenerTargetWindow: false, hotModuleReplacement: false, hydrateClientSide: true, hydrateServerSide: true, hydratedAttribute: false, hydratedClass: true, isDebug: false, isDev: false, isTesting: false, lazyLoad: true, lifecycle: true, lifecycleDOMEvents: false, member: true, method: false, mode: false, observeAttribute: true, profile: false, prop: true, propBoolean: true, propMutable: false, propNumber: false, propString: true, reflect: false, safari10: false, scoped: false, scriptDataOpts: false, shadowDelegatesFocus: false, shadowDom: true, shadowDomShim: true, slot: false, slotChildNodesFix: false, slotRelocation: true, state: true, style: true, svg: true, taskQueue: true, updatable: true, vdomAttribute: true, vdomClass: true, vdomFunctional: true, vdomKey: false, vdomListener: true, vdomPropOrAttr: true, vdomRef: false, vdomRender: true, vdomStyle: false, vdomText: true, vdomXlink: false, watchCallback: true };
+const BUILD = /* stencil-components */ { allRenderFn: true, appendChildSlotFix: false, asyncLoading: true, attachStyles: true, cloneNodeFix: false, cmpDidLoad: true, cmpDidRender: false, cmpDidUnload: false, cmpDidUpdate: false, cmpShouldUpdate: false, cmpWillLoad: false, cmpWillRender: false, cmpWillUpdate: false, connectedCallback: true, constructableCSS: false, cssAnnotations: true, cssVarShim: false, devTools: false, disconnectedCallback: true, dynamicImportShim: false, element: false, event: true, hasRenderFn: true, hostListener: false, hostListenerTarget: false, hostListenerTargetBody: false, hostListenerTargetDocument: false, hostListenerTargetParent: false, hostListenerTargetWindow: false, hotModuleReplacement: false, hydrateClientSide: true, hydrateServerSide: true, hydratedAttribute: false, hydratedClass: true, isDebug: false, isDev: false, isTesting: false, lazyLoad: true, lifecycle: true, lifecycleDOMEvents: false, member: true, method: false, mode: false, observeAttribute: true, profile: false, prop: true, propBoolean: true, propMutable: false, propNumber: false, propString: true, reflect: false, safari10: false, scoped: false, scriptDataOpts: false, shadowDelegatesFocus: false, shadowDom: true, shadowDomShim: true, slot: false, slotChildNodesFix: false, slotRelocation: true, state: true, style: true, svg: true, taskQueue: true, updatable: true, vdomAttribute: true, vdomClass: true, vdomFunctional: true, vdomKey: true, vdomListener: true, vdomPropOrAttr: true, vdomRef: true, vdomRender: true, vdomStyle: true, vdomText: true, vdomXlink: true, watchCallback: true };
 
 function componentOnReady() {
  return getHostRef(this).$onReadyPromise$;
@@ -4920,6 +4920,8 @@ function waitingOnElementMsg(e) {
  return t;
 }
 
+const XLINK_NS = "http://www.w3.org/1999/xlink";
+
 const createTime = (e, t = "") => {
  return () => {};
 }, rootAppliedStyles = new WeakMap, registerStyle = (e, t, o) => {
@@ -4946,18 +4948,20 @@ const createTime = (e, t = "") => {
  o.classList.add(l + "-h"), BUILD.scoped  ), 
  s();
 }, getScopeId = (e, t) => "sc-" + (e.$tagName$), EMPTY_OBJ = {}, isComplexType = e => "object" == (e = typeof e) || "function" === e, isPromise = e => !!e && ("object" == typeof e || "function" == typeof e) && "function" == typeof e.then, h = (e, t, ...o) => {
- let n = null, l = null, a = !1, r = !1, i = [];
+ let n = null, s = null, l = null, a = !1, r = !1, i = [];
  const d = t => {
   for (let o = 0; o < t.length; o++) n = t[o], Array.isArray(n) ? d(n) : null != n && "boolean" != typeof n && ((a = "function" != typeof e && !isComplexType(n)) ? n = String(n) : BUILD.isDev  , 
   a && r ? i[i.length - 1].$text$ += n : i.push(a ? newVNode(null, n) : n), r = a);
  };
- if (d(o), t && (t.name && (l = t.name), BUILD.vdomClass)) {
+ if (d(o), t && (t.key && (s = t.key), 
+ t.name && (l = t.name), BUILD.vdomClass)) {
   const e = t.className || t.class;
   e && (t.class = "object" != typeof e ? e : Object.keys(e).filter((t => e[t])).join(" "));
  }
  if ("function" == typeof e) return e(null === t ? {} : t, i, vdomFnUtils);
  const c = newVNode(e, null);
- return c.$attrs$ = t, i.length > 0 && (c.$children$ = i), (c.$name$ = l), c;
+ return c.$attrs$ = t, i.length > 0 && (c.$children$ = i), (c.$key$ = s), 
+ (c.$name$ = l), c;
 }, newVNode = (e, t) => {
  const o = {
   $flags$: 0,
@@ -4966,7 +4970,8 @@ const createTime = (e, t = "") => {
   $elm$: null,
   $children$: null
  };
- return (o.$attrs$ = null), (o.$name$ = null), o;
+ return (o.$attrs$ = null), (o.$key$ = null), 
+ (o.$name$ = null), o;
 }, Host = {}, isHost = e => e && e.$tag$ === Host, vdomFnUtils = {
  forEach: (e, t) => e.map(convertToPublic).forEach(t),
  map: (e, t) => e.map(convertToPublic).map(t).map(convertToPrivate)
@@ -4993,7 +4998,10 @@ const createTime = (e, t = "") => {
   if ("class" === t) {
    const t = e.classList, s = parseClassList(o), l = parseClassList(n);
    t.remove(...s.filter((e => e && !l.includes(e)))), t.add(...l.filter((e => e && !s.includes(e))));
-  } else if ((a ) || "o" !== t[0] || "n" !== t[1]) {
+  } else if ("style" === t) {
+   for (const t in o) n && null != n[t] || (e.style[t] = "");
+   for (const t in n) o && n[t] === o[t] || (e.style[t] = n[t]);
+  } else if ("key" === t) ; else if ("ref" === t) n && n(e); else if ((a ) || "o" !== t[0] || "n" !== t[1]) {
    {
     const i = isComplexType(n);
     if ((a || i && null !== n) && !s) try {
@@ -5002,8 +5010,9 @@ const createTime = (e, t = "") => {
       "list" === t ? a = !1 : null != o && e[t] == s || (e[t] = s);
      }
     } catch (e) {}
-    null == n || !1 === n ? !1 === n && "" !== e.getAttribute(t) || (e.removeAttribute(t)) : (!a || 4 & l || s) && !i && (n = !0 === n ? "" : n, 
-    e.setAttribute(t, n));
+    let d = !1;
+    r !== (r = r.replace(/^xlink\:?/, "")) && (t = r, d = !0), null == n || !1 === n ? !1 === n && "" !== e.getAttribute(t) || (d ? e.removeAttributeNS(XLINK_NS, t) : e.removeAttribute(t)) : (!a || 4 & l || s) && !i && (n = !0 === n ? "" : n, 
+    d ? e.setAttributeNS(XLINK_NS, t, n) : e.setAttribute(t, n));
    }
   } else t = "-" === t[2] ? t.slice(3) : isMemberInElement(win, r) ? r.slice(2) : r[2] + t.slice(3), 
   o && plt.rel(e, t, o, !1), n && plt.ael(e, t, n, !1);
@@ -5045,20 +5054,25 @@ const createElm = (e, t, o, n) => {
  for (r.shadowRoot && r.tagName === hostTagName && (r = r.shadowRoot); s <= l; ++s) n[s] && (a = createElm(null, o, s, e), 
  a && (n[s].$elm$ = a, r.insertBefore(a, referenceNode(t) )));
 }, removeVnodes = (e, t, o, n, s) => {
- for (;t <= o; ++t) (n = e[t]) && (s = n.$elm$, (checkSlotFallbackVisibility = !0, 
+ for (;t <= o; ++t) (n = e[t]) && (s = n.$elm$, callNodeRefs(n), (checkSlotFallbackVisibility = !0, 
  s["s-ol"] ? s["s-ol"].remove() : putBackInOriginalLocation(s, !0)), s.remove());
-}, isSameVnode = (e, t) => e.$tag$ === t.$tag$ && ("slot" === e.$tag$ ? e.$name$ === t.$name$ : !BUILD.vdomKey ), referenceNode = e => e && e["s-ol"] || e, parentReferenceNode = e => (e["s-ol"] ? e["s-ol"] : e).parentNode, patch = (e, t) => {
+}, isSameVnode = (e, t) => e.$tag$ === t.$tag$ && ("slot" === e.$tag$ ? e.$name$ === t.$name$ : e.$key$ === t.$key$), referenceNode = e => e && e["s-ol"] || e, parentReferenceNode = e => (e["s-ol"] ? e["s-ol"] : e).parentNode, patch = (e, t) => {
  const o = t.$elm$ = e.$elm$, n = e.$children$, s = t.$children$, l = t.$tag$, a = t.$text$;
  let r;
  null !== a ? (r = o["s-cr"]) ? r.parentNode.textContent = a : e.$text$ !== a && (o.data = a) : ((isSvgMode = "svg" === l || "foreignObject" !== l && isSvgMode), 
  (updateElement(e, t, isSvgMode)), 
  null !== n && null !== s ? ((e, t, o, n) => {
-  let s, a = 0, r = 0, c = t.length - 1, $ = t[0], m = t[c], p = n.length - 1, h = n[0], u = n[p];
+  let s, l, a = 0, r = 0, i = 0, d = 0, c = t.length - 1, $ = t[0], m = t[c], p = n.length - 1, h = n[0], u = n[p];
   for (;a <= c && r <= p; ) if (null == $) $ = t[++a]; else if (null == m) m = t[--c]; else if (null == h) h = n[++r]; else if (null == u) u = n[--p]; else if (isSameVnode($, h)) patch($, h), 
   $ = t[++a], h = n[++r]; else if (isSameVnode(m, u)) patch(m, u), m = t[--c], u = n[--p]; else if (isSameVnode($, u)) "slot" !== $.$tag$ && "slot" !== u.$tag$ || putBackInOriginalLocation($.$elm$.parentNode, !1), 
   patch($, u), e.insertBefore($.$elm$, m.$elm$.nextSibling), $ = t[++a], u = n[--p]; else if (isSameVnode(m, h)) "slot" !== $.$tag$ && "slot" !== u.$tag$ || putBackInOriginalLocation(m.$elm$.parentNode, !1), 
   patch(m, h), e.insertBefore(m.$elm$, $.$elm$), m = t[--c], h = n[++r]; else {
-   (s = createElm(t && t[r], o, r, e), h = n[++r]), 
+   if (i = -1, BUILD.vdomKey) for (d = a; d <= c; ++d) if (t[d] && null !== t[d].$key$ && t[d].$key$ === h.$key$) {
+    i = d;
+    break;
+   }
+   i >= 0 ? (l = t[i], l.$tag$ !== h.$tag$ ? s = createElm(t && t[r], o, i, e) : (patch(l, h), 
+   t[i] = void 0, s = l.$elm$), h = n[++r]) : (s = createElm(t && t[r], o, r, e), h = n[++r]), 
    s && (parentReferenceNode($.$elm$).insertBefore(s, referenceNode($.$elm$)) );
   }
   a > c ? addVnodes(e, null == n[p + 1] ? null : n[p + 1].$elm$, o, n, r, p) : r > p && removeVnodes(t, a, c);
@@ -5096,7 +5110,9 @@ const createElm = (e, t, o, n) => {
   }));
   1 === t.nodeType && relocateSlotContent(t);
  }
-}, isNodeLocatedInSlot = (e, t) => 1 === e.nodeType ? null === e.getAttribute("slot") && "" === t || e.getAttribute("slot") === t : e["s-sn"] === t || "" === t, renderVdom = (e, t) => {
+}, isNodeLocatedInSlot = (e, t) => 1 === e.nodeType ? null === e.getAttribute("slot") && "" === t || e.getAttribute("slot") === t : e["s-sn"] === t || "" === t, callNodeRefs = e => {
+ (e.$attrs$ && e.$attrs$.ref && e.$attrs$.ref(null), e.$children$ && e.$children$.map(callNodeRefs));
+}, renderVdom = (e, t) => {
  const o = e.$hostElement$, s = e.$vnode$ || newVNode(null, null), l = isHost(t) ? t : h(null, null, t);
  if (hostTagName = o.tagName, BUILD.isDev  ) ;
  if (l.$tag$ = null, l.$flags$ |= 4, e.$vnode$ = l, l.$elm$ = s.$elm$ = o.shadowRoot || o, 
@@ -5611,11 +5627,20 @@ class MyComponent {
 
 const Logo = () => hAsync("img", { alt: "Nationale Vacaturebank", src: "data:image/svg+xml,%3Csvg%20width%3D%22148%22%20height%3D%2230%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M25.608%204.399A14.967%2014.967%200%200015.027%200C6.719%200%200%206.679%200%2015c0%208.322%206.72%2015%2014.973%2015C23.281%2030%2029.947%2023.269%2030%2015a15.02%2015.02%200%2000-4.392-10.601z%22%20fill%3D%22%23FF9921%22%3E%3C%2Fpath%3E%3Cpath%20d%3D%22M12.963%2016.114c0%203.233-1.27%206.307-3.546%208.639a1.485%201.485%200%2001-2.063.053A1.492%201.492%200%20017.3%2022.74a9.36%209.36%200%20002.751-6.625c0-2.492-1.005-4.824-2.75-6.573-.583-.583-.53-1.484.052-2.067.582-.583%201.482-.53%202.063.053%202.276%202.226%203.598%205.353%203.546%208.587zM12.116%205.936c0-1.59%201.323-2.915%202.91-2.915%201.587%200%202.91%201.325%202.91%202.915s-1.323%202.915-2.91%202.915c-1.64%200-2.91-1.272-2.91-2.915zM23.016%2024.17c-.158.53-.582.955-1.11%201.06-.53.107-1.112-.105-1.43-.53-4.709-4.77-4.709-12.455.053-17.226.371-.371.9-.53%201.429-.371.514.143.915.546%201.058%201.06a1.574%201.574%200%2001-.423%201.431c-1.746%201.75-2.699%204.082-2.699%206.573%200%202.491.953%204.823%202.699%206.572.37.319.582.901.423%201.432z%22%20fill%3D%22%23fff%22%3E%3C%2Fpath%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M58.874%201.727c0%20.305.15.457.451.457h1.254c.15%200%20.25-.05.3-.101.1-.051.1-.152.1-.305V.458c0-.306-.15-.458-.4-.458h-1.254c-.3%200-.45.152-.45.457v1.27zm1.905%201.677c.05%200%20.15%200%20.2.051l.001.001c.05.05.1.101.1.202V12.6c0%20.203-.1.305-.3.305h-1.556c-.2%200-.3-.102-.3-.305V5.385h-3.059v4.623c0%20.356.05.61.15.813.101.203.302.305.602.305h.251c.036.012.07.021.1.03.096.026.163.045.201.122.05.05.05.153.05.255v1.066c0%20.254-.2.356-.552.356-.55%200-1.053-.153-1.504-.356-.451-.254-.802-.559-1.053-.965-.25-.457-.35-.915-.35-1.473V5.335h-.853c-.05%200-.15-.05-.2-.102a.39.39%200%2001-.1-.254V3.71a.39.39%200%2001.1-.254c.05-.051.1-.102.2-.102h.853V1.88c0-.152%200-.203.05-.254.028-.028.072-.041.123-.056.04-.01.084-.023.127-.045l1.505-.458h.1c.05%200%20.1%200%20.15.102.05.101.05.153.05.254v1.981h4.914zm-9.776%200c.2%200%20.301.101.301.304v8.89c0%20.204-.1.306-.3.306h-1.305c-.1%200-.2-.052-.3-.153a.464.464%200%2001-.15-.356v-.61a4.037%204.037%200%2001-2.908%201.22%204.61%204.61%200%2001-2.307-.61c-.752-.406-1.303-.965-1.755-1.727-.451-.762-.652-1.574-.652-2.489%200-.864.25-1.676.652-2.438.4-.762%201.003-1.321%201.705-1.778.702-.458%201.504-.66%202.356-.66.652%200%201.204.1%201.705.304.451.203.902.559%201.304%201.016l.15-.915c.015-.044.025-.08.033-.11.021-.071.032-.107.067-.143.05-.051.1-.051.2-.051h1.204zm-12.585.355c.501.254.952.711%201.304%201.32.35.61.5%201.372.5%202.236v5.131c0%20.203-.1.305-.3.305h-1.454c-.2%200-.301-.102-.301-.305v-5.13c0-.356-.05-.712-.25-1.017a2.714%202.714%200%2000-.752-.762c-.352-.203-.653-.305-1.053-.305-.301%200-.653.102-.953.254-.351.153-.602.407-.802.762-.2.356-.301.762-.301%201.169v5.03c0%20.1%200%20.202-.1.253-.1.051-.201.102-.302.102h-1.353c-.2%200-.301-.102-.301-.305V3.708c0-.203.1-.305.3-.305h1.004c.1%200%20.25.052.3.102.05.05.101.153.151.254l.1%201.067c.351-.508.803-.864%201.304-1.118.502-.253%201.053-.355%201.604-.355.552%200%201.103.102%201.655.406zm10.73%204.37c.1.558-.05%201.016-.301%201.473-.25.457-.552.812-1.003%201.066a2.67%202.67%200%2001-1.404.407c-.501%200-.952-.152-1.404-.406a2.92%202.92%200%2001-1.003-1.067c-.25-.457-.35-.965-.35-1.474%200-.558.1-1.066.35-1.472.251-.458.602-.814%201.003-1.067a2.498%202.498%200%20011.354-.407c.501%200%20.953.152%201.404.407.401.253.752.61%201.003%201.067.25.457.35.914.35%201.472zm20.857-4.166c.752.406%201.304%201.016%201.755%201.778.451.762.651%201.574.651%202.438%200%20.863-.2%201.677-.651%202.439a4.938%204.938%200%2001-1.755%201.777%204.529%204.529%200%2001-2.407.661%204.528%204.528%200%2001-2.406-.66%204.937%204.937%200%2001-1.755-1.778%204.682%204.682%200%2001-.652-2.439c0-.864.2-1.676.652-2.438a4.938%204.938%200%20011.755-1.778%204.528%204.528%200%20012.406-.66c.853%200%201.655.202%202.407.66zm.35%204.115c0%20.559-.1%201.067-.35%201.524-.251.457-.552.813-.953%201.067a2.669%202.669%200%2001-1.404.406%202.67%202.67%200%2001-1.404-.406c-.401-.255-.752-.61-.952-1.067-.251-.457-.352-.915-.352-1.474%200-.507.1-1.015.352-1.472.25-.458.55-.762.952-1.067a2.67%202.67%200%20011.404-.407c.497-.005.985.136%201.404.407.4.253.752.61.952%201.067.251.457.351.914.351%201.422zm10.129-4.319c.5.254.952.711%201.353%201.32.351.61.501%201.372.501%202.236v5.131c0%20.203-.1.305-.3.305h-1.454c-.2%200-.301-.102-.301-.305v-5.13c0-.356-.05-.712-.25-1.017a2.715%202.715%200%2000-.753-.762c-.351-.203-.652-.305-1.053-.305-.3%200-.652.102-.953.254-.35.153-.601.407-.802.762-.2.356-.3.762-.3%201.169v5.03c0%20.1%200%20.202-.1.253-.1.051-.201.102-.302.102h-1.353c-.2%200-.301-.102-.301-.305V3.708c0-.203.1-.305.3-.305h1.004c.073%200%20.119.028.178.062l.072.04c.05.05.098.148.147.247l.004.007.1%201.067a3.438%203.438%200%20011.303-1.118c.502-.253%201.053-.355%201.605-.355.551%200%201.103.102%201.655.406zm12.884-.05c0-.204-.1-.305-.3-.305h-1.204c-.1%200-.15%200-.2.05v.001c-.05.05-.1.102-.1.253l-.151.915c-.4-.457-.852-.813-1.303-1.016-.502-.203-1.053-.305-1.705-.305-.852%200-1.655.203-2.356.66-.702.458-1.304%201.017-1.705%201.779s-.652%201.574-.652%202.438c0%20.915.2%201.727.652%202.49.45.761%201.003%201.32%201.755%201.726a4.61%204.61%200%20002.306.61%204.038%204.038%200%20002.908-1.22v.61a.464.464%200%2000.15.356c.1.101.2.153.301.153h1.304c.2%200%20.3-.102.3-.305v-8.89zm-2.457%205.893c.251-.457.401-.915.3-1.474%200-.558-.1-1.015-.35-1.472a2.915%202.915%200%2000-1.003-1.067c-.451-.255-.902-.407-1.403-.407-.502%200-.954.152-1.354.407-.401.253-.752.61-1.003%201.067-.251.406-.35.914-.35%201.472%200%20.509.099%201.017.35%201.474.25.457.602.812%201.003%201.066.451.255.902.407%201.403.407a2.669%202.669%200%20001.404-.406c.451-.255.752-.61%201.003-1.067zM97.48.712C97.379.66%2097.33.66%2097.228.66h-1.504c-.1%200-.15.05-.2.1v.002c-.051.05-.101.152-.101.254v11.531c0%20.204.1.305.3.305h1.505a.38.38%200%2000.25-.101.391.391%200%2000.1-.254V.965a.338.338%200%2000-.06-.182l-.04-.072zm10.328%204.775c.451.711.702%201.625.652%202.743%200%20.203-.051.406-.101.508-.049.101-.1.203-.2.203-.1.05-.251.05-.451.05h-6.518c.1.458.3.814.551%201.17.251.304.552.558.953.761.401.153.802.254%201.254.254.35%200%20.651-.05.902-.101.081-.033.157-.06.227-.086.148-.054.273-.1.375-.168.056-.038.119-.076.187-.117.113-.068.238-.143.364-.239l.201-.152c.05-.051.15-.051.2-.051.05%200%20.101.05.15.101l.753.915c.049.05.1.152.1.203%200%20.051%200%20.152-.1.204-.502.507-1.053.863-1.605%201.066a5.104%205.104%200%2001-1.754.305%204.359%204.359%200%2001-2.357-.66%204.936%204.936%200%2001-1.755-1.778%204.681%204.681%200%2001-.652-2.439c0-.864.2-1.676.602-2.438.401-.762%201.003-1.321%201.704-1.778.703-.458%201.505-.66%202.407-.66.752%200%201.454.202%202.156.558a4.51%204.51%200%20011.755%201.626zm-6.517%201.676v-.05c.15-.357.3-.712.601-1.017a2.46%202.46%200%2001.903-.711c.351-.203.702-.254%201.103-.254.601%200%201.103.203%201.554.559.451.356.802.863%201.003%201.473h-5.164zm-60.767%2012.04c.15%200%20.2.05.15.152%200%20.05%200%20.152-.05.254l-3.56%208.737a.378.378%200%2001-.35.255h-.803c-.15%200-.25-.052-.351-.255l-3.51-8.686c-.05-.051-.05-.153-.05-.203%200-.101.05-.152.099-.202l.002-.002c.1-.05.15-.05.25-.05h1.505c.15%200%20.3.101.35.304l2.156%206.046%202.156-6.096c.05-.153.15-.255.351-.255h1.655zm10.078.304c0-.203-.1-.305-.301-.305h-1.203c-.1%200-.15%200-.2.05-.037.037-.047.073-.068.146l-.033.11-.15.914c-.402-.458-.853-.813-1.304-1.017-.452-.203-1.053-.305-1.705-.305-.852%200-1.654.204-2.356.661-.702.457-1.304%201.016-1.705%201.778s-.651%201.575-.651%202.438c0%20.915.2%201.728.651%202.49.451.762%201.003%201.32%201.755%201.727a4.61%204.61%200%20002.306.61%204.037%204.037%200%20002.908-1.22v.61a.464.464%200%2000.15.355c.1.102.201.153.301.153h1.304c.2%200%20.3-.102.3-.305v-8.89zM48.145%2025.4c.25-.457.4-.915.3-1.474%200-.559-.1-1.016-.35-1.473a2.918%202.918%200%2000-1.003-1.067c-.451-.254-.902-.406-1.404-.406-.501%200-.953.152-1.354.406-.4.254-.752.61-1.002%201.067-.251.407-.352.914-.352%201.473%200%20.508.1%201.017.352%201.474.25.457.602.812%201.002%201.067.451.253.903.405%201.404.405a2.67%202.67%200%20001.404-.405c.451-.255.752-.61%201.003-1.067zm11.982%201.677l-.802-.965c-.05-.05-.1-.101-.15-.101-.05%200-.151%200-.201.05-.652.508-1.354.762-2.006.762-.501%200-.952-.102-1.404-.407a2.914%202.914%200%2001-1.002-1.066c-.25-.458-.351-.965-.351-1.524.002-.535.14-1.06.401-1.524.25-.458.602-.813%201.002-1.067a2.502%202.502%200%20011.354-.406c.356%200%20.71.052%201.053.152.351.101.652.305%201.003.559.05.05.1.05.15.05.1%200%20.15-.05.15-.101l.753-1.169c.05-.05.05-.1.05-.152%200-.05-.05-.152-.1-.203-.451-.355-.903-.66-1.404-.864a3.555%203.555%200%2000-1.655-.253c-.852%200-1.654.203-2.356.66-.752.406-1.304%201.016-1.755%201.778a4.68%204.68%200%2000-.652%202.438c0%20.915.2%201.727.652%202.49a4.94%204.94%200%20001.755%201.778c.752.406%201.554.66%202.407.66a3.89%203.89%200%20001.654-.355c.551-.204%201.002-.509%201.404-.814.1-.1.15-.152.15-.203%200-.05-.05-.152-.1-.203zm10.128-7.875c.2%200%20.301.102.301.305v8.89c0%20.204-.1.305-.3.305H68.95c-.1%200-.2-.05-.3-.153a.464.464%200%2001-.15-.355v-.61a4.037%204.037%200%2001-2.908%201.22%204.61%204.61%200%2001-2.307-.61c-.752-.407-1.303-.965-1.755-1.727-.45-.762-.652-1.575-.652-2.49%200-.863.251-1.676.652-2.438.401-.762%201.003-1.32%201.705-1.778.702-.457%201.504-.66%202.357-.66.651%200%201.203.101%201.704.304.451.204.902.56%201.304%201.017l.15-.915c.015-.045.025-.08.034-.11.02-.072.03-.108.066-.144.05-.05.1-.05.201-.05h1.203zM68.4%2023.926c.1.56-.05%201.017-.301%201.474-.25.457-.551.812-1.002%201.067a2.669%202.669%200%2001-1.405.405c-.5%200-.952-.152-1.403-.405a2.92%202.92%200%2001-1.003-1.067c-.25-.457-.351-.966-.351-1.474%200-.559.1-1.066.35-1.473a2.92%202.92%200%20011.004-1.067%202.502%202.502%200%20011.353-.406c.502%200%20.953.152%201.404.406.401.254.752.61%201.003%201.067.25.457.35.914.35%201.473zm17.548-4.723c.251%200%20.351.101.15.304v8.89c0%20.204-.1.305-.3.305h-.953a.327.327%200%2001-.178-.061%201.296%201.296%200%2000-.073-.04.28.28%200%2001-.15-.254l-.2-.915c-.602.915-1.504%201.372-2.708%201.372-.601%200-1.153-.152-1.705-.407a3.398%203.398%200%2001-1.353-1.32c-.351-.61-.552-1.372-.552-2.286v-3.607h-2.908v4.622c0%20.357.05.61.15.814.1.203.301.304.602.304h.251c.036.013.07.022.1.03.096.027.163.046.2.123.05.05.05.152.05.253v1.067c0%20.255-.2.356-.55.356-.552%200-1.053-.152-1.504-.356-.452-.253-.803-.507-1.053-.965-.251-.457-.352-.914-.352-1.473v-4.826h-.852a.381.381%200%2001-.2-.102.39.39%200%2001-.1-.254v-1.27c0-.101.05-.203.1-.254.05-.051.1-.101.2-.101h.852v-1.473c0-.153%200-.203.05-.255.029-.028.073-.04.123-.055a.684.684%200%2000.128-.046l1.504-.457h.1c.05%200%20.101.05.151.101.05.102.05.153.05.254v1.982h4.713c.2%200%20.301.101.301.304v5.182c.05.407.1.762.301%201.067.2.305.451.559.752.711.35.153.702.254%201.103.254.2%200%20.501-.05.802-.203.3-.152.602-.407.803-.762.25-.355.35-.762.35-1.321v-4.928c0-.203.1-.304.301-.304h1.504zm8.976.914c-.251-.254-.602-.457-1.053-.712a3.198%203.198%200%2000-1.404-.355c-.451%200-.903.102-1.254.355-.4.204-.702.509-.952.915l-.15-.813c-.013-.037-.022-.07-.03-.102-.027-.097-.045-.164-.12-.203-.051-.05-.151-.05-.302-.05h-1.052c-.201%200-.301.101-.301.305v8.788c0%20.203.1.305.3.305h1.505c.2%200%20.3-.102.3-.305v-5.08c0-.457.1-.864.25-1.169.151-.304.402-.558.653-.71.3-.153.551-.255.903-.255.29-.003.58.049.851.153.251.101.502.254.752.406.028.014.05.027.073.04.058.035.105.062.178.062.1%200%20.15-.051.2-.102l.703-.965c.05-.05.1-.153.1-.203%200-.102-.05-.203-.15-.305zm7.369-.508a3.9%203.9%200%20011.704%201.676c.451.711.702%201.626.702%202.693%200%20.203-.05.406-.1.508a.396.396%200%2001-.201.203c-.1.05-.25.05-.451.05h-6.518c.1.458.3.814.552%201.17.25.304.551.558.952.761.401.153.803.254%201.254.254.351%200%20.652-.05.902-.101.081-.033.157-.06.228-.087.147-.053.272-.099.374-.168.055-.037.117-.074.184-.114.114-.069.24-.145.367-.241l.201-.152c.05-.051.151-.051.2-.051.05%200%20.101.05.151.101l.752.915c.05.05.1.152.1.203%200%20.05%200%20.153-.1.203-.501.508-1.053.864-1.605%201.067a5.1%205.1%200%2001-1.754.305%204.36%204.36%200%2001-2.357-.66%204.939%204.939%200%2001-1.755-1.779%204.68%204.68%200%2001-.651-2.438c0-.864.2-1.677.601-2.439.402-.761%201.003-1.32%201.705-1.778.702-.457%201.504-.66%202.406-.66.752%200%201.455.203%202.157.56zm-4.714%203.352v-.05c.15-.356.3-.712.602-1.016.3-.305.551-.56.902-.712.351-.203.702-.254%201.104-.254.601%200%201.102.204%201.554.56.451.354.802.863%201.003%201.473h-5.165zm16.145-3.2c.652.407%201.304%201.016%201.655%201.727.351.712.551%201.524.551%202.439%200%20.914-.2%201.727-.602%202.489a4.199%204.199%200%2001-1.654%201.728%204.482%204.482%200%2001-2.306.61c-.501%200-1.003-.153-1.504-.357a4%204%200%2001-1.354-.914l-.15.711c-.05.153-.101.254-.151.305a.382.382%200%2001-.251.102h-1.253c-.2%200-.301-.102-.301-.305V16.714c0-.204.101-.305.301-.305h1.504c.2%200%20.301.1.301.305v3.555a3.908%203.908%200%20011.304-.863%204.034%204.034%200%20011.554-.305c.902%200%201.654.254%202.356.66zm.151%204.165c0%20.56-.1%201.067-.3%201.474-.251.457-.552.812-.953%201.067a2.543%202.543%200%2001-1.404.405%202.996%202.996%200%2001-1.454-.405%202.682%202.682%200%2001-1.053-1.067%203.101%203.101%200%2001-.401-1.474c0-.559.151-1.016.401-1.473.243-.45.609-.82%201.053-1.067.451-.254.902-.406%201.454-.406.501%200%20.952.152%201.354.406.401.254.702.61.952%201.067.251.457.351.966.351%201.473zm12.534-4.724c.2%200%20.301.102.301.305v8.89c0%20.204-.101.305-.301.305h-1.304c-.1%200-.2-.05-.301-.153a.463.463%200%2001-.15-.355v-.61a4.034%204.034%200%2001-2.908%201.22%204.608%204.608%200%2001-2.306-.61c-.752-.407-1.304-.965-1.755-1.727-.451-.762-.652-1.575-.652-2.49%200-.863.251-1.676.652-2.438.401-.762%201.003-1.32%201.704-1.778.702-.457%201.504-.66%202.357-.66.652%200%201.203.101%201.705.304.451.204.902.56%201.303%201.017l.151-.915.033-.11c.021-.072.031-.108.067-.144.05-.05.1-.05.201-.05h1.203zm-1.855%204.724c.1.56-.05%201.017-.3%201.474-.251.457-.552.812-1.003%201.067a2.673%202.673%200%2001-1.404.405c-.502%200-.953-.152-1.404-.405a2.923%202.923%200%2001-1.003-1.067c-.251-.457-.351-.966-.351-1.474%200-.559.1-1.066.351-1.473a2.923%202.923%200%20011.003-1.067%202.5%202.5%200%20011.353-.406c.502%200%20.953.152%201.405.406.4.254.752.61%201.002%201.067.251.457.351.914.351%201.473zm10.629-4.369c.502.255.953.712%201.354%201.321.352.61.502%201.372.502%202.236v5.13c0%20.204-.101.305-.301.305h-1.454c-.2%200-.301-.101-.301-.305v-5.13c0-.356-.05-.712-.251-1.016a2.691%202.691%200%2000-.752-.762c-.351-.203-.651-.305-1.053-.305-.301%200-.651.102-.952.254-.351.152-.602.406-.802.762a2.379%202.379%200%2000-.301%201.168v5.03c0%20.101%200%20.203-.1.253l-.006.003c-.098.05-.197.1-.295.1h-1.354c-.2%200-.301-.102-.301-.305v-8.79c0-.202.101-.304.301-.304h1.003c.074%200%20.12.027.18.063l.07.039c.05.05.1.15.149.25l.002.003.1%201.067a3.433%203.433%200%20011.304-1.117c.501-.254%201.053-.356%201.604-.356.552%200%201.103.102%201.654.406zm12.183%208.79c0-.102-.05-.152-.1-.203l-3.961-4.979%203.359-3.505c.05-.05.05-.102.05-.203%200-.102-.05-.152-.1-.204a.38.38%200%2000-.25-.1h-1.555c-.1%200-.2%200-.25.05-.049%200-.144.095-.196.147l-.005.005-3.359%203.607v-6.198c0-.203-.101-.304-.301-.304h-1.504c-.201%200-.301.101-.301.304v11.583c0%20.203.1.305.301.305h1.554c.201%200%20.301-.102.301-.305v-2.845l.902-.915%202.909%203.81.2.204c.05.05.1.05.2.05h1.805c.101%200%20.151-.05.201-.101.05-.05.1-.101.1-.203z%22%20fill%3D%22%23fff%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E" });
 
-const SubMenu = ({ listItems, subMenuTitle }) => hAsync("div", { class: 'sub-menu' },
+const AnalyticsDataAttributes = ({ action, category, label }) => ({
+  'data-analytics-action': action,
+  'data-analytics-category': category,
+  'data-analytics-label': label
+});
+
+const AnchorList = ({ listItems, analyticsAction }) => listItems.map(item => hAsync("li", null,
+  hAsync("a", Object.assign({}, AnalyticsDataAttributes({ action: analyticsAction, label: item.analyticsLabel || item.label }), { href: item.value }), item.label)));
+
+const SubMenu = (analyticsAction) => ({ listItems, subMenuTitle }) => hAsync("div", { class: 'sub-menu' },
   hAsync("div", { class: 'sub-menu-inner' },
     hAsync("strong", { class: 'sub-menu-title' }, subMenuTitle),
-    hAsync("ul", { class: 'sub-menu-list' }, listItems.map(item => hAsync("li", null,
-      hAsync("a", { href: item.value }, item.label))))));
+    hAsync("ul", { class: 'sub-menu-list' },
+      hAsync(AnchorList, { listItems: listItems, analyticsAction: analyticsAction }))));
 
 const cityListItems = [
   {
@@ -5677,112 +5702,97 @@ const industryListItems = [
     value: '/werken-in-de-sales'
   }
 ];
+const jobsListItems = [
+  {
+    label: 'Zoeken',
+    value: "/vacature/zoeken",
+    analyticsLabel: 'Vacatures'
+  },
+  {
+    label: 'Zoekopdrachten',
+    value: "/vacature/zoeken/zoekopdrachten-beheren"
+  },
+  {
+    label: 'Favorieten',
+    value: "/vacature/zoeken/favorieten"
+  }
+];
+const JobSeekerSubMenu = SubMenu('ClickOnHeaderWerkZoekendenLink');
 const DropdownContainerJobs = () => hAsync("div", { class: "dropdown-container" },
   hAsync("div", { class: "container" },
     hAsync("ul", { class: 'dropdown-list' },
-      hAsync("li", null,
-        hAsync("a", { href: "/vacature/zoeken" }, "Zoeken")),
-      hAsync("li", null,
-        hAsync("a", { href: "/vacature/zoeken/zoekopdrachten-beheren" }, "Zoekopdrachten")),
-      hAsync("li", null,
-        hAsync("a", { href: "/vacature/zoeken/favorieten" }, "Favorieten")),
+      hAsync(AnchorList, { listItems: jobsListItems, analyticsAction: 'ClickOnHeaderWerkZoekendenLink' }),
       hAsync("li", { class: 'sub-menu-container' },
         hAsync("button", { class: 'sub-menu-link' }, "Per branche"),
-        hAsync(SubMenu, { listItems: industryListItems, subMenuTitle: 'Per branche' })),
+        hAsync(JobSeekerSubMenu, { listItems: industryListItems, subMenuTitle: 'Per branche' })),
       hAsync("li", { class: 'sub-menu-container' },
         hAsync("button", { class: 'sub-menu-link' }, "Per plaats"),
-        hAsync(SubMenu, { listItems: cityListItems, subMenuTitle: 'Per plaats' })),
+        hAsync(JobSeekerSubMenu, { listItems: cityListItems, subMenuTitle: 'Per plaats' })),
       hAsync("li", { class: 'dropdown-list-expander dropdown-list-expander--jobs' }))));
 
+const careerListItems = [
+  {
+    label: 'Carrièretips',
+    value: '/carriere'
+  },
+  {
+    label: 'Actueel',
+    value: '/carriere/actueel'
+  },
+  {
+    label: 'Motivatiebrief',
+    value: '/carriere/motivatiebrief'
+  },
+  {
+    label: 'Salaris',
+    value: '/carriere/salaris'
+  },
+  {
+    label: 'Sollicitatiegesprek',
+    value: '/carriere/sollicitatiegesprek'
+  },
+  {
+    label: 'Curriculum Vitae',
+    value: '/carriere/curriculum-vitae'
+  },
+  {
+    label: 'Carrière Ontwikkeling',
+    value: '/carriere/carriere-ontwikkeling'
+  },
+  {
+    label: 'Personal Branding',
+    value: '/carriere/personal-branding'
+  }
+];
 const DropdownContainerCareer$1 = () => hAsync("div", { class: "dropdown-container" },
   hAsync("div", { class: "container" },
     hAsync("ul", { class: 'dropdown-list' },
-      hAsync("li", null,
-        hAsync("a", { href: "/carriere" }, "Carri\u00E8retips")),
-      hAsync("li", null,
-        hAsync("a", { href: "/carriere/actueel" }, "Actueel")),
-      hAsync("li", null,
-        hAsync("a", { href: "/carriere/motivatiebrief" }, "Motivatiebrief")),
-      hAsync("li", null,
-        hAsync("a", { href: "/carriere/salaris" }, "Salaris")),
-      hAsync("li", null,
-        hAsync("a", { href: "/carriere/sollicitatiegesprek" }, "Sollicitatiegesprek")),
-      hAsync("li", null,
-        hAsync("a", { href: "/carriere/curriculum-vitae" }, "Curriculum Vitae")),
-      hAsync("li", null,
-        hAsync("a", { href: "/carriere/carriere-ontwikkeling" }, "Carri\u00E8re Ontwikkeling")),
-      hAsync("li", null,
-        hAsync("a", { href: "/carriere/personal-branding" }, "Personal Branding")))));
+      hAsync(AnchorList, { listItems: careerListItems, analyticsAction: 'ClickOnHeaderWerkZoekendenLink' }))));
 
 const DropdownContainerCareer = () => hAsync("div", { class: "dropdown-container" },
   hAsync("div", { class: "container" },
     hAsync("ul", { class: 'dropdown-list' },
       hAsync("li", null,
-        hAsync("a", { href: "/profiel/overzicht" }, "Jouw profiel")),
+        hAsync("a", Object.assign({}, AnalyticsDataAttributes({ action: 'ClickOnHeaderAccountLink', label: "Jouw profiel" }), { href: "/profiel/overzicht" }), "Jouw profiel")),
       hAsync("li", null,
-        hAsync("a", { href: "/account/e-mailinstellingen" }, "E-mailinstellingen")),
+        hAsync("a", Object.assign({}, AnalyticsDataAttributes({ action: 'ClickOnHeaderAccountLink', label: "JouwEmailInstellingen" }), { href: "/account/e-mailinstellingen" }), "E-mailinstellingen")),
       hAsync("li", null,
-        hAsync("a", { href: "/account" }, "Jouw account")),
+        hAsync("a", Object.assign({}, AnalyticsDataAttributes({ action: 'ClickOnHeaderAccountLink', label: "JouwAccount" }), { href: "/account" }), "Jouw account")),
       hAsync("li", null,
-        hAsync("a", { href: "/account/uitloggen" }, "Uitloggen")))));
+        hAsync("a", Object.assign({}, AnalyticsDataAttributes({ action: 'ClickOnHeaderAccountLink', label: "Uitloggen" }), { href: "/account/uitloggen" }), "Uitloggen")))));
 
 const LogoInverse = () => hAsync("img", { alt: "Nationale Vacaturebank", src: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjI0IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNMTIuODIxIDBhMTEuOTc0IDExLjk3NCAwIDAgMSA4LjQ2NiAzLjUyQTEyLjAxNyAxMi4wMTcgMCAwIDEgMjQuOCAxMmMtLjA0MiA2LjYxNS01LjM3NSAxMi0xMi4wMjEgMTJDNi4xNzYgMjQgLjggMTguNjU3LjggMTJTNi4xNzYgMCAxMi44MjEgMFpNOC4zMzQgMTkuODAyYzEuODItMS44NjUgMi44MzYtNC4zMjUgMi44MzYtNi45MTFhOS40NTQgOS40NTQgMCAwIDAtMi44MzYtNi44N2MtLjQ2NS0uNDY2LTEuMTg1LS41MDgtMS42NS0uMDQyLS40NjYuNDY2LS41MDkgMS4xODctLjA0MyAxLjY1NCAxLjM5NyAxLjQgMi4yIDMuMjY1IDIuMiA1LjI1OCAwIDEuOTktLjc5MiAzLjg5Ny0yLjIgNS4zYTEuMTkzIDEuMTkzIDAgMCAwIC4wNDIgMS42NTQgMS4xODggMS4xODggMCAwIDAgMS42NTEtLjA0M1pNMTAuNDkzIDQuNzVjMC0xLjI3MiAxLjA1OC0yLjMzMiAyLjMyOC0yLjMzMiAxLjI3IDAgMi4zMjggMS4wNiAyLjMyOCAyLjMzMiAwIDEuMjcyLTEuMDU4IDIuMzMyLTIuMzI4IDIuMzMyYTIuMjk3IDIuMjk3IDAgMCAxLTIuMzI5LTIuMzMyWm03LjgzMSAxNS40MzVjLjQyMy0uMDg0Ljc2Mi0uNDI0Ljg5LS44NDhhMS4xMyAxLjEzIDAgMCAwLS4zNC0xLjE0NCA3LjM4MSA3LjM4MSAwIDAgMS0yLjE1OC01LjI1OSA3LjM4IDcuMzggMCAwIDEgMi4xNTgtNS4yNThjLjI5OS0uMy40MjYtLjczLjM0LTEuMTQ1YTEuMjIgMS4yMiAwIDAgMC0uODQ4LS44NDhjLS40MjMtLjEyNy0uODQ2IDAtMS4xNDIuMjk3YTkuNzc2IDkuNzc2IDAgMCAwLS4wNDMgMTMuNzgxYy4yNTQuMzQuNzIuNTEgMS4xNDMuNDI0WiIgZmlsbD0iI0ZGOTkyMSIvPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNDcuOSAxLjM4MmMwIC4yNDMuMTIuMzY1LjM2LjM2NWgxLjAwM2MuMTIgMCAuMi0uMDQuMjQtLjA4LjA4MS0uMDQyLjA4MS0uMTIzLjA4MS0uMjQ0Vi4zNjZjMC0uMjQ0LS4xMi0uMzY2LS4zMi0uMzY2SDQ4LjI2Yy0uMjQgMC0uMzYuMTIyLS4zNi4zNjZ2MS4wMTZabTEuNTIzIDEuMzQxYy4wNCAwIC4xMiAwIC4xNi4wNDFoLjAwMWMuMDQuMDQxLjA4LjA4Mi4wOC4xNjN2Ny4xNTJjMCAuMTYzLS4wOC4yNDQtLjI0LjI0NEg0OC4xOGMtLjE2IDAtLjI0MS0uMDgxLS4yNDEtLjI0NFY0LjMxaC0yLjQ0N3YzLjY5OGMwIC4yODQuMDQuNDg4LjEyLjY1LjA4MS4xNjIuMjQxLjI0NC40ODIuMjQ0aC4ybC4wOC4wMjRjLjA3Ny4wMi4xMy4wMzYuMTYxLjA5OC4wNC4wNC4wNC4xMjIuMDQuMjAzdi44NTNjMCAuMjAzLS4xNi4yODUtLjQ0LjI4NS0uNDQyIDAtLjg0My0uMTIyLTEuMjA0LS4yODUtLjM2MS0uMjAzLS42NDItLjQ0Ny0uODQyLS43NzItLjItLjM2Ni0uMjgxLS43MzItLjI4MS0xLjE3OFY0LjI2OGgtLjY4MmEuMy4zIDAgMCAxLS4xNi0uMDgyLjMxMy4zMTMgMCAwIDEtLjA4LS4yMDNWMi45NjdjMC0uMDguMDQtLjE2Mi4wOC0uMjAzLjA0LS4wNC4wOC0uMDgxLjE2LS4wODFoLjY4MlYxLjUwNGMwLS4xMjIgMC0uMTYyLjA0LS4yMDMuMDIzLS4wMjMuMDU4LS4wMzMuMDk5LS4wNDUuMDMxLS4wMDkuMDY2LS4wMTkuMTAxLS4wMzZsMS4yMDQtLjM2NmguMDhjLjA0IDAgLjA4IDAgLjEyLjA4MS4wNC4wODEuMDQuMTIyLjA0LjIwM3YxLjU4NWgzLjkzMVptLTcuODIgMGMuMTYgMCAuMjQuMDgxLjI0LjI0NHY3LjExMmMwIC4xNjItLjA4LjI0NC0uMjQuMjQ0SDQwLjU2Yy0uMDggMC0uMTYtLjA0MS0uMjQxLS4xMjJhLjM3MS4zNzEgMCAwIDEtLjEyLS4yODVWOS40M2EzLjIzIDMuMjMgMCAwIDEtMi4zMjYuOTc1IDMuNjg4IDMuNjg4IDAgMCAxLTEuODQ2LS40ODhjLS42MDItLjMyNS0xLjA0My0uNzcyLTEuNDA0LTEuMzgxLS4zNi0uNjEtLjUyMS0xLjI2LS41MjEtMS45OTIgMC0uNjkuMi0xLjM0LjUyMi0xLjk1LjMyLS42MS44MDEtMS4wNTcgMS4zNjMtMS40MjMuNTYyLS4zNjYgMS4yMDMtLjUyOCAxLjg4NS0uNTI4LjUyMiAwIC45NjMuMDggMS4zNjQuMjQ0LjM2MS4xNjIuNzIyLjQ0NyAxLjA0My44MTJsLjEyLS43MzEuMDI3LS4wODhjLjAxNy0uMDU4LjAyNS0uMDg2LjA1My0uMTE1LjA0LS4wNDEuMDgtLjA0MS4xNjEtLjA0MWguOTYzWm0tMTAuMDY5LjI4NWMuNDAxLjIwMi43NjIuNTY4IDEuMDQzIDEuMDU2LjI4MS40ODguNDAxIDEuMDk3LjQwMSAxLjc4OHY0LjEwNWMwIC4xNjItLjA4LjI0NC0uMjQuMjQ0aC0xLjE2NGMtLjE2IDAtLjI0LS4wODItLjI0LS4yNDRWNS44NTJjMC0uMjg0LS4wNC0uNTY5LS4yLS44MTNhMi4xNzEgMi4xNzEgMCAwIDAtLjYwMi0uNjFjLS4yODEtLjE2Mi0uNTIyLS4yNDMtLjg0My0uMjQzLS4yNCAwLS41MjEuMDgxLS43NjIuMjAzLS4yOC4xMjItLjQ4MS4zMjUtLjY0Mi42MS0uMTYuMjg0LS4yNC42MS0uMjQuOTM1djQuMDIzYzAgLjA4MSAwIC4xNjItLjA4LjIwM2EuNTU4LjU1OCAwIDAgMS0uMjQxLjA4MUgyNi42NGMtLjE2IDAtLjI0LS4wODEtLjI0LS4yNDNWMi45NjdjMC0uMTYzLjA4LS4yNDQuMjQtLjI0NGguODAyYy4wOCAwIC4yLjA0LjI0LjA4MS4wNC4wNC4wODEuMTIyLjEyMS4yMDRsLjA4Ljg1M2MuMjgxLS40MDcuNjQyLS42OTEgMS4wNDMtLjg5NGEyLjgyNiAyLjgyNiAwIDAgMSAxLjI4NC0uMjg1Yy40NDEgMCAuODgyLjA4MiAxLjMyMy4zMjZabTguNTg0IDMuNDk1Yy4wOC40NDctLjA0LjgxMy0uMjQgMS4xNzgtLjIuMzY2LS40NDEuNjUtLjgwMy44NTRhMi4xMzUgMi4xMzUgMCAwIDEtMS4xMjMuMzI1Yy0uNCAwLS43NjItLjEyMi0xLjEyMy0uMzI1YTIuMzM2IDIuMzM2IDAgMCAxLS44MDItLjg1NGMtLjItLjM2NS0uMjgtLjc3Mi0uMjgtMS4xNzggMC0uNDQ3LjA4LS44NTQuMjgtMS4xNzkuMi0uMzY1LjQ4MS0uNjUuODAyLS44NTNhMS45OTggMS45OTggMCAwIDEgMS4wODMtLjMyNWMuNDAxIDAgLjc2Mi4xMjIgMS4xMjMuMzI1LjMyMS4yMDMuNjAyLjQ4OC44MDMuODUzLjIuMzY2LjI4LjczMi4yOCAxLjE3OVpNNTYuODA0IDMuMTdjLjYwMi4zMjUgMS4wNDMuODEzIDEuNDA0IDEuNDIzLjM2MS42MS41MjEgMS4yNi41MjEgMS45NSAwIC42OTEtLjE2IDEuMzQyLS41MjEgMS45NTFhMy45NSAzLjk1IDAgMCAxLTEuNDA0IDEuNDIyIDMuNjIzIDMuNjIzIDAgMCAxLTEuOTI1LjUyOSAzLjYyMyAzLjYyMyAwIDAgMS0xLjkyNS0uNTI5IDMuOTUgMy45NSAwIDAgMS0xLjQwNC0xLjQyMiAzLjc0NiAzLjc0NiAwIDAgMS0uNTIyLTEuOTVjMC0uNjkyLjE2LTEuMzQyLjUyMi0xLjk1MWEzLjk1IDMuOTUgMCAwIDEgMS40MDQtMS40MjMgMy42MjIgMy42MjIgMCAwIDEgMS45MjUtLjUyOGMuNjgyIDAgMS4zMjMuMTYyIDEuOTI1LjUyOFptLjI4IDMuMjkyYzAgLjQ0Ny0uMDguODU0LS4yOCAxLjIyLS4yLjM2NS0uNDQyLjY1LS43NjIuODUzYTIuMTM1IDIuMTM1IDAgMCAxLTEuMTI0LjMyNSAyLjEzNiAyLjEzNiAwIDAgMS0xLjEyMy0uMzI1IDEuOTU2IDEuOTU2IDAgMCAxLS43NjEtLjg1NGMtLjIwMS0uMzY1LS4yODItLjczMS0uMjgyLTEuMTc4IDAtLjQwNi4wOC0uODEzLjI4Mi0xLjE3OC4yLS4zNjYuNDQtLjYxLjc2MS0uODU0YTIuMTM2IDIuMTM2IDAgMCAxIDEuMTIzLS4zMjVjLjM5OC0uMDA0Ljc4OC4xMDkgMS4xMjQuMzI1LjMyLjIwMy42MDIuNDg4Ljc2Mi44NTQuMi4zNjUuMjguNzMxLjI4IDEuMTM3Wm04LjEwMy0zLjQ1NGMuNDAxLjIwMi43NjIuNTY4IDEuMDgzIDEuMDU2LjI4LjQ4OC40IDEuMDk3LjQgMS43ODh2NC4xMDVjMCAuMTYyLS4wOC4yNDQtLjI0LjI0NGgtMS4xNjNjLS4xNiAwLS4yNC0uMDgyLS4yNC0uMjQ0VjUuODUyYzAtLjI4NC0uMDQtLjU2OS0uMjAxLS44MTNhMi4xNyAyLjE3IDAgMCAwLS42MDItLjYxYy0uMjgtLjE2Mi0uNTIxLS4yNDMtLjg0Mi0uMjQzLS4yNCAwLS41MjIuMDgxLS43NjIuMjAzLS4yOC4xMjItLjQ4Mi4zMjUtLjY0Mi42MS0uMTYuMjg0LS4yNC42MS0uMjQuOTM1djQuMDIzYzAgLjA4MSAwIC4xNjItLjA4MS4yMDNhLjU1OC41NTggMCAwIDEtLjI0LjA4MWgtMS4wODRjLS4xNiAwLS4yNC0uMDgxLS4yNC0uMjQzVjIuOTY3YzAtLjE2My4wOC0uMjQ0LjI0LS4yNDRoLjgwM2EuMjYuMjYgMCAwIDEgLjE0Mi4wNDlsLjA1OS4wMzJjLjAzOC4wNC4wNzcuMTE4LjExNy4xOThsLjAwMy4wMDYuMDguODUzYTIuNzUgMi43NSAwIDAgMSAxLjA0My0uODk0IDIuODI1IDIuODI1IDAgMCAxIDEuMjgzLS4yODVjLjQ0MSAwIC44ODMuMDgyIDEuMzI0LjMyNlptMTAuMzA4LS4wNDFjMC0uMTYzLS4wOC0uMjQ0LS4yNC0uMjQ0aC0uOTYzYy0uMDggMC0uMTIgMC0uMTYuMDRsLS4wMDEuMDAxYy0uMDQuMDQtLjA4LjA4MS0uMDguMjAzbC0uMTIuNzMxYy0uMzIxLS4zNjUtLjY4Mi0uNjUtMS4wNDMtLjgxMmEzLjU1MiAzLjU1MiAwIDAgMC0xLjM2NC0uMjQ0Yy0uNjgyIDAtMS4zMjQuMTYyLTEuODg1LjUyOC0uNTYyLjM2Ni0xLjA0My44MTMtMS4zNjQgMS40MjMtLjMyLjYxLS41MjEgMS4yNi0uNTIxIDEuOTUgMCAuNzMyLjE2IDEuMzgyLjUyMSAxLjk5Mi4zNjEuNjEuODAyIDEuMDU2IDEuNDA0IDEuMzgxLjU2My4zMjIgMS4xOTkuNDkgMS44NDUuNDg4YTMuMjMgMy4yMyAwIDAgMCAyLjMyNy0uOTc1di40ODdhLjM3MS4zNzEgMCAwIDAgLjEyLjI4NWMuMDguMDgxLjE2LjEyMi4yNC4xMjJoMS4wNDNjLjE2MSAwIC4yNC0uMDgyLjI0LS4yNDRWMi45NjdaTTczLjUyOSA3LjY4Yy4yLS4zNjUuMzIxLS43MzEuMjQtMS4xNzggMC0uNDQ3LS4wOC0uODEzLS4yOC0xLjE3OS0uMi0uMzY1LS40ODEtLjY1LS44MDItLjg1My0uMzYxLS4yMDMtLjcyMi0uMzI1LTEuMTIzLS4zMjUtLjQwMiAwLS43NjMuMTIyLTEuMDgzLjMyNWEyLjMzMiAyLjMzMiAwIDAgMC0uODAyLjg1M2MtLjIwMS4zMjUtLjI4MS43MzItLjI4MSAxLjE3OSAwIC40MDYuMDguODEzLjI4IDEuMTc4LjIwMS4zNjYuNDgyLjY1LjgwMy44NTQuMzYuMjAzLjcyMi4zMjUgMS4xMjMuMzI1YTIuMTM2IDIuMTM2IDAgMCAwIDEuMTIzLS4zMjVjLjM2LS4yMDQuNjAxLS40ODguODAyLS44NTRaTTc4Ljc4NC41N2MtLjA4LS4wNDEtLjEyLS4wNDEtLjIwMS0uMDQxSDc3LjM4Yy0uMDggMC0uMTIuMDQtLjE2LjA4Vi42MWEuMzEuMzEgMCAwIDAtLjA4LjIwNHY5LjIyNWMwIC4xNjMuMDguMjQ0LjI0LjI0NGgxLjIwM2EuMzA1LjMwNSAwIDAgMCAuMi0uMDgxLjMxMy4zMTMgMCAwIDAgLjA4LS4yMDRWLjc3MmMwLS4wNi0uMDItLjA5OC0uMDQ4LS4xNDVhMS4wNTEgMS4wNTEgMCAwIDEtLjAzMS0uMDU4Wm04LjI2MiAzLjgyYy4zNjEuNTcuNTYyIDEuMzAxLjUyMiAyLjE5NSAwIC4xNjItLjA0LjMyNS0uMDguNDA2LS4wNC4wODItLjA4LjE2My0uMTYuMTYzLS4wODEuMDQtLjIwMS4wNC0uMzYyLjA0aC01LjIxNGMuMDguMzY2LjI0LjY1LjQ0MS45MzUuMi4yNDQuNDQyLjQ0Ny43NjIuNjEuMzIxLjEyMi42NDIuMjAzIDEuMDAzLjIwMy4yOCAwIC41MjItLjA0LjcyMi0uMDgxYTUuMDIgNS4wMiAwIDAgMSAuMTgyLS4wNjljLjExOC0uMDQzLjIxOC0uMDguMy0uMTM0LjA0NC0uMDMuMDk1LS4wNjEuMTUtLjA5NC4wOS0uMDU0LjE5LS4xMTQuMjktLjE5bC4xNjEtLjEyM2MuMDQtLjA0LjEyLS4wNC4xNi0uMDQuMDQgMCAuMDguMDQuMTIuMDhsLjYwMi43MzJjLjA0LjA0LjA4LjEyMi4wOC4xNjMgMCAuMDQgMCAuMTIyLS4wOC4xNjMtLjQuNDA2LS44NDIuNjktMS4yODMuODUzLS40NDEuMTYyLS45MjIuMjQ0LTEuNDA0LjI0NGEzLjQ4OCAzLjQ4OCAwIDAgMS0xLjg4NS0uNTI5IDMuOTUxIDMuOTUxIDAgMCAxLTEuNDA0LTEuNDIyIDMuNzQ2IDMuNzQ2IDAgMCAxLS41MjEtMS45NWMwLS42OTIuMTYtMS4zNDIuNDgtMS45NTEuMzIyLS42MS44MDMtMS4wNTcgMS4zNjUtMS40MjMuNTYxLS4zNjYgMS4yMDMtLjUyOCAxLjkyNS0uNTI4LjYwMSAwIDEuMTYzLjE2MiAxLjcyNS40NDdhMy42MDUgMy42MDUgMCAwIDEgMS40MDMgMS4zWk04MS44MzMgNS43M3YtLjA0Yy4xMi0uMjg1LjI0LS41Ny40ODEtLjgxMy4yLS4yNDQuNDQxLS40NDcuNzIyLS41Ny4yOC0uMTYyLjU2Mi0uMjAyLjg4Mi0uMjAyLjQ4MSAwIC44ODMuMTYyIDEuMjQ0LjQ0Ny4zNi4yODQuNjQyLjY5LjgwMiAxLjE3OGgtNC4xMzFabS00OC42MTQgOS42MzJjLjEyIDAgLjE2LjA0LjEyLjEyMiAwIC4wNCAwIC4xMjItLjA0LjIwM2wtMi44NDggNi45OWEuMzAyLjMwMiAwIDAgMS0uMjguMjA0aC0uNjQyYy0uMTIgMC0uMi0uMDQxLS4yOC0uMjA0bC0yLjgwOC02Ljk1Yy0uMDQtLjA0LS4wNC0uMTIxLS4wNC0uMTYyIDAtLjA4LjAzOS0uMTIuMDc4LS4xNjFsLjAwMi0uMDAyYy4wOC0uMDQuMTItLjA0LjItLjA0aDEuMjAzYy4xMiAwIC4yNDEuMDgxLjI4MS4yNDRsMS43MjUgNC44MzYgMS43MjUtNC44NzdjLjA0LS4xMjIuMTItLjIwMy4yOC0uMjAzaDEuMzI0Wm04LjA2My4yNDRjMC0uMTYzLS4wOC0uMjQ0LS4yNDEtLjI0NGgtLjk2M2MtLjA4IDAtLjEyIDAtLjE2LjA0LS4wMjkuMDMtLjAzNy4wNTgtLjA1NC4xMTZhMi41MjYgMi41MjYgMCAwIDEtLjAyNi4wODhsLS4xMi43MzFjLS4zMjItLjM2Ni0uNjgzLS42NS0xLjA0NC0uODEzLS4zNi0uMTYyLS44NDItLjI0NC0xLjM2My0uMjQ0LS42ODIgMC0xLjMyNC4xNjMtMS44ODYuNTI5LS41Ni4zNjYtMS4wNDIuODEzLTEuMzYzIDEuNDIyLS4zMjEuNjEtLjUyMSAxLjI2LS41MjEgMS45NSAwIC43MzIuMTYgMS4zODMuNTIgMS45OTIuMzYyLjYxLjgwMyAxLjA1NyAxLjQwNSAxLjM4Mi41NjMuMzIyIDEuMTk4LjQ5IDEuODQ1LjQ4OGEzLjIzIDMuMjMgMCAwIDAgMi4zMjYtLjk3NnYuNDg4YS4zNzIuMzcyIDAgMCAwIC4xMi4yODVjLjA4LjA4LjE2MS4xMjEuMjQuMTIxaDEuMDQ0Yy4xNiAwIC4yNC0uMDguMjQtLjI0M3YtNy4xMTJabS0xLjk2NiA0LjcxNGMuMi0uMzY2LjMyLS43MzIuMjQtMS4xNzkgMC0uNDQ3LS4wOC0uODEzLS4yOC0xLjE3OS0uMi0uMzY2LS40ODItLjY1LS44MDItLjg1My0uMzYxLS4yMDMtLjcyMi0uMzI1LTEuMTIzLS4zMjVzLS43NjIuMTIyLTEuMDg0LjMyNWMtLjMyLjIwMy0uNjAxLjQ4Ny0uODAxLjg1My0uMjAxLjMyNi0uMjgyLjczMi0uMjgyIDEuMTc5IDAgLjQwNi4wOC44MTMuMjgyIDEuMTc5LjIuMzY2LjQ4LjY1LjgwMS44NTMuMzYxLjIwMy43MjIuMzI1IDEuMTI0LjMyNWEyLjEzNiAyLjEzNiAwIDAgMCAxLjEyMy0uMzI1Yy4zNi0uMjAzLjYwMS0uNDg3LjgwMi0uODUzWm05LjU4NiAxLjM0Mi0uNjQyLS43NzNjLS4wNC0uMDQtLjA4LS4wOC0uMTItLjA4LS4wNCAwLS4xMiAwLS4xNi4wNC0uNTIyLjQwNi0xLjA4NC42MS0xLjYwNS42MS0uNDAxIDAtLjc2Mi0uMDgyLTEuMTIzLS4zMjZhMi4zMzMgMi4zMzMgMCAwIDEtLjgwMy0uODUzYy0uMi0uMzY2LS4yOC0uNzcyLS4yOC0xLjIyLjAwMS0uNDI3LjExMi0uODQ3LjMyLTEuMjE5LjIwMS0uMzY2LjQ4Mi0uNjUuODAzLS44NTNhMi4wMDIgMi4wMDIgMCAwIDEgMS4wODMtLjMyNWMuMjg1IDAgLjU2OC4wNDIuODQyLjEyMi4yODEuMDguNTIyLjI0NC44MDIuNDQ3LjA0LjA0LjA4LjA0LjEyLjA0LjA4MSAwIC4xMjEtLjA0LjEyMS0uMDhsLjYwMi0uOTM2Yy4wNC0uMDQuMDQtLjA4LjA0LS4xMjJhLjMxLjMxIDAgMCAwLS4wOC0uMTYyYy0uMzYxLS4yODQtLjcyMi0uNTI4LTEuMTI0LS42OTFhMi44NDUgMi44NDUgMCAwIDAtMS4zMjMtLjIwM2MtLjY4MiAwLTEuMzI0LjE2My0xLjg4NS41MjgtLjYwMi4zMjUtMS4wNDMuODEzLTEuNDA0IDEuNDIzYTMuNzQ1IDMuNzQ1IDAgMCAwLS41MjEgMS45NWMwIC43MzIuMTYgMS4zODIuNTIgMS45OTJhMy45NSAzLjk1IDAgMCAwIDEuNDA1IDEuNDIyYy42MDEuMzI1IDEuMjQzLjUyOSAxLjkyNS41MjkuNDU2LjAwMy45MDgtLjA5NCAxLjMyNC0uMjg1LjQ0LS4xNjMuODAyLS40MDcgMS4xMjMtLjY1LjA4LS4wODEuMTItLjEyMi4xMi0uMTYzIDAtLjA0LS4wNC0uMTIyLS4wOC0uMTYyWm04LjEwMi02LjNjLjE2IDAgLjI0MS4wODEuMjQxLjI0NHY3LjExMmMwIC4xNjItLjA4LjI0My0uMjQuMjQzSDU1Ljk2Yy0uMDggMC0uMTYtLjA0LS4yNC0uMTIxYS4zNzIuMzcyIDAgMCAxLS4xMi0uMjg1di0uNDg4YTMuMjMyIDMuMjMyIDAgMCAxLTIuMzI2Ljk3NSAzLjY4OSAzLjY4OSAwIDAgMS0xLjg0Ni0uNDg3Yy0uNjAyLS4zMjUtMS4wNDMtLjc3Mi0xLjQwNC0xLjM4MS0uMzYtLjYxLS41MjEtMS4yNi0uNTIxLTEuOTkyIDAtLjY5LjItMS4zNDEuNTIxLTEuOTUuMzItLjYxLjgwMi0xLjA1NyAxLjM2NC0xLjQyMy41NjEtLjM2NiAxLjIwMy0uNTI5IDEuODg1LS41MjkuNTIxIDAgLjk2My4wODIgMS4zNjQuMjQ0LjM2LjE2My43MjIuNDQ3IDEuMDQzLjgxM2wuMTItLjczMS4wMjctLjA4OGMuMDE2LS4wNTguMDI1LS4wODcuMDUzLS4xMTYuMDQtLjA0LjA4LS4wNC4xNi0uMDRoLjk2M1pNNTUuNTIgMTkuMTRjLjA4LjQ0Ny0uMDQuODEzLS4yNCAxLjE3OS0uMjAxLjM2Ni0uNDQyLjY1LS44MDMuODUzLS4zMzcuMjExLS43MjYuMzI0LTEuMTIzLjMyNS0uNDAxIDAtLjc2Mi0uMTIyLTEuMTIzLS4zMjVhMi4zMzcgMi4zMzcgMCAwIDEtLjgwMi0uODUzYy0uMi0uMzY2LS4yODEtLjc3My0uMjgxLTEuMTc5IDAtLjQ0Ny4wOC0uODUzLjI4LTEuMTc5LjIwMS0uMzY2LjQ4Mi0uNjUuODAzLS44NTNhMi4wMDIgMi4wMDIgMCAwIDEgMS4wODMtLjMyNWMuNCAwIC43NjIuMTIyIDEuMTIzLjMyNS4zMi4yMDMuNjAyLjQ4Ny44MDIuODUzLjIwMS4zNjYuMjguNzMyLjI4IDEuMTc5Wm0xNC4wMzktMy43NzljLjIgMCAuMjguMDgyLjEyLjI0NHY3LjExMmMwIC4xNjMtLjA4LjI0NC0uMjQuMjQ0aC0uNzYzYy0uMDU4IDAtLjA5Ni0uMDIyLS4xNDMtLjA1bC0uMDU3LS4wMzFhLjIyNC4yMjQgMCAwIDEtLjEyLS4yMDRsLS4xNi0uNzMxYy0uNDgyLjczMS0xLjIwNCAxLjA5Ny0yLjE2NyAxLjA5Ny0uNDgxIDAtLjkyMi0uMTIyLTEuMzY0LS4zMjVhMi43MTcgMi43MTcgMCAwIDEtMS4wODMtMS4wNTZjLS4yOC0uNDg4LS40NC0xLjA5OC0uNDQtMS44M3YtMi44ODVoLTIuMzI4djMuNjk4YzAgLjI4NS4wNDEuNDg4LjEyLjY1LjA4MS4xNjMuMjQyLjI0NS40ODIuMjQ1aC4ybC4wOC4wMjRjLjA3OC4wMi4xMzEuMDM2LjE2Mi4wOTguMDQuMDQuMDQuMTIxLjA0LjIwMnYuODU0YzAgLjIwMy0uMTYuMjg1LS40NDEuMjg1LS40NDIgMC0uODQzLS4xMjItMS4yMDQtLjI4NS0uMzYtLjIwMy0uNjQyLS40MDYtLjg0Mi0uNzcyLS4yLS4zNjYtLjI4MS0uNzMyLS4yODEtMS4xNzl2LTMuODZoLS42ODJhLjMwNS4zMDUgMCAwIDEtLjE2LS4wODIuMzEzLjMxMyAwIDAgMS0uMDgtLjIwM3YtMS4wMTZjMC0uMDgyLjA0LS4xNjIuMDgtLjIwM3YtLjAwMWMuMDQtLjA0LjA4LS4wOC4xNi0uMDhoLjY4MnYtMS4xOGMwLS4xMjEgMC0uMTYyLjA0LS4yMDIuMDIzLS4wMjMuMDU4LS4wMzMuMDk5LS4wNDVhLjU1NC41NTQgMCAwIDAgLjEwMi0uMDM2bDEuMjAzLS4zNjZoLjA4Yy4wNCAwIC4wOC4wNC4xMi4wOC4wNC4wODIuMDQuMTIzLjA0LjIwNHYxLjU4NWgzLjc3MWMuMTYgMCAuMjQuMDgyLjI0LjI0NHY0LjE0NWMuMDQuMzI1LjA4LjYxLjI0Mi44NTQuMTYuMjQ0LjM2LjQ0Ny42MDEuNTY5LjI4LjEyMi41NjEuMjAzLjg4Mi4yMDNhMS41NDEgMS41NDEgMCAwIDAgMS4yODQtLjc3MmMuMi0uMjg1LjI4LS42MS4yOC0xLjA1N3YtMy45NDJjMC0uMTYyLjA4MS0uMjQ0LjI0MS0uMjQ0aDEuMjA0Wm03LjE4LjczMWMtLjItLjIwMy0uNDgxLS4zNjUtLjg0Mi0uNTY5YTIuNTU5IDIuNTU5IDAgMCAwLTEuMTIzLS4yODRjLS4zNjEgMC0uNzIyLjA4Mi0xLjAwMy4yODQtLjMyMS4xNjMtLjU2Mi40MDctLjc2Mi43MzJsLS4xMi0uNjVhMS42MjMgMS42MjMgMCAwIDEtLjAyNC0uMDgyYy0uMDIxLS4wNzctLjAzNi0uMTMxLS4wOTctLjE2Mi0uMDQtLjA0LS4xMi0uMDQtLjI0LS4wNGgtLjg0M2MtLjE2IDAtLjI0LjA4LS4yNC4yNDN2Ny4wM2MwIC4xNjQuMDguMjQ1LjI0LjI0NWgxLjIwNGMuMTYgMCAuMjQtLjA4MS4yNC0uMjQ0di00LjA2NGMwLS4zNjYuMDgtLjY5MS4yLS45MzUuMTItLjI0NC4zMjItLjQ0Ny41MjItLjU2OS4yNDEtLjEyMS40NDEtLjIwMy43MjItLjIwMy4yMzMtLjAwMi40NjQuMDM5LjY4Mi4xMjIuMi4wODEuNDAxLjIwMy42MDIuMzI1bC4wNTcuMDMyYy4wNDcuMDI4LjA4NS4wNS4xNDMuMDUuMDggMCAuMTItLjA0MS4xNi0uMDgybC41NjItLjc3MmEuMzEuMzEgMCAwIDAgLjA4LS4xNjNjMC0uMDgxLS4wNC0uMTYyLS4xMi0uMjQ0Wm01Ljg5NS0uNDA2YTMuMTIgMy4xMiAwIDAgMSAxLjM2NCAxLjM0MWMuMzYuNTcuNTYyIDEuMy41NjIgMi4xNTQgMCAuMTYzLS4wNC4zMjUtLjA4LjQwN2EuMzE1LjMxNSAwIDAgMS0uMTYxLjE2MmMtLjA4LjA0LS4yLjA0LS4zNjEuMDRoLTUuMjE1Yy4wOC4zNjYuMjQxLjY1MS40NDIuOTM2LjIuMjQzLjQ0MS40NDcuNzYyLjYxLjMyLjEyMS42NDIuMjAzIDEuMDAzLjIwMy4yOCAwIC41MjEtLjA0MS43MjItLjA4Mi4wNjQtLjAyNi4xMjUtLjA0OC4xODEtLjA2OWExLjM3IDEuMzcgMCAwIDAgLjMtLjEzNGMuMDQ0LS4wMy4wOTQtLjA2LjE0Ny0uMDkyLjA5MS0uMDU1LjE5My0uMTE2LjI5NC0uMTkzbC4xNi0uMTIxYy4wNC0uMDQxLjEyMS0uMDQxLjE2LS4wNDEuMDQgMCAuMDgxLjA0LjEyMS4wOGwuNjAyLjczMmMuMDQuMDQxLjA4LjEyMi4wOC4xNjMgMCAuMDQgMCAuMTIyLS4wOC4xNjMtLjQwMS40MDYtLjg0Mi42OS0xLjI4NC44NTMtLjQ0LjE2My0uOTIyLjI0NC0xLjQwMy4yNDRhMy40ODcgMy40ODcgMCAwIDEtMS44ODYtLjUyOCAzLjk1IDMuOTUgMCAwIDEtMS40MDQtMS40MjMgMy43NDQgMy43NDQgMCAwIDEtLjUyLTEuOTVjMC0uNjkxLjE2LTEuMzQyLjQ4LTEuOTUxLjMyMi0uNjEuODAzLTEuMDU3IDEuMzY0LTEuNDIzLjU2Mi0uMzY2IDEuMjAzLS41MjggMS45MjUtLjUyOC42MDIgMCAxLjE2NC4xNjIgMS43MjUuNDQ3Wm0tMy43NyAyLjY4MnYtLjA0Yy4xMi0uMjg1LjI0LS41Ny40OC0uODEzLjI0MS0uMjQ0LjQ0Mi0uNDQ3LjcyMy0uNTcuMjgtLjE2Mi41NjEtLjIwMy44ODItLjIwMy40ODIgMCAuODgzLjE2MyAxLjI0NC40NDguMzYuMjg0LjY0MS42OS44MDIgMS4xNzhoLTQuMTMyWm0xMi45MTYtMi41NmMuNTIuMzI1IDEuMDQyLjgxMyAxLjMyMyAxLjM4Mi4yOC41NjkuNDQxIDEuMjE5LjQ0MSAxLjk1YTQuMTcgNC4xNyAwIDAgMS0uNDgxIDEuOTkyYy0uMy41OC0uNzYgMS4wNi0xLjMyNCAxLjM4MmEzLjU4NCAzLjU4NCAwIDAgMS0xLjg0NS40ODhjLS40IDAtLjgwMi0uMTIyLTEuMjAzLS4yODVhMy4yMDMgMy4yMDMgMCAwIDEtMS4wODMtLjczMmwtLjEyLjU3YS42NjMuNjYzIDAgMCAxLS4xMi4yNDMuMzA0LjMwNCAwIDAgMS0uMjAxLjA4MmgtMS4wMDNjLS4xNiAwLS4yNC0uMDgyLS4yNC0uMjQ0VjEzLjM3YzAtLjE2My4wOC0uMjQ0LjI0LS4yNDRoMS4yMDNjLjE2IDAgLjI0MS4wOC4yNDEuMjQ0djIuODQ0YTMuMjMyIDMuMjMyIDAgMCAxIDIuMjg2LS45MzVjLjcyMiAwIDEuMzI0LjIwNCAxLjg4Ni41M1ptLjEyIDMuMzMyYzAgLjQ0Ny0uMDguODU0LS4yNCAxLjE3OS0uMi4zNjYtLjQ0MS42NS0uNzYzLjg1My0uMzIuMjAzLS42ODEuMzI1LTEuMTIzLjMyNS0uNCAwLS44MDItLjEyMi0xLjE2My0uMzI1YTIuMTQzIDIuMTQzIDAgMCAxLS44NDItLjg1M2MtLjItLjM2Ni0uMzItLjc3My0uMzItMS4xNzkgMC0uNDQ3LjEyLS44MTMuMzItMS4xNzlhMi4xNCAyLjE0IDAgMCAxIC44NDItLjg1M2MuMzYxLS4yMDMuNzIyLS4zMjUgMS4xNjMtLjMyNS40MDEgMCAuNzYyLjEyMiAxLjA4NC4zMjUuMzIuMjAzLjU2MS40ODcuNzYxLjg1My4yMDEuMzY2LjI4MS43NzMuMjgxIDEuMTc5Wm0xMC4wMjctMy43OGMuMTYxIDAgLjI0MS4wODIuMjQxLjI0NXY3LjExMmMwIC4xNjItLjA4LjI0My0uMjQxLjI0M2gtMS4wNDNjLS4wOCAwLS4xNi0uMDQtLjI0LS4xMjFhLjM3LjM3IDAgMCAxLS4xMjEtLjI4NXYtLjQ4OGEzLjIzIDMuMjMgMCAwIDEtMi4zMjYuOTc1IDMuNjg4IDMuNjg4IDAgMCAxLTEuODQ1LS40ODdjLS42MDItLjMyNS0xLjA0My0uNzcyLTEuNDA0LTEuMzgxLS4zNi0uNjEtLjUyMS0xLjI2LS41MjEtMS45OTIgMC0uNjkuMi0xLjM0MS41MjEtMS45NS4zMjEtLjYxLjgwMi0xLjA1NyAxLjM2NC0xLjQyMy41NjEtLjM2NiAxLjIwMy0uNTI5IDEuODg1LS41MjkuNTIxIDAgLjk2My4wODIgMS4zNjQuMjQ0LjM2LjE2My43MjIuNDQ3IDEuMDQzLjgxM2wuMTItLjczMS4wMTQtLjA0M2EuOTE3LjkxNyAwIDAgMSAuMDA2LS4wMjJsLjAwNy0uMDIzYy4wMTYtLjA1OC4wMjUtLjA4Ny4wNTMtLjExNi4wNC0uMDQuMDgtLjA0LjE2MS0uMDRoLjk2MlptLTEuNDgzIDMuNzhjLjA4LjQ0Ny0uMDQxLjgxMy0uMjQxIDEuMTc5LS4yMDEuMzY2LS40NDEuNjUtLjgwMi44NTMtLjMzOC4yMTEtLjcyNy4zMjMtMS4xMjMuMzI1LS40MDIgMC0uNzYzLS4xMjItMS4xMjQtLjMyNWEyLjMzNiAyLjMzNiAwIDAgMS0uODAyLS44NTMgMi40MyAyLjQzIDAgMCAxLS4yOC0xLjE3OWMwLS40NDcuMDgtLjg1My4yOC0xLjE3OS4yLS4zNjYuNDgyLS42NS44MDItLjg1M2EyLjAwMiAyLjAwMiAwIDAgMSAxLjA4My0uMzI1Yy40MDIgMCAuNzYzLjEyMiAxLjEyNC4zMjUuMzIuMjAzLjYwMS40ODcuODAyLjg1My4yLjM2Ni4yODEuNzMyLjI4MSAxLjE3OVptOC41MDMtMy40OTVjLjQwMS4yMDMuNzYyLjU3IDEuMDgzIDEuMDU3LjI4MS40ODcuNDAxIDEuMDk3LjQwMSAxLjc4OHY0LjEwNGMwIC4xNjMtLjA4LjI0NC0uMjQuMjQ0aC0xLjE2NGMtLjE2IDAtLjI0LS4wOC0uMjQtLjI0NHYtNC4xMDRjMC0uMjg1LS4wNC0uNTctLjIwMS0uODEzYTIuMTUyIDIuMTUyIDAgMCAwLS42MDItLjYxYy0uMjgtLjE2Mi0uNTIxLS4yNDMtLjg0Mi0uMjQzYTEuNzggMS43OCAwIDAgMC0uNzYyLjIwM2MtLjI4MS4xMjItLjQ4MS4zMjUtLjY0Mi42MS0uMTYuMjg0LS4yNC42MS0uMjQuOTM0djQuMDIzYzAgLjA4MiAwIC4xNjMtLjA4MS4yMDRsLS4wMDQuMDAyYy0uMDc5LjA0LS4xNTcuMDgtLjIzNi4wOGgtMS4wODNjLS4xNjEgMC0uMjQxLS4wODItLjI0MS0uMjQ1di03LjAzYzAtLjE2My4wOC0uMjQ0LjI0MS0uMjQ0aC44MDJjLjA1OSAwIC4wOTYuMDIyLjE0NC4wNWwuMDU2LjAzMWMuMDQuMDQuMDguMTIuMTE5LjJsLjAwMi4wMDMuMDguODUzYy4yODEtLjQwNi42NDItLjY5IDEuMDQzLS44OTRhMi44MTggMi44MTggMCAwIDEgMS4yODMtLjI4NGMuNDQyIDAgLjg4My4wODEgMS4zMjQuMzI1Wm05Ljc0NiA3LjAzMWMwLS4wOC0uMDQtLjEyMS0uMDgtLjE2MmwtMy4xNjktMy45ODMgMi42ODgtMi44MDRjLjA0LS4wNC4wNC0uMDgxLjA0LS4xNjIgMC0uMDgyLS4wNC0uMTIyLS4wODEtLjE2M2EuMzA0LjMwNCAwIDAgMC0uMi0uMDgxaC0xLjI0NGMtLjA4IDAtLjE2IDAtLjIuMDQtLjAzOSAwLS4xMTUuMDc2LS4xNTcuMTE4bC0uMDA0LjAwNC0yLjY4NyAyLjg4NlYxMy40MWMwLS4xNjItLjA4LS4yNDMtLjI0MS0uMjQzaC0xLjIwM2MtLjE2IDAtLjI0LjA4MS0uMjQuMjQ0djkuMjY1YzAgLjE2My4wOC4yNDQuMjQuMjQ0aDEuMjQzYy4xNjEgMCAuMjQxLS4wODEuMjQxLS4yNDR2LTIuMjc2bC43MjItLjczMSAyLjMyNyAzLjA0OC4xNi4xNjNjLjA0LjA0LjA4LjA0LjE2LjA0aDEuNDQ0Yy4wODEgMCAuMTIxLS4wNC4xNjEtLjA4MS4wNC0uMDQuMDgtLjA4MS4wOC0uMTYzWiIgZmlsbD0iIzA1QkFFRCIvPjwvc3ZnPg==" });
 
-const MobileCitiesMenu = () => hAsync("div", null,
-  hAsync("div", { class: 'mobile-menu__link-list-title' }, "Per plaats"),
-  hAsync("ul", { class: 'mobile-menu__link-list mobile-menu__link-list--capitalize' },
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/vacatures/plaats/amsterdam" }, "Amsterdam")),
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/vacatures/plaats/rotterdam" }, "Rotterdam")),
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/vacatures/plaats/s-gravenhage" }, "Den Haag")),
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/vacatures/plaats/utrecht" }, "Utrecht")),
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/vacatures/plaats/groningen" }, "Groningen")),
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/vacatures/plaats/eindhoven" }, "Eindhoven")),
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/vacatures/plaats/tilburg" }, "Tilburg"))));
+const MobileSubMenu = ({ listItems, subMenuTitle, capitalizeLabels }) => hAsync("div", null,
+  hAsync("div", { class: 'mobile-menu__link-list-title' }, subMenuTitle),
+  hAsync("ul", { class: 'mobile-menu__link-list' + (capitalizeLabels ? ' mobile-menu__link-list--capitalize' : '') }, listItems.map(item => hAsync("li", null,
+    hAsync("a", Object.assign({ class: "mobile-menu__link--no-icon" }, AnalyticsDataAttributes({ action: 'ClickOnHeaderWerkZoekendenLink', label: item.label }), { href: item.value }), item.label)))));
 
-const MobileIndustriesMenu = () => hAsync("div", null,
-  hAsync("div", { class: 'mobile-menu__link-list-title' }, "Per branche"),
-  hAsync("ul", { class: 'mobile-menu__link-list' },
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/werken-in-de-bouw" }, "Bouw")),
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/werken-in-de-zorg" }, "Zorg")),
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/werken-in-het-onderwijs" }, "Onderwijs")),
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/werken-in-de-horeca" }, "Horeca")),
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/werken-in-de-logistiek" }, "Logistiek")),
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/werken-in-de-techniek" }, "Techniek")),
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/werken-in-de-sales" }, "Sales"))));
+const MobileCitiesMenu = () => hAsync(MobileSubMenu, { subMenuTitle: 'Per plaats', listItems: cityListItems, capitalizeLabels: true });
 
-const MobileCareerMenu = () => hAsync("div", null,
-  hAsync("div", { class: 'mobile-menu__link-list-title' }, "Carri\u00E8retips"),
-  hAsync("ul", { class: 'mobile-menu__link-list' },
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/carriere" }, "Alle")),
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/carriere/actueel" }, "Actueel")),
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/carriere/motivatiebrief" }, "Motivatiebrief")),
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/carriere/salaris" }, "Salaris")),
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/carriere/sollicitatiegesprek" }, "Sollicitatiegesprek")),
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/carriere/curriculum-vitae" }, "Curriculum Vitae")),
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/carriere/carriere-ontwikkeling" }, "Carri\u00E8re ontwikkeling")),
-    hAsync("li", null,
-      hAsync("a", { class: "mobile-menu__link--no-icon", href: "/carriere/personal-branding" }, "Personal branding"))));
+const MobileIndustriesMenu = () => hAsync(MobileSubMenu, { subMenuTitle: 'Per branche', listItems: industryListItems });
+
+const MobileCareerMenu = () => hAsync(MobileSubMenu, { subMenuTitle: 'Carrièretips', listItems: careerListItems });
 
 const MobileJobsMenu = ({ setActiveMobileMenuLevel }) => hAsync("div", null,
   hAsync("div", { class: 'mobile-menu__link-list-title' }, "Vacatures"),
@@ -5820,7 +5830,7 @@ const MobileMainMenu = ({ setActiveMobileMenuLevel }) => hAsync("div", null,
   hAsync("div", { class: 'mobile-menu__link-list-title' }, "Carri\u00E8re"),
   hAsync("ul", { class: 'mobile-menu__link-list' },
     hAsync("li", null,
-      hAsync("a", { class: 'mobile-menu__link--with-icon', href: "/vacature/zoeken" },
+      hAsync("a", Object.assign({}, AnalyticsDataAttributes({ action: 'ClickOnHeaderWerkZoekendenLink', label: 'Vacatures' }), { class: 'mobile-menu__link--with-icon', href: "/vacature/zoeken" }),
         hAsync(Icons.search, { className: 'mobile-menu__link-icon' }),
         "Vacature zoeken")),
     hAsync("li", null,
@@ -5832,30 +5842,30 @@ const MobileMainMenu = ({ setActiveMobileMenuLevel }) => hAsync("div", null,
         hAsync(Icons.lightbulb, { className: 'mobile-menu__link-icon' }),
         "Carri\u00E8retips")),
     hAsync("li", null,
-      hAsync("a", { class: 'mobile-menu__link--with-icon', href: "/salariswijzer" },
+      hAsync("a", Object.assign({}, AnalyticsDataAttributes({ action: 'ClickOnHeaderWerkZoekendenLink', label: 'Salariswijzer' }), { class: 'mobile-menu__link--with-icon', href: "/salariswijzer" }),
         hAsync(Icons.euro, { className: 'mobile-menu__link-icon' }),
         "Salariswijzer"))),
   hAsync("div", { class: 'mobile-menu__link-list-title' }, "Account"),
   hAsync("ul", { class: 'mobile-menu__link-list' },
     hAsync("li", null,
-      hAsync("a", { class: 'mobile-menu__link--with-icon', href: '/profiel/overzicht' },
+      hAsync("a", Object.assign({}, AnalyticsDataAttributes({ action: 'ClickOnHeaderAccountLink', label: 'JouwProfiel' }), { class: 'mobile-menu__link--with-icon', href: '/profiel/overzicht' }),
         hAsync(Icons.person, { className: 'mobile-menu__link-icon' }),
         "Profiel")),
     hAsync("li", null,
-      hAsync("a", { class: 'mobile-menu__link--with-icon', href: '/vacature/zoeken/favorieten' },
+      hAsync("a", Object.assign({}, AnalyticsDataAttributes({ action: 'ClickOnHeaderWerkZoekendenLink', label: 'Favorieten' }), { class: 'mobile-menu__link--with-icon', href: '/vacature/zoeken/favorieten' }),
         hAsync(Icons.favorite, { className: 'mobile-menu__link-icon' }),
         "Favorieten")),
     hAsync("li", null,
-      hAsync("a", { class: 'mobile-menu__link--with-icon', href: '/vacature/zoeken/zoekopdrachten-beheren' },
+      hAsync("a", Object.assign({}, AnalyticsDataAttributes({ action: 'ClickOnHeaderWerkZoekendenLink', label: 'Zoekopdrachten' }), { class: 'mobile-menu__link--with-icon', href: '/vacature/zoeken/zoekopdrachten-beheren' }),
         hAsync(Icons.mail, { className: 'mobile-menu__link-icon' }),
         "Zoekopdrachten")),
     hAsync("li", null,
-      hAsync("a", { class: 'mobile-menu__link--with-icon', href: '/account/e-mailinstellingen' },
+      hAsync("a", Object.assign({}, AnalyticsDataAttributes({ action: 'ClickOnHeaderAccountLink', label: 'JouwEmailInstellingen' }), { class: 'mobile-menu__link--with-icon', href: '/account/e-mailinstellingen' }),
         hAsync(Icons.settings, { className: 'mobile-menu__link-icon' }),
         "E-mailinstellingen")),
     hAsync("li", null,
-      hAsync("a", { class: 'mobile-menu__link--no-icon', href: '/account/uitloggen' }, "Uitloggen"))),
-  hAsync("a", { class: 'mobile-menu__bottom-link', href: '/werkgever' }, "Werkgevers / plaats vacature"));
+      hAsync("a", Object.assign({}, AnalyticsDataAttributes({ action: 'ClickOnHeaderAccountLink', label: 'Uitloggen' }), { class: 'mobile-menu__link--no-icon', href: '/account/uitloggen' }), "Uitloggen"))),
+  hAsync("a", Object.assign({}, AnalyticsDataAttributes({ action: 'ClickOnHeaderWerkgeversLink', label: 'VoorWerkgevers' }), { class: 'mobile-menu__bottom-link', href: '/werkgever' }), "Werkgevers / plaats vacature"));
 
 const secondLevelIds = ['jobs', 'career'];
 const thirdLevelIds = ['cities', 'industries'];
@@ -5937,7 +5947,7 @@ class NvbHeaderB2c {
   render() {
     const dropdownActiveClassExtender = createActiveClassExtender('dropdown-wrapper', 'dropdown-wrapper--active', document);
     const linkActiveClassExtender = createActiveClassExtender('menu-link', 'menu-link--active', document);
-    return (hAsync("header", null, hAsync("div", { class: "container container--top" }, hAsync("div", { class: 'top' }, hAsync("a", { href: "#" }, "Werkgevers / Plaats vacature"))), hAsync("nav", { class: 'main' }, hAsync("div", { class: "container" }, hAsync("div", { class: "main-inner" }, hAsync("div", { class: "mobile-menu-button-container" }, hAsync("button", { class: "mobile-menu-button", onClick: () => this.handleOpenMenu(), "aria-label": "Open menu" }, hAsync(Icons.menu, { className: 'mobile-menu__header-icon' }))), hAsync("a", { href: "/", class: 'logo-link' }, hAsync(Logo, null)), hAsync("div", { class: 'menu' }, hAsync("div", { class: dropdownActiveClassExtender('/vacature') }, hAsync("button", { class: 'menu-link menu-link--dropdown' }, "Vacatures"), hAsync(DropdownContainerJobs, null)), hAsync("div", { class: dropdownActiveClassExtender('/carriere') }, hAsync("button", { class: 'menu-link menu-link--dropdown' }, "Carri\u00E8retips"), hAsync(DropdownContainerCareer$1, null)), hAsync("a", { href: "/salariswijzer", class: linkActiveClassExtender('/salariswijzer') }, "Salariswijzer"), hAsync("hr", { class: 'menu-separator' }), hAsync("div", { class: dropdownActiveClassExtender(['/account', '/profiel']) }, hAsync("button", { class: 'menu-link menu-link--dropdown' }, "Account"), hAsync(DropdownContainerCareer, null)), hAsync("div", { class: "dropdown-backdrop" })), hAsync("div", { class: 'account-button-container' }, hAsync("a", { class: "account-button", href: "/account", "aria-label": "Naar account" }, hAsync(Icons.person, { className: 'mobile-menu__header-icon' })))))), hAsync(MobileMenu, { isVisible: this.isActiveMobileMenu, handleModalClose: () => this.handleClose(), activeMobileMenuLevel: this.activeMobileMenuLevel, setActiveMobileMenuLevel: level => this.setActiveMobileMenuLevel(level) })));
+    return (hAsync("header", null, hAsync("div", { class: "container container--top" }, hAsync("div", { class: 'top' }, hAsync("a", Object.assign({ href: "/werkgever" }, AnalyticsDataAttributes({ action: 'ClickOnHeaderWerkgeversLink', label: 'VoorWerkgevers' })), "Werkgevers / Plaats vacature"))), hAsync("nav", { class: 'main' }, hAsync("div", { class: "container" }, hAsync("div", { class: "main-inner" }, hAsync("div", { class: "mobile-menu-button-container" }, hAsync("button", { class: "mobile-menu-button", onClick: () => this.handleOpenMenu(), "aria-label": "Open menu" }, hAsync(Icons.menu, { className: 'mobile-menu__header-icon' }))), hAsync("a", Object.assign({ href: "/", class: 'logo-link' }, AnalyticsDataAttributes({ action: 'ClickOnHeaderLink', label: 'Home' })), hAsync(Logo, null)), hAsync("div", { class: 'menu' }, hAsync("div", { class: dropdownActiveClassExtender('/vacature') }, hAsync("button", { class: 'menu-link menu-link--dropdown' }, "Vacatures"), hAsync(DropdownContainerJobs, null)), hAsync("div", { class: dropdownActiveClassExtender('/carriere') }, hAsync("button", { class: 'menu-link menu-link--dropdown' }, "Carri\u00E8retips"), hAsync(DropdownContainerCareer$1, null)), hAsync("a", { href: "/salariswijzer", class: linkActiveClassExtender('/salariswijzer') }, "Salariswijzer"), hAsync("hr", { class: 'menu-separator' }), hAsync("div", { class: dropdownActiveClassExtender(['/account', '/profiel']) }, hAsync("button", { class: 'menu-link menu-link--dropdown' }, "Account"), hAsync(DropdownContainerCareer, null)), hAsync("div", { class: "dropdown-backdrop" })), hAsync("div", { class: 'account-button-container' }, hAsync("a", Object.assign({ class: "account-button", href: "/account", "aria-label": "Naar account" }, AnalyticsDataAttributes({ action: 'ClickOnHeaderLink', label: 'Account' })), hAsync(Icons.person, { className: 'mobile-menu__header-icon' })))))), hAsync(MobileMenu, { isVisible: this.isActiveMobileMenu, handleModalClose: () => this.handleClose(), activeMobileMenuLevel: this.activeMobileMenuLevel, setActiveMobileMenuLevel: level => this.setActiveMobileMenuLevel(level) })));
   }
   static get watchers() { return {
     "isActiveMobileMenu": ["adjustDocument"]

@@ -6,6 +6,7 @@ import DropdownContainerAccount from "./nvb-header-b2c/DropdownContainerAccount"
 import MobileMenu, {ActiveMobileMenuLevel} from "./nvb-header-b2c/MobileMenu";
 import Icons from "./nvb-header-b2c/Icons";
 import createActiveClassExtender from "./nvb-header-b2c/createActiveClassExtender";
+import AnalyticsDataAttributes from "./nvb-header-b2c/AnalyticsDataAttributes";
 
 @Component({
   tag: 'nvb-header-b2c',
@@ -44,7 +45,10 @@ export class NvbHeaderB2c {
     return (
       <header>
         <div class="container container--top">
-          <div class={'top'}><a href="#">Werkgevers / Plaats vacature</a></div>
+          <div class={'top'}>
+            <a href="/werkgever"
+               {...AnalyticsDataAttributes({ action: 'ClickOnHeaderWerkgeversLink', label: 'VoorWerkgevers' })}
+          >Werkgevers / Plaats vacature</a></div>
         </div>
         <nav class={'main'}>
           <div class="container">
@@ -54,7 +58,9 @@ export class NvbHeaderB2c {
                   <Icons.menu className={'mobile-menu__header-icon'} />
                 </button>
               </div>
-              <a href="/" class={'logo-link'}><Logo /></a>
+              <a href="/" class={'logo-link'}
+                 {...AnalyticsDataAttributes({ action: 'ClickOnHeaderLink', label: 'Home'})}><Logo />
+              </a>
               <div class={'menu'}>
                 <div class={dropdownActiveClassExtender('/vacature')}>
                   <button class='menu-link menu-link--dropdown'>Vacatures</button>
@@ -73,7 +79,8 @@ export class NvbHeaderB2c {
                 <div class={"dropdown-backdrop"}/>
               </div>
               <div class={'account-button-container'}>
-                <a class={"account-button"} href={"/account"} aria-label="Naar account"><Icons.person className={'mobile-menu__header-icon'} /></a>
+                <a class={"account-button"} href={"/account"} aria-label="Naar account" {...AnalyticsDataAttributes({ action: 'ClickOnHeaderLink', label: 'Account'})}>
+                  <Icons.person className={'mobile-menu__header-icon'} /></a>
               </div>
             </div>
           </div>

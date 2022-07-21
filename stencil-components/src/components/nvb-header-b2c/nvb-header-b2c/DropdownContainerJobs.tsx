@@ -1,7 +1,8 @@
 import {h} from "@stencil/core";
-import SubMenu, {SubMenuItem} from "./SubMenu";
+import SubMenu, {AnchorListItem} from "./SubMenu";
+import AnchorList from "./AnchorList";
 
-const cityListItems: SubMenuItem[] =[
+export const cityListItems: AnchorListItem[] =[
   {
     label: 'Amsterdam',
     value: '/vacatures/plaats/amsterdam'
@@ -32,7 +33,7 @@ const cityListItems: SubMenuItem[] =[
   }
 ]
 
-const industryListItems: SubMenuItem[] = [
+export const industryListItems: AnchorListItem[] = [
   {
       label: 'Bouw',
       value: '/werken-in-de-bouw'
@@ -63,26 +64,36 @@ const industryListItems: SubMenuItem[] = [
   }
 ]
 
+const jobsListItems: AnchorListItem[] = [
+  {
+    label: 'Zoeken',
+    value: "/vacature/zoeken",
+    analyticsLabel: 'Vacatures'
+  },
+  {
+    label: 'Zoekopdrachten',
+    value: "/vacature/zoeken/zoekopdrachten-beheren"
+  },
+  {
+    label: 'Favorieten',
+    value: "/vacature/zoeken/favorieten"
+  }
+]
+
+const JobSeekerSubMenu = SubMenu('ClickOnHeaderWerkZoekendenLink')
+
 const DropdownContainerJobs = () =>
   <div class="dropdown-container">
     <div class="container">
         <ul class={'dropdown-list'}>
-          <li>
-            <a href="/vacature/zoeken">Zoeken</a>
-          </li>
-          <li>
-            <a href="/vacature/zoeken/zoekopdrachten-beheren">Zoekopdrachten</a>
-          </li>
-          <li>
-            <a href="/vacature/zoeken/favorieten">Favorieten</a>
-          </li>
+          <AnchorList listItems={jobsListItems} analyticsAction={'ClickOnHeaderWerkZoekendenLink'} />
           <li class={'sub-menu-container'}>
             <button class={'sub-menu-link'}>Per branche</button>
-            <SubMenu listItems={industryListItems} subMenuTitle={'Per branche'} />
+            <JobSeekerSubMenu listItems={industryListItems} subMenuTitle={'Per branche'} />
           </li>
           <li class={'sub-menu-container'}>
             <button class={'sub-menu-link'}>Per plaats</button>
-            <SubMenu listItems={cityListItems} subMenuTitle={'Per plaats'} />
+            <JobSeekerSubMenu listItems={cityListItems} subMenuTitle={'Per plaats'} />
           </li>
           <li class={'dropdown-list-expander dropdown-list-expander--jobs'} />
         </ul>
