@@ -1,12 +1,14 @@
-import {Component, h, State, Watch} from '@stencil/core';
+import {Component, h, Prop, State, Watch} from '@stencil/core';
 import Logo from "./nvb-header-b2c/Logo";
 import DropdownContainerJobs from "./nvb-header-b2c/DropdownContainerJobs";
 import DropdownContainerCareer from "./nvb-header-b2c/DropdownContainerCareer";
-import DropdownContainerAccount from "./nvb-header-b2c/DropdownContainerAccount";
+import DropdownContainerAccountAuthenticated from "./nvb-header-b2c/DropdownContainerAccountAuthenticated";
 import MobileMenu, {ActiveMobileMenuLevel} from "./nvb-header-b2c/MobileMenu";
 import Icons from "./nvb-header-b2c/Icons";
 import createActiveClassExtender from "./nvb-header-b2c/createActiveClassExtender";
 import AnalyticsDataAttributes from "./nvb-header-b2c/AnalyticsDataAttributes";
+import DropdownContainerAccountUnauthenticated from "./nvb-header-b2c/DropdownContainerAccountUnauthenticated";
+import AccountButton from "./nvb-header-b2c/AccountButton";
 
 @Component({
   tag: 'nvb-header-b2c',
@@ -15,6 +17,7 @@ import AnalyticsDataAttributes from "./nvb-header-b2c/AnalyticsDataAttributes";
 })
 export class NvbHeaderB2c {
   @State() isActiveMobileMenu: boolean = false
+  @Prop() isAuthenticated: boolean
   @State() activeMobileMenuLevel: ActiveMobileMenuLevel = 'main'
 
   @Watch('isActiveMobileMenu')
@@ -58,9 +61,7 @@ export class NvbHeaderB2c {
                   <Icons.menu className={'mobile-menu__header-icon'} />
                 </button>
               </div>
-              <a href="/" class={'logo-link'}
-                 {...AnalyticsDataAttributes({ action: 'ClickOnHeaderLink', label: 'Home'})}><Logo />
-              </a>
+             <Logo />
               <div class={'menu'}>
                 <div class={dropdownActiveClassExtender('/vacature')}>
                   <button class='menu-link menu-link--dropdown'>Vacatures</button>
@@ -70,22 +71,26 @@ export class NvbHeaderB2c {
                   <button class='menu-link menu-link--dropdown'>Carrièretips</button>
                   <DropdownContainerCareer/>
                 </div>
-                <a href={"/salariswijzer"} class={linkActiveClassExtender('/salariswijzer')}>Salariswijzer</a>
+                <a href={"/salariswijzer"} class={linkActiveClassExtender('/salariswijzer')} {...AnalyticsDataAttributes({
+                  action: 'ClickOnHeaderWerkZoekendenLink',
+                  label: 'Salariswijzer'
+                })}>Salariswijzer</a>
                 <hr class={'menu-separator'} />
                 <div class={dropdownActiveClassExtender(['/account', '/profiel'])}>
                   <button class='menu-link menu-link--dropdown'>Account</button>
-                  <DropdownContainerAccount/>
+                  {this.isAuthenticated && <DropdownContainerAccountAuthenticated/>}
+                  {!this.isAuthenticated && <DropdownContainerAccountUnauthenticated/>}
                 </div>
                 <div class={"dropdown-backdrop"}/>
               </div>
               <div class={'account-button-container'}>
-                <a class={"account-button"} href={"/account"} aria-label="Naar account" {...AnalyticsDataAttributes({ action: 'ClickOnHeaderLink', label: 'Account'})}>
-                  <Icons.person className={'mobile-menu__header-icon'} /></a>
+                <AccountButton />
               </div>
             </div>
           </div>
         </nav>
         <MobileMenu
+          isAuthenticated={this.isAuthenticated}
           isVisible={this.isActiveMobileMenu}
           handleModalClose={() => this.handleClose()}
           activeMobileMenuLevel={this.activeMobileMenuLevel}

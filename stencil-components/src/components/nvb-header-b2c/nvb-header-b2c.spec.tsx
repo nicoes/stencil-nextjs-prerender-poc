@@ -9,6 +9,13 @@ describe('nvb-header-b2c', () => {
     });
     expect(page.root).toMatchSnapshot()
   });
+  it('show right account menu when authenticated', async () => {
+    const page = await newSpecPage({
+      components: [NvbHeaderB2c],
+      html: `<nvb-header-b2c is-authenticated="true"></nvb-header-b2c>`
+    });
+    expect(page.root).toMatchSnapshot()
+  });
   it('renders with mobile menu open', async () => {
     const page = await newSpecPage({
       components: [NvbHeaderB2c],
@@ -87,4 +94,28 @@ describe('nvb-header-b2c', () => {
     component.handleClose();
     expect(component.activeMobileMenuLevel).toBe('main');
   });
+
+  it.each([{
+    value: '/werkgever',
+    label: 'Werkgevers / Plaats vacature',
+    analyticsLabel: 'VoorWerkgevers',
+    analyticsAction: 'ClickOnHeaderWerkgeversLink'
+  },{
+    value: '/',
+    label: '',
+    analyticsLabel: 'Home',
+    analyticsAction: 'ClickOnHeaderLink'
+  }
+  ])('should have the right data attributes', async (item) => {
+    const page = await newSpecPage({
+      components: [NvbHeaderB2c],
+      html: `<nvb-header-b2c></nvb-header-b2c>`
+    });
+    const labelToAssert = item.analyticsLabel || item.label;
+    const actionToAssert = item.analyticsAction || item.label;
+    const element = page.root.shadowRoot.querySelectorAll(`[href='${item.value}']`)[0];
+    expect(element).toBeDefined()
+    expect(element.getAttribute('data-analytics-action')).toEqual(actionToAssert)
+    expect(element.getAttribute('data-analytics-label')).toEqual(labelToAssert)
+  })
 });

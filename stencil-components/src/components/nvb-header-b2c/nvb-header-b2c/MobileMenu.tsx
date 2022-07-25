@@ -17,9 +17,10 @@ type Props = {
   handleModalClose: () => void
   activeMobileMenuLevel: ActiveMobileMenuLevel,
   setActiveMobileMenuLevel: (level: ActiveMobileMenuLevel) => void,
+  isAuthenticated: boolean
 }
 
-const MobileMenu = ({ isVisible, handleModalClose, activeMobileMenuLevel, setActiveMobileMenuLevel }: Props) => {
+const MobileMenu = ({ isVisible, handleModalClose, activeMobileMenuLevel, setActiveMobileMenuLevel, isAuthenticated }: Props) => {
 
   let stackInnerModifier = '';
   let previousLevel: ActiveMobileMenuLevel;
@@ -46,7 +47,7 @@ const MobileMenu = ({ isVisible, handleModalClose, activeMobileMenuLevel, setAct
       <div class="mobile-menu__stack">
         <div class={"mobile-menu__stack-inner" + stackInnerModifier}>
           <section class="mobile-menu__stack-screen">
-            <MobileMainMenu setActiveMobileMenuLevel={setActiveMobileMenuLevel} />
+            <MobileMainMenu setActiveMobileMenuLevel={setActiveMobileMenuLevel} isAuthenticated={isAuthenticated} />
           </section>
           <section class="mobile-menu__stack-screen">
             {activeMobileMenuLevel === 'jobs' && <MobileJobsMenu setActiveMobileMenuLevel={setActiveMobileMenuLevel} />}

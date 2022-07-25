@@ -18,6 +18,7 @@ export namespace Components {
     interface MyComponent {
     }
     interface NvbHeaderB2c {
+        "isAuthenticated": boolean;
     }
 }
 declare global {
@@ -65,6 +66,7 @@ declare namespace LocalJSX {
     interface MyComponent {
     }
     interface NvbHeaderB2c {
+        "isAuthenticated"?: boolean;
     }
     interface IntrinsicElements {
         "footer-b2c": FooterB2c;

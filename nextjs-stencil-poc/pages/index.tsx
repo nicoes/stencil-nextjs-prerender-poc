@@ -23,7 +23,7 @@ const Home: NextPage = () => {
         <style dangerouslySetInnerHTML={{ __html: '/*!@:host*/.sc-my-component-h{display:block}/*!@button*/button.sc-my-component{color:#AA00CC}'}} />
       </Head>
 
-      <NvbHeaderB2c />
+      <NvbHeaderB2c isAuthenticated={!!userName} />
       <Link href="/"><a>Home</a></Link>
       <Link href="/search"><a>Search</a></Link>
 
