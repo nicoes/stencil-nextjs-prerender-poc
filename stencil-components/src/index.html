@@ -18,10 +18,19 @@
       a {
         color: purple !important;
       }
+      .component-display {
+        display: block;
+        margin-bottom: 3rem;
+        position: relative;
+      }
     </style>
   </head>
   <body>
-    <nvb-header-b2c is-authenticated="false" />
-    <div>Just a normal div</div>
+    <div class="component-display">
+      <iol-header-b2c is-authenticated="false" />
+    </div>
+    <div class="component-display">
+      <nvb-header-b2c is-authenticated="false" />
+    </div>
   </body>
 </html>

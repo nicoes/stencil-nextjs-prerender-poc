@@ -10,6 +10,8 @@ export namespace Components {
     interface FooterB2c {
         "userName": string;
     }
+    interface IolHeaderB2c {
+    }
     interface ModalWindow {
         "isVisible": boolean;
         "modalText": string;
@@ -27,6 +29,12 @@ declare global {
     var HTMLFooterB2cElement: {
         prototype: HTMLFooterB2cElement;
         new (): HTMLFooterB2cElement;
+    };
+    interface HTMLIolHeaderB2cElement extends Components.IolHeaderB2c, HTMLStencilElement {
+    }
+    var HTMLIolHeaderB2cElement: {
+        prototype: HTMLIolHeaderB2cElement;
+        new (): HTMLIolHeaderB2cElement;
     };
     interface HTMLModalWindowElement extends Components.ModalWindow, HTMLStencilElement {
     }
@@ -48,6 +56,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "footer-b2c": HTMLFooterB2cElement;
+        "iol-header-b2c": HTMLIolHeaderB2cElement;
         "modal-window": HTMLModalWindowElement;
         "my-component": HTMLMyComponentElement;
         "nvb-header-b2c": HTMLNvbHeaderB2cElement;
@@ -56,6 +65,8 @@ declare global {
 declare namespace LocalJSX {
     interface FooterB2c {
         "userName"?: string;
+    }
+    interface IolHeaderB2c {
     }
     interface ModalWindow {
         "isVisible"?: boolean;
@@ -70,6 +81,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "footer-b2c": FooterB2c;
+        "iol-header-b2c": IolHeaderB2c;
         "modal-window": ModalWindow;
         "my-component": MyComponent;
         "nvb-header-b2c": NvbHeaderB2c;
@@ -80,6 +92,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "footer-b2c": LocalJSX.FooterB2c & JSXBase.HTMLAttributes<HTMLFooterB2cElement>;
+            "iol-header-b2c": LocalJSX.IolHeaderB2c & JSXBase.HTMLAttributes<HTMLIolHeaderB2cElement>;
             "modal-window": LocalJSX.ModalWindow & JSXBase.HTMLAttributes<HTMLModalWindowElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "nvb-header-b2c": LocalJSX.NvbHeaderB2c & JSXBase.HTMLAttributes<HTMLNvbHeaderB2cElement>;

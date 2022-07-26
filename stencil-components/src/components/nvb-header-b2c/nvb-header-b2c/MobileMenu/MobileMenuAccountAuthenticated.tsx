@@ -1,4 +1,4 @@
-import AnalyticsDataAttributes from "../AnalyticsDataAttributes";
+import AnalyticsDataAttributes from "../../../../utils/AnalyticsDataAttributes";
 import Icons from "../Icons";
 import {h} from "@stencil/core";
 

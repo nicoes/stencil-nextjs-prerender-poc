@@ -1,6 +1,11 @@
 import AnalyticsDataAttributes, {AnalyticsAction} from "../../../utils/AnalyticsDataAttributes";
 import {h} from "@stencil/core";
-import {AnchorListItem} from "./SubMenu";
+
+export type AnchorListItem = {
+  label: string,
+  value: string,
+  analyticsLabel?: string
+}
 
 type AnchorListProps = { listItems: AnchorListItem[], analyticsAction: AnalyticsAction, className?: string }
 
