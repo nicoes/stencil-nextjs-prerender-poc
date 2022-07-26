@@ -12,10 +12,10 @@ type SubMenuProps = {subMenuTitle: string, listItems: AnchorListItem[], isCapita
 
 const SubMenu = (analyticsAction: AnalyticsAction) => ({listItems, subMenuTitle, isCapitalized }: SubMenuProps) =>
   <div class={'sub-menu'}>
-    <div class={'sub-menu-inner'}>
-      <strong class={'sub-menu-title'}>{subMenuTitle}</strong>
-      <ul class={'sub-menu-list'}>
-        <AnchorList listItems={listItems} analyticsAction={analyticsAction} className={isCapitalized ? 'sub-menu-list-item--capitalized' : ''} />
+    <div class={'sub-menu__inner'}>
+      <strong class={'sub-menu__title'}>{subMenuTitle}</strong>
+      <ul class={'sub-menu__list'}>
+        <AnchorList listItems={listItems} analyticsAction={analyticsAction} className={isCapitalized ? 'sub-menu__list-item--capitalized' : ''} />
       </ul>
     </div>
 </div>
