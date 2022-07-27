@@ -7,6 +7,8 @@ import {topicsListItems} from "./config/topicsListItems";
 import mainMenuLinks from "./config/mainMenuLinks";
 import MainMenuLink from "./iol-header-b2c/MainMenuLink";
 import DropdownContainerJobs from "./iol-header-b2c/DropdownContainerJobs";
+import {educationItems} from "./config/educationItems";
+import Logo from "./iol-header-b2c/Logo";
 
 @Component({
   tag: 'iol-header-b2c',
@@ -33,15 +35,22 @@ export class IolHeaderB2c {
                   <Icons.menu className={'mobile-menu__header-icon'}/>
                 </button>
               </div>
+              <Logo />
               <div class={'menu'}>
-                <div class={dropdownActiveClassExtender('/vacature')}>
-                  <MainMenuLink item={mainMenuLinks.VACATURES} />
-                  <DropdownContainerJobs />
-                </div>
                 <div class={dropdownActiveClassExtender(topicsListItems.map(item => item.value))}>
-                  <MainMenuLink item={mainMenuLinks.TOPICS} />
+                  <MainMenuLink item={mainMenuLinks.TOPICS} withDropdown />
                   <DropdownContainer listItems={topicsListItems} analyticsAction={'ClickOnHeaderTopicsLink'}/>
                 </div>
+                <MainMenuLink item={mainMenuLinks.TESTEN_EN_TOOLS} />
+                <div class={dropdownActiveClassExtender(topicsListItems.map(item => item.value))}>
+                  <MainMenuLink item={mainMenuLinks.OPLEIDINGEN} withDropdown />
+                  <DropdownContainer listItems={educationItems} analyticsAction={'ClickOnHeaderOpleidingenLink'}/>
+                </div>
+                <div class={dropdownActiveClassExtender('/vacature')}>
+                  <MainMenuLink item={mainMenuLinks.VACATURES} withDropdown />
+                  <DropdownContainerJobs/>
+                </div>
+                <MainMenuLink item={mainMenuLinks.JOUW_PROFIEL} />
               </div>
             </div>
           </div>

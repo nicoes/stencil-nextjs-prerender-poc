@@ -76,6 +76,12 @@ button {
   align-items: stretch;
 }
 
+.logo {
+  display: flex;
+  height: $menu-main-height;
+  align-items: center;
+}
+
 @mixin dropdown-style() {
   list-style: none;
   padding: 0;
@@ -107,6 +113,7 @@ button {
 
   &:hover {
     text-decoration: none;
+    background-color: colors.$white;
   }
 }
 
@@ -126,7 +133,6 @@ button {
 .menu {
   align-items: center;
   flex-direction: row;
-  width: $desktop-menu-width;
   display: none;
 
   @media (min-width: breakpoints.$lg) {
@@ -151,6 +157,7 @@ button {
 
   &:hover {
     text-decoration: none;
+    color: colors.$yellow-400;
   }
 
   &:before {
@@ -195,17 +202,18 @@ button {
   visibility: visible;
 }
 
-.dropdown-wrapper:focus,
-.dropdown-wrapper:focus-within,
-.dropdown-wrapper--active,
-.dropdown-wrapper:hover {
-  .menu-link {
+.dropdown-wrapper:focus .menu-link,
+.dropdown-wrapper:focus-within .menu-link,
+.dropdown-wrapper--active .menu-link,
+.dropdown-wrapper:hover .menu-link,
+.menu-link:hover {
+  & {
     color: colors.$yellow-400;
   }
-  .menu-link:before {
+  &:before {
     opacity: 1;
   }
-  .menu-link:after {
+  &:after {
     transform: rotate(0deg);
     @include icon-tools.background-icon-fill-color(colors.$yellow-400)
   }
@@ -213,6 +221,7 @@ button {
 
 .sub-menu-container {
   position: relative;
+  display: flex;
 }
 
 .sub-menu {
@@ -234,8 +243,13 @@ button {
 
 .dropdown-list .sub-menu-button {
   padding-right: calc(#{icons.$icon-size-sm} + 0.5rem);
+  flex: 1;
 }
 
 .sub-menu__inner {
   @include dropdown-style();
+}
+
+.mobile-menu-button-container {
+  display: none;
 }

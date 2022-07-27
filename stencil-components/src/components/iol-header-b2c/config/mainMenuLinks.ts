@@ -10,10 +10,19 @@ const mainMenuLinks: Record<string, LinkItem> = {
     label: 'Testen en tools',
     analyticsLabel: 'TestenEnTools'
   },
+  OPLEIDINGEN: {
+    value: '/opleidingen',
+    label: 'Opleidingen'
+  },
   VACATURES: {
     value: '/vacature/zoeken',
     label: 'Vacatures'
   },
+  JOUW_PROFIEL: {
+    value: '/account/login?login_type=direct',
+    label: 'Jouw profiel',
+    analyticsLabel: 'JouwProfiel',
+  }
 }
 
 export default mainMenuLinks
