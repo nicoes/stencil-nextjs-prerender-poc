@@ -1,10 +1,10 @@
 import {h} from "@stencil/core";
-import AnchorList, {AnchorListItem} from "./AnchorList";
+import AnchorList, {LinkItem} from "./AnchorList";
 import {AnalyticsAction} from "./AnalyticsDataAttributes";
 
-const DropdownContainer = ({listItems, analyticsAction}:{listItems: AnchorListItem[], analyticsAction: AnalyticsAction}) =>
-      <menu class={'dropdown-list'}>
+const DropdownContainer = ({listItems, analyticsAction}:{listItems: LinkItem[], analyticsAction: AnalyticsAction}) =>
+      <ul class={'dropdown-list'}>
         <AnchorList listItems={listItems} analyticsAction={analyticsAction} />
-      </menu>
+      </ul>
 
 export default DropdownContainer

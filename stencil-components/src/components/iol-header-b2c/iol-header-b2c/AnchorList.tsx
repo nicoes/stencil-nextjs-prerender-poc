@@ -1,13 +1,13 @@
 import AnalyticsDataAttributes, {AnalyticsAction} from "./AnalyticsDataAttributes";
 import {h} from "@stencil/core";
 
-export type AnchorListItem = {
+export type LinkItem = {
   label: string,
   value: string,
   analyticsLabel?: string
 }
 
-type AnchorListProps = { listItems: AnchorListItem[], analyticsAction: AnalyticsAction, className?: string }
+type AnchorListProps = { listItems: LinkItem[], analyticsAction: AnalyticsAction, className?: string }
 
 const AnchorList = ({ listItems, analyticsAction, className }: AnchorListProps) => listItems.map(item => <li>
   <a

@@ -17,6 +17,7 @@ $desktop-menu-width: 35rem;
 $dropdown-link-height: 2.75rem;
 $dropdown-link-hover-correction: 0.5rem;
 $dropdown-link-width: 13rem;
+$sub-menu-hover-bleed: 2rem;
 
 header {
   all: initial;
@@ -75,15 +76,21 @@ button {
   align-items: stretch;
 }
 
-.dropdown-list {
+@mixin dropdown-style() {
   list-style: none;
   padding: 0;
   margin: 0;
-  position: relative;
+  background: colors.$yellow-400;
+  box-shadow: 0 1px 8px 0 rgb(35 45 61 / 30%);
+}
+
+.dropdown-list {
+  @include dropdown-style();
+  top: $menu-main-height;
   left: 0;
   visibility: hidden;
-  background: colors.$yellow-400;
   z-index: z-indices.$header-menu-dropdown;
+  position: absolute;
 }
 
 .dropdown-list a,
@@ -96,6 +103,7 @@ button {
   box-sizing: border-box;
   padding-left: 1rem;
   padding-right: 1rem;
+  white-space: nowrap;
 
   &:hover {
     text-decoration: none;
@@ -177,6 +185,8 @@ button {
   align-items: center;
   height: $menu-main-height;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .dropdown-wrapper:focus .dropdown-list,
@@ -199,4 +209,33 @@ button {
     transform: rotate(0deg);
     @include icon-tools.background-icon-fill-color(colors.$yellow-400)
   }
+}
+
+.sub-menu-container {
+  position: relative;
+}
+
+.sub-menu {
+  padding: $sub-menu-hover-bleed;
+  z-index: z-indices.$header-menu-dropdown;
+  position: absolute;
+  top: -1 * $sub-menu-hover-bleed;
+  left: calc(100% - #{$sub-menu-hover-bleed} + 0.5rem);
+  visibility: hidden;
+}
+
+.sub-menu-container:focus,
+.sub-menu-container:focus-within,
+.sub-menu-container:hover {
+  .sub-menu {
+    visibility: visible;
+  }
+}
+
+.dropdown-list .sub-menu-button {
+  padding-right: calc(#{icons.$icon-size-sm} + 0.5rem);
+}
+
+.sub-menu__inner {
+  @include dropdown-style();
 }

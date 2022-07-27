@@ -3,8 +3,10 @@ import Icons from './iol-header-b2c/Icons';
 import TopBar from "./iol-header-b2c/TopBar";
 import createActiveClassExtender from "../../utils/createActiveClassExtender";
 import DropdownContainer from "./iol-header-b2c/DropdownContainer";
-import {jobsListItems} from "./config/jobsListItems";
 import {topicsListItems} from "./config/topicsListItems";
+import mainMenuLinks from "./config/mainMenuLinks";
+import MainMenuLink from "./iol-header-b2c/MainMenuLink";
+import DropdownContainerJobs from "./iol-header-b2c/DropdownContainerJobs";
 
 @Component({
   tag: 'iol-header-b2c',
@@ -33,11 +35,11 @@ export class IolHeaderB2c {
               </div>
               <div class={'menu'}>
                 <div class={dropdownActiveClassExtender('/vacature')}>
-                  <button class='menu-link menu-link--dropdown'>Vacatures</button>
-                  <DropdownContainer listItems={jobsListItems} analyticsAction={'ClickOnHeaderWerkZoekendenLink'}/>
+                  <MainMenuLink item={mainMenuLinks.VACATURES} />
+                  <DropdownContainerJobs />
                 </div>
-                <div class={dropdownActiveClassExtender('/werk-en-carriere')}>
-                  <button class='menu-link menu-link--dropdown'>Topics</button>
+                <div class={dropdownActiveClassExtender(topicsListItems.map(item => item.value))}>
+                  <MainMenuLink item={mainMenuLinks.TOPICS} />
                   <DropdownContainer listItems={topicsListItems} analyticsAction={'ClickOnHeaderTopicsLink'}/>
                 </div>
               </div>
