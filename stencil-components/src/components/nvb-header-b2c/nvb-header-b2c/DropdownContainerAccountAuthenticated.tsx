@@ -1,5 +1,5 @@
 import {h} from "@stencil/core";
-import AnalyticsDataAttributes from "../../../utils/AnalyticsDataAttributes";
+import AnalyticsDataAttributes from "./AnalyticsDataAttributes";
 
 const DropdownContainerAccountAuthenticated = () =>
   <div class="dropdown-container">

@@ -1,5 +1,5 @@
 import {h} from "@stencil/core";
-import {AnalyticsAction} from "../../../utils/AnalyticsDataAttributes";
+import {AnalyticsAction} from "./AnalyticsDataAttributes";
 import AnchorList from "./AnchorList";
 
 export type AnchorListItem = {

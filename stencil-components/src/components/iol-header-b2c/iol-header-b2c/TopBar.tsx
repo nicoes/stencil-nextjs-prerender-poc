@@ -1,4 +1,4 @@
-import AnalyticsDataAttributes from "../../../utils/AnalyticsDataAttributes";
+import AnalyticsDataAttributes from "../../nvb-header-b2c/nvb-header-b2c/AnalyticsDataAttributes";
 import {h} from "@stencil/core";
 
 const TopBar = () => <div class={'top'}>

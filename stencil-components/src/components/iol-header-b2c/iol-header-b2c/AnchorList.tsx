@@ -1,4 +1,4 @@
-import AnalyticsDataAttributes, {AnalyticsAction} from "../../../utils/AnalyticsDataAttributes";
+import AnalyticsDataAttributes, {AnalyticsAction} from "./AnalyticsDataAttributes";
 import {h} from "@stencil/core";
 
 export type AnchorListItem = {

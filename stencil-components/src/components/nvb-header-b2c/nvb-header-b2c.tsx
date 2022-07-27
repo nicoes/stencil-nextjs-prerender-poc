@@ -6,7 +6,7 @@ import DropdownContainerAccountAuthenticated from "./nvb-header-b2c/DropdownCont
 import MobileMenu, {ActiveMobileMenuLevel} from "./nvb-header-b2c/MobileMenu";
 import Icons from "./nvb-header-b2c/Icons";
 import createActiveClassExtender from "../../utils/createActiveClassExtender";
-import AnalyticsDataAttributes from "../../utils/AnalyticsDataAttributes";
+import AnalyticsDataAttributes from "./nvb-header-b2c/AnalyticsDataAttributes";
 import DropdownContainerAccountUnauthenticated from "./nvb-header-b2c/DropdownContainerAccountUnauthenticated";
 import AccountButton from "./nvb-header-b2c/AccountButton";
 

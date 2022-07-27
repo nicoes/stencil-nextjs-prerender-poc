@@ -5,8 +5,11 @@ $icon-map: (
   "keyboard-arrow-up": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iOCIgdmlld0JveD0iMCAwIDEyIDgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xLjQxIDcuNDFMNiAyLjgzTDEwLjU5IDcuNDFMMTIgNkw2IDBMMCA2TDEuNDEgNy40MVoiIGZpbGw9IiMzMjMyMzIiLz4KPC9zdmc+Cg==",
   "close": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE0IDEuNDEgMTIuNTkgMCA3IDUuNTkgMS40MSAwIDAgMS40MSA1LjU5IDcgMCAxMi41OSAxLjQxIDE0IDcgOC40MSAxMi41OSAxNCAxNCAxMi41OSA4LjQxIDcgMTQgMS40MVoiIGZpbGw9IiMzMjMyMzIiLz48L3N2Zz4=",
   "arrow-back": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE2IDdIMy44M2w1LjU5LTUuNTlMOCAwIDAgOGw4IDggMS40MS0xLjQxTDMuODMgOUgxNlY3WiIgZmlsbD0iIzMyMzIzMiIvPjwvc3ZnPg==",
-  "campaign": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTE4IDExdjJoNHYtMmgtNFpNMTYgMTcuNjFjLjk2LjcxIDIuMjEgMS42NSAzLjIgMi4zOS40LS41My44LTEuMDcgMS4yLTEuNi0uOTktLjc0LTIuMjQtMS42OC0zLjItMi40LS40LjU0LS44IDEuMDgtMS4yIDEuNjFaTTIwLjQgNS42Yy0uNC0uNTMtLjgtMS4wNy0xLjItMS42LS45OS43NC0yLjI0IDEuNjgtMy4yIDIuNC40LjUzLjggMS4wNyAxLjIgMS42Ljk2LS43MiAyLjIxLTEuNjUgMy4yLTIuNFpNNCA5Yy0xLjEgMC0yIC45LTIgMnYyYzAgMS4xLjkgMiAyIDJoMXY0aDJ2LTRoMWw1IDNWNkw4IDlINFptNS4wMyAxLjcxTDExIDkuNTN2NC45NGwtMS45Ny0xLjE4LS40OC0uMjlINHYtMmg0LjU1bC40OC0uMjlaTTE1LjUgMTJjMC0xLjMzLS41OC0yLjUzLTEuNS0zLjM1djYuNjljLjkyLS44MSAxLjUtMi4wMSAxLjUtMy4zNFoiIGZpbGw9IiMzMjMyMzIiLz48L3N2Zz4="
 );
+
+@mixin background-icon-fill-color($color) {
+  background-color: $color
+}
 
 @mixin background-icon($icon-key, $color: #000) {
   display: block;
@@ -20,7 +23,7 @@ $icon-map: (
   -webkit-mask-repeat: no-repeat;
   transform-box: fill-box;
   transform-origin: center;
-  background-color: $color
+  @include background-icon-fill-color($color)
 }
 
 /* This is to be applied to an svg element with one fill color, applied to the root svg-tag*/

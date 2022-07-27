@@ -1,6 +1,6 @@
 import Icons from "../Icons";
 import {h} from "@stencil/core";
-import AnalyticsDataAttributes from "../../../../utils/AnalyticsDataAttributes";
+import AnalyticsDataAttributes from "../AnalyticsDataAttributes";
 import MobileMenuAccountAuthenticated from "./MobileMenuAccountAuthenticated";
 import MobileMenuAccountUnauthenticated from "./MobileMenuAccountUnauthenticated";
 

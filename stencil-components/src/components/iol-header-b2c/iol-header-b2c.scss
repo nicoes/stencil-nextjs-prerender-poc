@@ -68,10 +68,6 @@ button {
   background-color: colors.$grey-600;
 }
 
-.main a, .main button {
-  color: colors.$white;
-}
-
 .main-inner {
   display: flex;
   flex-direction: row;
@@ -79,35 +75,34 @@ button {
   align-items: stretch;
 }
 
-
-.dropdown-container {
-  position: absolute;
-  width: 100%;
-  top: $menu-main-height;
+.dropdown-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
   left: 0;
   visibility: hidden;
-  background: colors.$grey-100;
+  background: colors.$yellow-400;
   z-index: z-indices.$header-menu-dropdown;
 }
 
-.dropdown-container a,
-.dropdown-container button {
+.dropdown-list a,
+.dropdown-list button {
   display: block;
   line-height: $dropdown-link-height;
   text-align: left;
   text-transform: lowercase;
-  color: colors.$white;
-  padding-left: $dropdown-link-hover-correction;
-  margin-left: -1 * $dropdown-link-hover-correction;
-  width: $dropdown-link-width;
+  color: colors.$grey-600;
   box-sizing: border-box;
+  padding-left: 1rem;
+  padding-right: 1rem;
 
   &:hover {
     text-decoration: none;
   }
 }
 
-.dropdown-container button {
+.dropdown-list button {
   position: relative;
 
   &:after {
@@ -118,20 +113,6 @@ button {
     top: 50%;
     margin-top: icons.$icon-size-sm / 2 * -1;
   }
-}
-
-.dropdown-backdrop {
-  z-index: z-indices.$header-menu-backdrop;
-  display: block;
-  visibility: hidden;
-  opacity: 0;
-  position: absolute;
-  background: rgba(colors.$black, 0.6);
-  top: $menu-main-height + $menu-top-height;
-  left: 0;
-  width: 100%;
-  height: calc(100% - #{$menu-main-height} - #{$menu-top-height});
-  transition: visibility 0.3s, opacity 0.3s 0s;
 }
 
 .menu {
@@ -154,11 +135,11 @@ button {
 
 .menu-link {
   position: relative;
-  color: colors.$white;
+  color: colors.$green-300;
   line-height: $menu-main-height;
   text-transform: lowercase;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 
   &:hover {
     text-decoration: none;
@@ -168,24 +149,23 @@ button {
     content: " ";
     position: absolute;
     width: 100%;
-    bottom: 6px;
+    bottom: 0;
     height: 3px;
     left: 0;
-    background-color: colors.$white;
-    border-radius: 4px;
+    background-color: colors.$yellow-400;
     opacity: 0;
     transition: opacity 0.1s ease-in;
   }
 }
 
 .menu-link--dropdown {
-  padding-right: calc(#{icons.$icon-size-sm} + 0.5rem);
+  padding-right: calc(#{icons.$icon-size-sm} + 1.5rem);
 
   &:after {
     content: " ";
-    @include icon-tools.background-icon('keyboard-arrow-up', colors.$white);
+    @include icon-tools.background-icon('keyboard-arrow-up', colors.$green-300);
     position: absolute;
-    right: 0;
+    right: 1rem;
     top: 50%;
     margin-top: -12px;
     transition: transform 0.1s ease-out;
@@ -194,35 +174,29 @@ button {
 }
 
 .dropdown-wrapper {
-  display: flex;
   align-items: center;
   height: $menu-main-height;
   position: relative;
 }
 
-.dropdown-wrapper:focus .dropdown-container,
-.dropdown-wrapper:focus-within .dropdown-container,
-.dropdown-wrapper:hover .dropdown-container {
+.dropdown-wrapper:focus .dropdown-list,
+.dropdown-wrapper:focus-within .dropdown-list,
+.dropdown-wrapper:hover .dropdown-list {
   visibility: visible;
 }
 
-.dropdown-wrapper:focus ~ .dropdown-backdrop,
-.dropdown-wrapper:focus-within ~ .dropdown-backdrop,
-.dropdown-wrapper:hover ~ .dropdown-backdrop {
-  visibility: visible;
-  opacity: 1;
-}
-
-.dropdown-wrapper:focus .menu-link:after,
-.dropdown-wrapper:focus-within .menu-link:after,
-.dropdown-wrapper:hover .menu-link:after {
-  transform: rotate(0deg);
-}
-
-.dropdown-wrapper:focus  .menu-link:before,
-.dropdown-wrapper:focus-within  .menu-link:before,
-.dropdown-wrapper--active .menu-link:before,
-.dropdown-wrapper:hover .menu-link:before,
-.menu-link:hover:before {
-  opacity: 1;
+.dropdown-wrapper:focus,
+.dropdown-wrapper:focus-within,
+.dropdown-wrapper--active,
+.dropdown-wrapper:hover {
+  .menu-link {
+    color: colors.$yellow-400;
+  }
+  .menu-link:before {
+    opacity: 1;
+  }
+  .menu-link:after {
+    transform: rotate(0deg);
+    @include icon-tools.background-icon-fill-color(colors.$yellow-400)
+  }
 }

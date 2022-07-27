@@ -2,7 +2,9 @@ import { Component, h } from '@stencil/core';
 import Icons from './iol-header-b2c/Icons';
 import TopBar from "./iol-header-b2c/TopBar";
 import createActiveClassExtender from "../../utils/createActiveClassExtender";
-import DropdownContainerJobs from "./iol-header-b2c/DropdownContainerJobs";
+import DropdownContainer from "./iol-header-b2c/DropdownContainer";
+import {jobsListItems} from "./config/jobsListItems";
+import {topicsListItems} from "./config/topicsListItems";
 
 @Component({
   tag: 'iol-header-b2c',
@@ -32,7 +34,11 @@ export class IolHeaderB2c {
               <div class={'menu'}>
                 <div class={dropdownActiveClassExtender('/vacature')}>
                   <button class='menu-link menu-link--dropdown'>Vacatures</button>
-                  <DropdownContainerJobs/>
+                  <DropdownContainer listItems={jobsListItems} analyticsAction={'ClickOnHeaderWerkZoekendenLink'}/>
+                </div>
+                <div class={dropdownActiveClassExtender('/werk-en-carriere')}>
+                  <button class='menu-link menu-link--dropdown'>Topics</button>
+                  <DropdownContainer listItems={topicsListItems} analyticsAction={'ClickOnHeaderTopicsLink'}/>
                 </div>
               </div>
             </div>
