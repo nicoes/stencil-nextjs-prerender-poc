@@ -170,7 +170,7 @@ button {
 
   &:after {
     content: " ";
-    @include icon-tools.background-icon('keyboard-arrow-right');
+    @include icon-tools.background-icon('keyboard-arrow-right', colors.$grey-600);
     position: absolute;
     right: 0;
     top: 50%;
@@ -199,7 +199,6 @@ button {
   position: relative;
   color: colors.$green-300;
   line-height: $menu-main-height;
-  text-transform: lowercase;
   padding-left: 1rem;
   padding-right: 1rem;
 
@@ -298,6 +297,25 @@ button {
   @include dropdown-style();
 }
 
-.mobile-menu-button-container {
-  display: none;
+.mobile-menu-button-container, .account-button-container {
+  display: flex;
+  height: 60px;
+  align-items: center;
+
+  @media (min-width: breakpoints.$lg) {
+    display: none;
+  }
+}
+
+.mobile-menu-button {
+  position: relative;
+  width: icons.$icon-tap-area;
+  height: icons.$icon-tap-area;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobile-menu-button__icon {
+  @include icon-tools.inline-monochrome-icon(colors.$yellow-400)
 }

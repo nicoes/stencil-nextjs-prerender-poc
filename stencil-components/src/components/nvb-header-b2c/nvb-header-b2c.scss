@@ -100,6 +100,10 @@ button {
   align-items: center;
 }
 
+.mobile-menu-button__icon, .account-button__icon {
+  @include icon-tools.inline-monochrome-icon(colors.$white)
+}
+
 .dropdown-container {
   position: absolute;
   width: 100%;
@@ -320,10 +324,6 @@ button {
 
 .sub-menu .sub-menu__list-item--capitalized {
   text-transform: capitalize;
-}
-
-.mobile-menu__header-icon {
-  @include icon-tools.inline-monochrome-icon(colors.$white)
 }
 
 @import "./nvb-header-b2c/mobile-menu";

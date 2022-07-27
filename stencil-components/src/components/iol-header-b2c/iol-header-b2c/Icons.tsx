@@ -1,7 +1,7 @@
 import {h} from "@stencil/core";
 
 const paths = {
-  'menu': () => <path d="M0 4h24v2H0zM0 11h24v2H0zM0 18h24v2H0z"/>,
+  'menu': () => <path  d="M1.1.8h25v2h-25zM1.1 10.1h25v2h-25zM1.1 19.4h18.1v2H1.1z" />,
 }
 
 const Icon = (path) => ({ className }: { className?: string }) => <svg class={className} width="24" height="24" fill="#323232"

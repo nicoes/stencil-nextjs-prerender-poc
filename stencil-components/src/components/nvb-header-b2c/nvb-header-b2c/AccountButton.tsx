@@ -7,6 +7,6 @@ const AccountButton = () => <a class={"account-button"} href={"/account"}
   action: 'ClickOnHeaderLink',
   label: 'Account'
 })}>
-  <Icons.person className={'mobile-menu__header-icon'}/></a>
+  <Icons.person className={'account-button__icon'}/></a>
 
 export default AccountButton

@@ -58,7 +58,7 @@ export class NvbHeaderB2c {
             <div class="main-inner">
               <div class="mobile-menu-button-container">
                 <button class={"mobile-menu-button"} onClick={() => this.handleOpenMenu()} aria-label="Open menu">
-                  <Icons.menu className={'mobile-menu__header-icon'} />
+                  <Icons.menu className={'mobile-menu-button__icon'} />
                 </button>
               </div>
              <Logo />
