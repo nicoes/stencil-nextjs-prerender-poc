@@ -1,4 +1,4 @@
-import { Component, h } from '@stencil/core';
+import {Component, h, Prop, State, Watch} from '@stencil/core';
 import Icons from './iol-header-b2c/Icons';
 import TopBar from "./iol-header-b2c/TopBar";
 import createActiveClassExtender from "../../utils/createActiveClassExtender";
@@ -9,6 +9,7 @@ import MainMenuLink from "./iol-header-b2c/MainMenuLink";
 import DropdownContainerJobs from "./iol-header-b2c/DropdownContainerJobs";
 import {educationItems} from "./config/educationItems";
 import Logo from "./iol-header-b2c/Logo";
+import MobileMenu from "./iol-header-b2c/MobileMenu";
 
 @Component({
   tag: 'iol-header-b2c',
@@ -16,8 +17,25 @@ import Logo from "./iol-header-b2c/Logo";
   shadow: true,
 })
 export class IolHeaderB2c {
+  @State() isActiveMobileMenu: boolean = false
+  @Prop() isAuthenticated: boolean
 
-  handleOpenMenu() {}
+  @Watch('isActiveMobileMenu')
+  adjustDocument(isActiveMobileMenu: boolean) {
+    if(isActiveMobileMenu) {
+      document.body.style.overflow  = 'hidden'
+    } else {
+      document.body.style.overflow  = ''
+    }
+  }
+
+  handleOpenMenu() {
+    this.isActiveMobileMenu = true
+  }
+
+  handleClose() {
+    this.isActiveMobileMenu = false
+  }
 
   render() {
     const dropdownActiveClassExtender = createActiveClassExtender('dropdown-wrapper', 'dropdown-wrapper--active', document);
@@ -55,6 +73,11 @@ export class IolHeaderB2c {
             </div>
           </div>
         </nav>
+        <MobileMenu
+          isAuthenticated={this.isAuthenticated}
+          isVisible={this.isActiveMobileMenu}
+          handleModalClose={() => this.handleClose()}
+        />
       </header>
     );
   }

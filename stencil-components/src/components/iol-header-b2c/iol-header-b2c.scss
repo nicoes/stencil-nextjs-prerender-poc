@@ -319,3 +319,5 @@ button {
 .mobile-menu-button__icon {
   @include icon-tools.inline-monochrome-icon(colors.$yellow-400)
 }
+
+@import "./iol-header-b2c/mobile-menu";

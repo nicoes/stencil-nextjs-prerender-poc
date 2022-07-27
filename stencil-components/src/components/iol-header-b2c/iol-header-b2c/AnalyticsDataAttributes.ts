@@ -1,4 +1,4 @@
-export type AnalyticsAction = 'ClickOnHeaderLink' | 'ClickOnHeaderTopicsLink' | 'ClickOnHeaderWerkZoekendenLink' | 'ClickOnHeaderOpleidingenLink'
+export type AnalyticsAction = 'ClickOnHeaderLink' | 'ClickOnHeaderTopicsLink' | 'ClickOnHeaderWerkZoekendenLink' | 'ClickOnHeaderOpleidingenLink' | 'ClickOnHeaderProfileLink' | 'ClickOnHeaderAccountLink'
 
 export type AnalyticsAttributesProps = {
   action?: AnalyticsAction,
