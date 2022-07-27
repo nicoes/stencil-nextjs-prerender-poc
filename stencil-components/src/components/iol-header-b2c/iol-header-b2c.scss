@@ -12,7 +12,7 @@
 @use "../../sass/tokens/icons";
 
 $menu-main-height: 3.75rem;
-$menu-top-height: 2rem;
+$menu-top-height: 2.5rem;
 $desktop-menu-width: 35rem;
 $dropdown-link-height: 2.75rem;
 $dropdown-link-hover-correction: 0.5rem;
@@ -54,14 +54,62 @@ button {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  height: $menu-top-height;
-  padding-right: 0.6rem;
 }
 
 .top a {
   color: colors.$grey-500;
-  text-transform: lowercase;
   font-size: 0.875rem;
+}
+
+.top-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  height: $menu-top-height;
+}
+
+.top-list li {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.top-list li + li:before {
+  content: " ";
+  border-left: 1px solid colors.$grey-300;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  height: 1rem;
+}
+
+.top-list a {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.top__employer-button {
+  display: flex;
+  height: $menu-top-height;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background: colors.$green-300;
+  margin-left: 1rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    text-decoration: none;
+    background: colors.$green-400;
+  }
+}
+
+.profile-icon {
+  margin-right: 0.25rem;
 }
 
 
