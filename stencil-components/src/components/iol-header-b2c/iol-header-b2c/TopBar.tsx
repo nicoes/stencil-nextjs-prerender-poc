@@ -1,21 +1,33 @@
 import AnalyticsDataAttributes from "../../nvb-header-b2c/nvb-header-b2c/AnalyticsDataAttributes";
 import {h} from "@stencil/core";
 import ProfileIcon from "./ProfileIcon";
+import {accountUnauthenticatedListItems} from "../config/accountUnauthenticatedListItems";
+import {accountAuthenticatedListItems} from "../config/accountAuthenticatedListItems";
 
-const TopBar = () => <div class={'top'}>
+const getIconForLabel = (label: string) => {
+  if(label === 'Inloggen') {
+    return <ProfileIcon className={'profile-icon'} />
+  } else if (label === 'Account') {
+    return <ProfileIcon className={'profile-icon'} withFill />
+  }
+}
+
+const TopBar = ({ emailAddress }: { emailAddress?: string}) => <div class={'top'}>
   <ul class={'top-list'}>
-    <li>
-      <a href="/werkgever"
-       {...AnalyticsDataAttributes({action: 'ClickOnHeaderAccountLink', label: 'Inloggen'})}><ProfileIcon className={'profile-icon'} />Inloggen</a>
-    </li>
-    <li>
-      <a href="/werkgever"
-       {...AnalyticsDataAttributes({action: 'ClickOnHeaderProfileLink', label: 'Adverteren'})}>Profiel maken</a>
-    </li>
-    <li>
-      <a href="/werkgever"
-       {...AnalyticsDataAttributes({action: 'ClickOnHeaderLink', label: 'Registreren'})}>Adverteren</a>
-    </li>
+    {!!emailAddress && accountAuthenticatedListItems.map(item => {
+      return <li>
+        <a href={item.value}
+           {...AnalyticsDataAttributes({action: 'ClickOnHeaderAccountLink', label: item.analyticsLabel || item.label})}>
+          {getIconForLabel(item.label)}{item.label === 'Account' ? emailAddress : item.label}</a>
+      </li>
+    })}
+    {!emailAddress && accountUnauthenticatedListItems.map(item => {
+      return <li>
+        <a href={item.value}
+           {...AnalyticsDataAttributes({action: 'ClickOnHeaderAccountLink', label: item.analyticsLabel || item.label})}>
+            {getIconForLabel(item.label)}{item.label}</a>
+      </li>
+    })}
   </ul>
   <a href="/werkgever"
      class={"top__employer-button"}

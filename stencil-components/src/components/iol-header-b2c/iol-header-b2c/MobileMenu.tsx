@@ -8,6 +8,7 @@ import MobileMenuAccountAuthenticated from "./MobileMenu/MobileMenuAccountAuthen
 import MobileMenuAccountUnauthenticated from "./MobileMenu/MobileMenuAccountUnauthenticated";
 import {educationItems} from "../config/educationItems";
 import {topicsListItems} from "../config/topicsListItems";
+import MobileMainMenuLink from "./MobileMenu/MobileMainMenuLink";
 
 export enum CollapsibleId {
   JOBS,
@@ -37,11 +38,14 @@ const MobileMenu = ({ isVisible, handleModalClose, isAuthenticated, isOpenTopics
           </button>
         </div>
       </div>
-      <div>
+      <div class={'mobile-menu__main'}>
         <ul class={'mobile-menu__link-list'}>
           <li>
             <CollapsibleMenu isOpen={isOpenTopicsMenu} onClickToggle={() => handleToggleCollapsible(CollapsibleId.TOPICS)} analyticsAction={'ClickOnHeaderTopicsLink'} topLinkItem={mainMenuLinks.TOPICS}
                              linkList={topicsListItems}/>
+          </li>
+          <li>
+            <MobileMainMenuLink item={mainMenuLinks.TESTEN_EN_TOOLS} />
           </li>
           <li>
             <CollapsibleMenu isOpen={isOpenEducationMenu} onClickToggle={() => handleToggleCollapsible(CollapsibleId.EDUCATION)} analyticsAction={'ClickOnHeaderOpleidingenLink'} topLinkItem={mainMenuLinks.OPLEIDINGEN}

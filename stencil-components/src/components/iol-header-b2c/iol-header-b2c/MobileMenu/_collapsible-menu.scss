@@ -2,6 +2,10 @@
 @use "../../../../sass/tools/icons" as icon-tools;
 @use "../../../../sass/tokens/icons";
 
+.collapsible-menu {
+  border-bottom: 1px solid colors.$white;
+}
+
 .collapsible-menu__list {
   list-style: none;
   padding: 0 0 0 1rem;

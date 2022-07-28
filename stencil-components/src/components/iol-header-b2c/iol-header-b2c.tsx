@@ -21,7 +21,7 @@ export class IolHeaderB2c {
   @State() isOpenMobileJobsMenu: boolean = false
   @State() isOpenMobileTopicsMenu: boolean = false
   @State() isOpenMobileEducationMenu: boolean = false
-  @Prop() isAuthenticated: boolean
+  @Prop() emailAddress: string
 
   @Watch('isActiveMobileMenu')
   adjustDocument(isActiveMobileMenu: boolean) {
@@ -58,7 +58,7 @@ export class IolHeaderB2c {
     return (
       <header>
         <div class="container container--top">
-          <TopBar />
+          <TopBar emailAddress={this.emailAddress}/>
         </div>
         <nav class={'main'}>
           <div class="container">
@@ -89,7 +89,7 @@ export class IolHeaderB2c {
           </div>
         </nav>
         <MobileMenu
-          isAuthenticated={this.isAuthenticated}
+          isAuthenticated={!!this.emailAddress}
           isVisible={this.isActiveMobileMenu}
           handleModalClose={() => this.handleClose()}
           isOpenJobsMenu={this.isOpenMobileJobsMenu}

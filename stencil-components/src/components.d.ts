@@ -11,7 +11,7 @@ export namespace Components {
         "userName": string;
     }
     interface IolHeaderB2c {
-        "isAuthenticated": boolean;
+        "emailAddress": string;
     }
     interface ModalWindow {
         "isVisible": boolean;
@@ -68,7 +68,7 @@ declare namespace LocalJSX {
         "userName"?: string;
     }
     interface IolHeaderB2c {
-        "isAuthenticated"?: boolean;
+        "emailAddress"?: string;
     }
     interface ModalWindow {
         "isVisible"?: boolean;
