@@ -9,6 +9,7 @@ import MobileMenuAccountUnauthenticated from "./MobileMenu/MobileMenuAccountUnau
 import {educationItems} from "../config/educationItems";
 import {topicsListItems} from "../config/topicsListItems";
 import MobileMainMenuLink from "./MobileMenu/MobileMainMenuLink";
+import AnalyticsDataAttributes from "../../nvb-header-b2c/nvb-header-b2c/AnalyticsDataAttributes";
 
 export enum CollapsibleId {
   JOBS,
@@ -59,6 +60,9 @@ const MobileMenu = ({ isVisible, handleModalClose, isAuthenticated, isOpenTopics
         {isAuthenticated && <MobileMenuAccountAuthenticated/>}
         {!isAuthenticated && <MobileMenuAccountUnauthenticated/>}
       </div>
+      {!isAuthenticated && <div class={"mobile-menu__employer-button"}><a href="/werkgever"
+         {...AnalyticsDataAttributes({action: 'ClickOnHeaderWerkgeversLink', label: 'VoorWerkgevers'})}
+      >Voor werkgevers</a></div>}
     </nav>
   </div>
 }

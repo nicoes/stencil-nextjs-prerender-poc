@@ -22,7 +22,7 @@ $mobile-link-height: 55px;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(colors.$grey-700,0.6);
   opacity: 0;
   transition: visibility 0.3s, opacity 0.3s 0s;
   z-index: 1;
@@ -51,6 +51,7 @@ $mobile-link-height: 55px;
   transform: translateX(100%);
   transition: visibility 0.3s, transform 0.3s ease-in-out;
   padding: 1rem;
+  overflow-y: auto;
 }
 
 .mobile-menu__main a {
@@ -121,6 +122,36 @@ $mobile-link-height: 55px;
   border-bottom: 1px solid colors.$white;
   display: block;
   height: $mobile-link-height;
+}
+
+.mobile-menu__employer-button {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+  padding: 2rem 1rem 1rem;
+  box-sizing: border-box;
+}
+
+.mobile-menu__employer-button a {
+  background: colors.$green-300;
+  transition: background-color 0.3s ease;
+  display: flex;
+  height: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 3rem;
+  min-width: 12rem;
+  justify-content: center;
+  align-items: center;
+  color: colors.$grey-600;
+  text-transform: uppercase;
+
+  &:hover {
+    text-decoration: none;
+    background: colors.$green-400;
+  }
 }
 
 @import "./MobileMenu/collapsible-menu";
