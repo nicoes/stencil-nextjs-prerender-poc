@@ -9,7 +9,7 @@ import MainMenuLink from "./iol-header-b2c/MainMenuLink";
 import DropdownContainerJobs from "./iol-header-b2c/DropdownContainerJobs";
 import {educationItems} from "./config/educationItems";
 import Logo from "./iol-header-b2c/Logo";
-import MobileMenu from "./iol-header-b2c/MobileMenu";
+import MobileMenu, {CollapsibleId} from "./iol-header-b2c/MobileMenu";
 
 @Component({
   tag: 'iol-header-b2c',
@@ -18,6 +18,9 @@ import MobileMenu from "./iol-header-b2c/MobileMenu";
 })
 export class IolHeaderB2c {
   @State() isActiveMobileMenu: boolean = false
+  @State() isOpenMobileJobsMenu: boolean = false
+  @State() isOpenMobileTopicsMenu: boolean = false
+  @State() isOpenMobileEducationMenu: boolean = false
   @Prop() isAuthenticated: boolean
 
   @Watch('isActiveMobileMenu')
@@ -35,6 +38,18 @@ export class IolHeaderB2c {
 
   handleClose() {
     this.isActiveMobileMenu = false
+  }
+
+  handleToggleCollapsible(collapsibleId: CollapsibleId) {
+    if(collapsibleId === CollapsibleId.JOBS) {
+      this.isOpenMobileJobsMenu = !this.isOpenMobileJobsMenu;
+    }
+    if(collapsibleId === CollapsibleId.TOPICS) {
+      this.isOpenMobileTopicsMenu = !this.isOpenMobileTopicsMenu;
+    }
+    if(collapsibleId === CollapsibleId.EDUCATION) {
+      this.isOpenMobileEducationMenu = !this.isOpenMobileEducationMenu;
+    }
   }
 
   render() {
@@ -77,6 +92,10 @@ export class IolHeaderB2c {
           isAuthenticated={this.isAuthenticated}
           isVisible={this.isActiveMobileMenu}
           handleModalClose={() => this.handleClose()}
+          isOpenJobsMenu={this.isOpenMobileJobsMenu}
+          isOpenTopicsMenu={this.isOpenMobileTopicsMenu}
+          isOpenEducationMenu={this.isOpenMobileEducationMenu}
+          handleToggleCollapsible={id => this.handleToggleCollapsible(id)}
         />
       </header>
     );

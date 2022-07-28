@@ -122,12 +122,17 @@ button {
   flex-direction: row;
   justify-content: space-between;
   align-items: stretch;
+
+  @media (min-width: breakpoints.$lg) {
+    justify-content: flex-start;
+  }
 }
 
 .logo {
   display: flex;
   height: $menu-main-height;
   align-items: center;
+  margin-left: 0.5rem;
 }
 
 @mixin dropdown-style() {
@@ -182,9 +187,14 @@ button {
   align-items: center;
   flex-direction: row;
   display: none;
+  margin-left: 5rem;
 
   @media (min-width: breakpoints.$lg) {
     display: flex;
+  }
+
+  @media (min-width: breakpoints.$xl) {
+    margin-left: 10rem;
   }
 }
 

@@ -1,22 +1,60 @@
 import {h} from "@stencil/core";
-import MobileMainMenu from "./MobileMenu/MobileMainMenu";
+import MobileLogo from "./MobileMenu/MobileLogo";
+import Icons from "./Icons";
+import CollapsibleMenu from "./MobileMenu/CollapsibleMenu";
+import mainMenuLinks from "../config/mainMenuLinks";
+import {jobsListItems} from "../config/jobsListItems";
+import MobileMenuAccountAuthenticated from "./MobileMenu/MobileMenuAccountAuthenticated";
+import MobileMenuAccountUnauthenticated from "./MobileMenu/MobileMenuAccountUnauthenticated";
+import {educationItems} from "../config/educationItems";
+import {topicsListItems} from "../config/topicsListItems";
+
+export enum CollapsibleId {
+  JOBS,
+  TOPICS,
+  EDUCATION
+}
 
 type Props = {
   isVisible: boolean
-  handleModalClose: () => void
+  handleModalClose: () => void,
+  handleToggleCollapsible: (collapsibleId: CollapsibleId) => void,
   isAuthenticated: boolean
+  isOpenTopicsMenu: boolean
+  isOpenEducationMenu: boolean
+  isOpenJobsMenu: boolean
 }
 
-const MobileMenu = ({ isVisible, handleModalClose,isAuthenticated }: Props) => {
+const MobileMenu = ({ isVisible, handleModalClose, isAuthenticated, isOpenTopicsMenu, isOpenEducationMenu, isOpenJobsMenu, handleToggleCollapsible }: Props) => {
   return <div class={isVisible ? 'mobile-menu__wrapper mobile-menu__wrapper--visible' : 'mobile-menu__wrapper'}>
     <div class='mobile-menu__backdrop' onClick={() => handleModalClose()}/>
     <nav class="mobile-menu">
       <div class="mobile-menu__header">
+        <MobileLogo />
         <div class="mobile-menu__header-button mobile-menu__header-button--close">
-          <button onClick={() => handleModalClose()} class={"mobile-menu__close-button"}/>
+          <button onClick={() => handleModalClose()} class={"mobile-menu__close-button"}>
+            <Icons.close className={'mobile-menu__close-button-icon'} />
+          </button>
         </div>
       </div>
-      <MobileMainMenu isAuthenticated={isAuthenticated} />
+      <div>
+        <ul class={'mobile-menu__link-list'}>
+          <li>
+            <CollapsibleMenu isOpen={isOpenTopicsMenu} onClickToggle={() => handleToggleCollapsible(CollapsibleId.TOPICS)} analyticsAction={'ClickOnHeaderTopicsLink'} topLinkItem={mainMenuLinks.TOPICS}
+                             linkList={topicsListItems}/>
+          </li>
+          <li>
+            <CollapsibleMenu isOpen={isOpenEducationMenu} onClickToggle={() => handleToggleCollapsible(CollapsibleId.EDUCATION)} analyticsAction={'ClickOnHeaderOpleidingenLink'} topLinkItem={mainMenuLinks.OPLEIDINGEN}
+                             linkList={educationItems}/>
+          </li>
+          <li>
+            <CollapsibleMenu isOpen={isOpenJobsMenu} onClickToggle={() => handleToggleCollapsible(CollapsibleId.JOBS)} analyticsAction={'ClickOnHeaderWerkZoekendenLink'} topLinkItem={mainMenuLinks.VACATURES}
+                             linkList={jobsListItems}/>
+          </li>
+        </ul>
+        {isAuthenticated && <MobileMenuAccountAuthenticated/>}
+        {!isAuthenticated && <MobileMenuAccountUnauthenticated/>}
+      </div>
     </nav>
   </div>
 }

@@ -253,7 +253,7 @@ button {
 
 .dropdown-list {
   padding: $dropdown-list-padding-y 0;
-  margin-left: calc(100% - #{$desktop-menu-width} + #{grid.$container-gutter} - #{$dropdown-link-hover-correction});
+  margin-left: calc(100% - #{$desktop-menu-width} + #{grid.$container-gutter-lg} - #{$dropdown-link-hover-correction});
   position: relative;
   list-style: none;
 }

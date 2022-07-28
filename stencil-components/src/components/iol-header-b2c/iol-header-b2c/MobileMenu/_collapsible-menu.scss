@@ -1,0 +1,37 @@
+@use "~@dpgr/design-system/iol/tokens/colors";
+@use "../../../../sass/tools/icons" as icon-tools;
+@use "../../../../sass/tokens/icons";
+
+.collapsible-menu__list {
+  list-style: none;
+  padding: 0 0 0 1rem;
+  margin: 0;
+}
+
+.collapsible-menu__toggle {
+  display: block;
+  cursor: pointer;
+}
+
+.collapsible-menu .collapsible-menu__list-item {
+  display: block;
+}
+
+.collapsible-menu__toggle {
+  position: relative;
+
+  &:after {
+    content: " ";
+    @include icon-tools.background-icon('keyboard-arrow-up', colors.$white);
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: calc(#{icons.$icon-size-sm} * -0.5);
+    transition: transform 0.1s ease-out;
+    transform: rotate(180deg);
+  }
+}
+
+.collapsible-menu__toggle--open:after {
+  transform: rotate(0deg);
+}

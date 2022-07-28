@@ -1,9 +1,10 @@
-@use "~@dpgr/design-system/nvb/tokens/z-indices";
-@use "~@dpgr/design-system/nvb/tokens/colors";
+@use "~@dpgr/design-system/iol/tokens/z-indices";
+@use "~@dpgr/design-system/iol/tokens/colors";
 @use "../../../sass/tokens/icons";
 @use "../../../sass/tools/icons" as icons-tools;
 
 $mobile-menu-max-width: 350px;
+$mobile-link-height: 45px;
 
 .mobile-menu__wrapper {
   position: fixed;
@@ -38,7 +39,7 @@ $mobile-menu-max-width: 350px;
 .mobile-menu {
   display: flex;
   flex-direction: column;
-  background-color: colors.$white;
+  background-color: colors.$grey-600;
   position: absolute;
   top: 0;
   right: 0;
@@ -49,6 +50,16 @@ $mobile-menu-max-width: 350px;
   z-index: 2;
   transform: translateX(100%);
   transition: visibility 0.3s, transform 0.3s ease-in-out;
+  padding: 1rem;
+}
+
+.mobile-menu a, .mobile-menu button {
+  color: colors.$white;
+  text-transform: uppercase;
+  height: $mobile-link-height;
+  box-sizing: border-box;
+  padding: 1rem;
+  display: inline-block;
 }
 
 .mobile-menu__wrapper--visible .mobile-menu {
@@ -59,10 +70,7 @@ $mobile-menu-max-width: 350px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 60px;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  border-bottom: 1px solid colors.$grey-300;
+  justify-content: space-between;
 }
 
 .mobile-menu__header img {
@@ -74,14 +82,10 @@ $mobile-menu-max-width: 350px;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  width: icons.$icon-tap-area;
-  height: icons.$icon-tap-area;
+}
 
-  &::after {
-    content: " ";
-    @include icons-tools.background-icon("close", colors.$grey-600)
-  }
+.mobile-menu__close-button-icon {
+  @include icons-tools.inline-monochrome-icon(colors.$yellow-400)
 }
 
 .mobile-menu__header-button {
@@ -91,3 +95,11 @@ $mobile-menu-max-width: 350px;
 .mobile-menu__header-button--close {
   justify-content: flex-end;
 }
+
+.mobile-menu__link-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@import "./MobileMenu/collapsible-menu";
