@@ -6,7 +6,8 @@ const componentTags = [
   'my-component',
   'footer-b2c',
   'modal-window',
-  'nvb-header-b2c'
+  'nvb-header-b2c',
+  'iol-header-b2c',
 ]
 
 async function getPrerenderedComponent(tag) {

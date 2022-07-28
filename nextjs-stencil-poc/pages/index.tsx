@@ -8,6 +8,7 @@ import React, {useState} from "react";
 import ModalWindow from "../components/ModalWindow";
 import NvbHeaderB2c from "../components/NvbHeaderB2c";
 import Link from "next/link";
+import IolHeaderB2c from "../components/IolHeaderB2c";
 
 const Home: NextPage = () => {
   const [showComponents, setShowComponents] = useState(true);
@@ -23,6 +24,7 @@ const Home: NextPage = () => {
         <style dangerouslySetInnerHTML={{ __html: '/*!@:host*/.sc-my-component-h{display:block}/*!@button*/button.sc-my-component{color:#AA00CC}'}} />
       </Head>
 
+      <IolHeaderB2c emailAddress={userName} />
       <NvbHeaderB2c isAuthenticated={!!userName} />
       <Link href="/"><a>Home</a></Link>
       <Link href="/search"><a>Search</a></Link>

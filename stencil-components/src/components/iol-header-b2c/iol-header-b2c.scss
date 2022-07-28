@@ -22,6 +22,7 @@ $sub-menu-hover-bleed: 2rem;
 header {
   all: initial;
   font-family: fonts.$body-font-family;
+  font-weight: 400;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -143,6 +144,15 @@ button {
   box-shadow: 0 1px 8px 0 rgb(35 45 61 / 30%);
 }
 
+@mixin base-link-style() {
+  text-transform: uppercase;
+  font-family: fonts.$heading-font-family;
+  font-weight: 700;
+  white-space: nowrap;
+  font-size: 12px;
+  letter-spacing: 1.33px;
+}
+
 .dropdown-list {
   @include dropdown-style();
   top: $menu-main-height;
@@ -152,20 +162,28 @@ button {
   position: absolute;
 }
 
+
+.dropdown-list a,
+.dropdown-list button,
+.menu-link {
+  @include base-link-style();
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 .dropdown-list a,
 .dropdown-list button {
   display: block;
   line-height: $dropdown-link-height;
   text-align: left;
-  text-transform: lowercase;
   color: colors.$grey-600;
   box-sizing: border-box;
   padding-left: 1rem;
   padding-right: 1rem;
-  white-space: nowrap;
 
   &:hover {
-    text-decoration: none;
     background-color: colors.$white;
   }
 }
@@ -213,7 +231,6 @@ button {
   padding-right: 1rem;
 
   &:hover {
-    text-decoration: none;
     color: colors.$yellow-400;
   }
 

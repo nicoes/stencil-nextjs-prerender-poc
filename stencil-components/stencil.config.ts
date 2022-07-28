@@ -2,6 +2,9 @@ import { Config } from '@stencil/core';
 import { sass } from '@stencil/sass';
 
 export const config: Config = {
+  devServer: {
+    port: 5555
+  },
   namespace: 'stencil-components',
   plugins: [
     sass()
